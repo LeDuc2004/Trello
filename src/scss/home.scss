@@ -1,0 +1,132 @@
+.home {
+  flex: 1;
+  border-bottom: 8px solid transparent;
+  overflow-x: scroll;
+  z-index: 1;
+  height: calc(100vh - 59px);
+  position: relative;
+  width: calc(100% - 64px);
+  padding: 0 32px;
+  overflow: inherit;
+  transition: all 0.1s ease;
+
+}
+.home__table {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  div {
+    font-size: 25px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+  .fa-circle-chevron-left {
+    position: absolute;
+    top: 13px;
+    left: -45px;
+    z-index: 16;
+    font-size: 27px;
+    rotate: 180deg;
+    display: none;
+  }
+  .fa-circle-chevron-left.hien {
+    display: block;
+    cursor: pointer;
+  }
+}
+.home__filter-option {
+  display: flex;
+  align-items: center;
+}
+.filter__search {
+  width: 300px;
+  .search__text {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 7px;
+    margin-top: 12px;
+  }
+  .wrapp-input-search {
+    position: relative;
+    .fa-magnifying-glass {
+      position: absolute;
+      left: 9px;
+      top: 10px;
+    }
+    input {
+      border: none;
+      box-sizing: border-box;
+      color: black;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      transition-property: background-color, border-color, box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+      border-radius: 3px;
+      padding: 8px 12px;
+      box-shadow: inset 0 0 0 2px var(--ds-border-input, #dfe1e6);
+      background-color: white;
+      width: 100%;
+      margin-bottom: 0;
+      outline-color: #5b8bff;
+      padding-left: 30px;
+    }
+  }
+}
+.home__creacttb {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  .tb {
+
+    position: relative;
+    cursor: pointer;
+    width: 31%;
+    height: 110px;
+    background-color: black;
+    margin-right: 2%;
+    border-radius: 3px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter:blur(5px);
+    margin-bottom: 45px;
+    .background__blur{
+        transition: all 0.1s ease;
+        position:absolute ;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(128, 128, 128, 0.21);
+    }
+    .background__blur:hover{
+        background-color: transparent;
+    }
+    .tb__text {
+      word-wrap: break-word;
+      display: inline-block;
+      flex: 0 0 auto;
+      font-size: 16px;
+      font-weight: 700;
+      margin:10px 15px;
+      color: white;
+    }
+  }
+  .btn__creacttb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f2f4;
+  }
+  .btn__creacttb:hover {
+    background-color: #e4e9f5;
+
+  }
+}

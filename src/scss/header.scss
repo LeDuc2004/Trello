@@ -1,0 +1,291 @@
+@import "./global.scss";
+.header {
+  user-select: none;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid hsla(199, 47%, 23%, 0.58);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: hsl(198deg 39.4% 33% / 100%);
+  ::placeholder {
+  color: white; /* Màu chữ mong muốn */
+}
+
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+  a {
+    width: 100px;
+    height: 22px;
+  }
+  .logo {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .navigation {
+    .nearly:hover {
+      background-color: #6f8ca193;
+    }
+    .voted:hover {
+      background-color: #6f8ca193;
+    }
+    .mgl {
+      margin-left: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 6px 9px;
+      border-radius: 3px;
+
+      i {
+        font-size: smaller;
+        margin-top: 2px;
+        margin-left: 5px;
+      }
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn-new {
+      color: white;
+      padding: 6px 9px;
+      border-radius: 3px;
+      background-color: #0c66e4;
+    }
+  }
+  .navigation {
+    .btn-new:hover {
+      cursor: pointer;
+      background-color: #075dd5;
+      background-size: cover;
+    }
+  }
+}
+.header__right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .warap__input {
+    height: 35px;
+    width: 100%;
+    position: relative;
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 1px 12px 0px 30px;
+      box-sizing: border-box;
+      outline: none;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 10px;
+      border: 1.2px solid #dbdde2;
+      box-shadow: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    i {
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      font-size: small;
+    }
+  }
+  .fa-circle-user {
+    font-size: xx-large;
+    margin: 0 20px;
+    margin-top: -1px;
+  }
+}
+#imguser{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.header__table {
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 304px;
+  will-change: top, left;
+  top: 62px;
+  left: 430px;
+  color: $font-color;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: var(
+    --ds-shadow-overlay,
+    0 8px 16px -4px rgba(9, 30, 66, 0.25),
+    0 0 0 1px rgba(9, 30, 66, 0.08)
+  );
+  box-sizing: border-box;
+  outline: 0;
+  overflow: hidden;
+  .table__top {
+    width: 95%;
+    height: 40px;
+    margin: 0 2.5%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.429);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .text__tb {
+      font-size: medium;
+    }
+    i {
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      font-size: large;
+
+    }
+  }
+  .table__fontimg {
+    width: 200px;
+    height: 130px;
+    background: none;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: var(--ds-shadow-raised, 0 7px 15px rgba(0, 0, 0, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    img{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    }
+  }
+  .background__font{
+    width: 90%;
+    color: #44546f;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    .text{
+      font-size: 13px;
+      margin-bottom: 5px;
+      margin-left: -2px;
+    }
+    .list__font{
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+      cursor: pointer;
+      div{
+        position: relative;
+        width: 25%;
+        height: 45px;
+        border-radius: 5px;
+        margin: 0 1%;
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        .fa-check{
+          color: white;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50% , -50%);
+          display: none;
+        }
+        .fa-check.cr{
+          display: block;
+        }
+
+        span{
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+        }
+        span:hover{
+          background-color: rgba(65, 60, 60, 0.228);
+
+        }
+
+      }
+    }
+  }
+  .topic__table{
+    width: 90%;
+    color: #44546f;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    .text{
+      font-size: 13px;
+      margin-bottom: 5px;
+      margin-left: -2px;
+    }
+    input{
+      border: none;
+      box-sizing: border-box;
+      color: black;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      transition-property: background-color, border-color, box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+      border-radius: 3px;
+      padding: 8px 12px;
+     border: 2px solid tomato;
+      background-color: white;
+      width: 100%;
+      margin-bottom: 0;
+      outline-color: #5b8bff;
+      padding-left: 10px;
+    }
+  }
+  .btn__newcreate{
+    color: white;
+    padding: 8px 9px;
+    border-radius: 3px;
+    background-color: #0c66e4;
+    width: 85%;
+    text-align: center;
+    margin: 5px 0;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  .btn__newcreate:hover{
+    background-color: #2f56cd;
+  }
+  .btn__newcreate.white{
+    background-color: rgba(211, 211, 211, 0.541);
+    cursor: not-allowed;
+  }
+}
+.header__table.hide {
+  display: none;
+}

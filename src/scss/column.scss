@@ -1,0 +1,167 @@
+.column-todo {
+  .column-todo__name {
+    font-weight: 550;
+    margin-left: 10px;
+    margin-bottom: 15px;
+  }
+  .list__columns {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: max-content;
+    max-height: calc(100vh - 200px);
+    width: 100%;
+    padding-right: 5px;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {  
+    background: rgb(186, 183, 183);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgba(211, 211, 211, 0.712);
+    border-radius: 5px;
+  }
+
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  max-height: 100%;
+  height: max-content;
+  margin: 0 6px;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 302px;
+  border-radius: 12px;
+  background-color: #f1f2f4;
+  padding: 10px;
+
+  input {
+    width: calc(100% - 40px);
+    border: 2.5px solid #388bff;
+    height: 30px;
+    outline: none;
+    background-color: white;
+    padding-left: 10px;
+    font-size: 16px;
+    border-radius: 2px;
+    margin: 0 10px;
+  }
+  input::placeholder {
+    color: rgb(112, 111, 111); /* Màu chữ mong muốn */
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    margin-top: 10px;
+
+    .btn-add {
+      color: white;
+      padding: 6px 10px;
+      border-radius: 3px;
+      background-color: #0c66e4;
+      cursor: pointer;
+    }
+    img {
+      width: 15px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+  .options.task {
+    margin: 5px 0;
+  }
+}
+
+.btn-tranfer {
+  z-index: 0;
+  top: 0;
+  position: absolute;
+  width: 301px;
+  height: 60px;
+  background-color: #ffffff3d;
+  margin-left: 7px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  .icon-plus {
+    font-size: 27px;
+    margin: 0 5px;
+    margin-top: -6px;
+    margin-left: 10px;
+  }
+}
+.btn-tranfer:hover {
+  background-color: #a6c5e280;
+}
+.column-todo.addtodo {
+  padding: 10px 0;
+}
+.column-todo.hide {
+  height: 0;
+  padding: 0;
+}
+.btn-tranfer.visible {
+  z-index: -1;
+}
+.options-add {
+  width: 99%;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  flex-direction: column;
+
+  div {
+    cursor: pointer;
+  }
+  .icon-plus {
+    font-size: 27px;
+    margin: 0 5px;
+    margin-top: -6px;
+    cursor: pointer;
+  }
+  .add__task {
+    width: 100%;
+    textarea {
+      width: calc(100% - 8px);
+      resize: none;
+      overflow: hidden;
+      height: auto;
+      min-height: 50px;
+      padding-left: 5px;
+      padding-right: 5px;
+      overflow-wrap: break-word;
+      padding-top: 10px;
+      font-size: 16px;
+      outline: none;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f,
+        0 1px 1px #091e4240, 0 0 1px #091e424f;
+    }
+  }
+  .add__task.hide {
+    display: none;
+  }
+  .btn__add_task {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    padding: 2px 0;
+  }
+  .btn__add_task.hide {
+    display: none;
+  }
+  .btn__add_task:hover {
+    background-color: #d1d4db;
+    border-radius: 8px;
+  }
+}

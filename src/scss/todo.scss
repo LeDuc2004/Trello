@@ -1,0 +1,150 @@
+body {
+  overflow-y: hidden;
+}
+.todos {
+  width: calc(100% - 300px);
+  border-bottom: 8px solid transparent;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  z-index: 1;
+  height: calc(100vh - 59px);
+  position: relative;
+  transition: all 0.2s ease;
+
+}
+.todos.fullscreen {
+  width: calc(100% - 11px);
+  overflow: inherit;
+}
+.todo-slideBar {
+  position: fixed;
+  width: calc(100% - 300px);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #0000003d;
+  backdrop-filter: blur(4px);
+  justify-content: space-between;
+  z-index: 1;
+  transition: all 0.2s ease;
+  z-index: 2;
+
+  img {
+    width: 15px;
+  }
+  color: white;
+}
+.todo-slideBar.fullscreen {
+  width: calc(100% - 11px );
+  transition: all 0.2s ease;
+
+
+
+
+}
+
+.todo-slideBar__left {
+  .fa-circle-chevron-left{
+    rotate: 180deg;
+    font-size: 29px;
+    margin-left: -10px;
+    color:#335368;
+    display: none;
+  }
+  .fa-circle-chevron-left.hien{
+   display: block;
+   cursor: pointer;
+  }
+  .fa-circle-chevron-left.hien:hover{
+    color: #33536889;
+   }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .todo-slideBar__name {
+    font-weight: 700;
+    font-size: large;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  .todo-slideBar__table {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 7px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    i {
+      margin: 0 5px;
+    }
+  }
+    .todo-slideBar__table:hover {
+      background-color: #9facb1;
+    }
+  .todo-slideBar__table.curent {
+    background-color: white;
+    color: black;
+  }
+}
+.todo-slideBar__right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .todo-slideBar__filer {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 7px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    i{
+      margin: 0 5px;
+    }
+  }
+
+      .todo-slideBar__filer:hover {
+      background-color: #9facb1;
+    }
+}
+
+
+.list-column {
+  flex: 8;
+  user-select: none;
+  margin-top: 15px;
+  margin-left: 10px;
+  min-width: max-content;
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: max-content;
+  z-index: 2;
+  margin-top: 70px;
+
+}
+::-webkit-scrollbar {
+  padding: 0 10px;
+  height: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  padding: 0 10px;
+
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  padding: 0 10px;
+
+  background: #838682d0;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+//   ::-webkit-scrollbar-thumb:hover {
+//     background: #ee4330;
+//   }
