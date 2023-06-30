@@ -8,29 +8,40 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 function Signin() {
+  const [spanName, setSpanName] = useState(".");
   const [spantk, setSpantk] = useState(".");
   const [spanmk, setSpanmk] = useState(".");
   const [spancf, setSpancf] = useState(".");
+  const [name, setName] = useState("");
   const [tk, setTk] = useState("");
   const [mk, setMk] = useState("");
   const [cfmk, setCfmk] = useState("");
   const [togle, setTogle] = useState(true);
   const [common, setCommon] = useState(true);
   const API_DATA_BASE = process.env.REACT_APP_API_BASE;
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    
+    return color;
+  }
   useEffect(() => {
     setCommon(localStorage.getItem("idd"));
   }, [localStorage.getItem("idd")]);
   const responseGoogle = (responseStart) => {
     if (responseStart.provider == "facebook") {
       const user = {
-        email: responseStart.data.email,
+        tk: responseStart.data.email,
         name: responseStart.data.name,
         id: responseStart.data.userID,
       };
       handleSubmitdk(user);
     } else {
       let response = jwt_decode(responseStart.credential);
-      console.log(response);
       const user = {
         email: response.email,
         name: response.name,
@@ -44,77 +55,130 @@ function Signin() {
 
   let useAuthen = {
     id: Math.random(),
-    tk: tk,
+    tk:name,
+    email: tk,
+    color:getRandomColor(),
     mk: mk,
     token: [],
     idTable: [],
   };
-
   function handleSubmitdk(fborgg) {
     if (fborgg) {
-      let user = {
-        id: fborgg.id,
-        tk: fborgg.name,
-        img: fborgg.image,
-        token: [],
-        idTable: [],
-      };
-      fetch(API_DATA_BASE + "/users")
-        .then((res) => res.json())
-        .then((data) => {
-          authengg(data);
-        });
-      function authengg(data) {
-        console.log(data.length);
-        let flag = true;
-        for (let i = 0; i < data.length; i++) {
-          if (fborgg.name != data[i].tk) {
-            flag = false;
-            continue;
-          } else {
-            flag = true;
-            break;
+      if (fborgg.image) {
+        let user = {
+          id: fborgg.id,
+          tk: fborgg.name,
+          img: fborgg.image,
+          token: [],
+          idTable: [],
+        };
+        fetch(API_DATA_BASE + "/users")
+          .then((res) => res.json())
+          .then((data) => {
+            authengg(data);
+          });
+        function authengg(data) {
+          let flag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (fborgg.name != data[i].tk) {
+              flag = false;
+              continue;
+            } else {
+              flag = true;
+              break;
+            }
+          }
+          if (flag == false) {
+            fetch(API_DATA_BASE + "/users", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(user),
+            });
+            handleSubmitdn(user);
+          } else if (flag == true) {
+            fetch(API_DATA_BASE + `/users/${fborgg.id}`)
+              .then((res) => res.json())
+              .then((data) => {
+                handleSubmitdn(data);
+              });
           }
         }
-        if (flag == false) {
-          fetch(API_DATA_BASE + "/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
+      }else{
+        let user = {
+          id: fborgg.id,
+          tk: fborgg.name,
+          color:getRandomColor(),
+          token: [],
+          idTable: [],
+        };
+        fetch(API_DATA_BASE + "/users")
+          .then((res) => res.json())
+          .then((data) => {
+            authengg(data);
           });
-          handleSubmitdn(user);
-        } else if (flag == true) {
-          fetch(API_DATA_BASE + `/users/${fborgg.id}`)
-            .then((res) => res.json())
-            .then((data) => {
-              handleSubmitdn(data);
+        function authengg(data) {
+          let flag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (fborgg.name != data[i].tk) {
+              flag = false;
+              continue;
+            } else {
+              flag = true;
+              break;
+            }
+          }
+          if (flag == false) {
+            fetch(API_DATA_BASE + "/users", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(user),
             });
+            handleSubmitdn(user);
+          } else if (flag == true) {
+            fetch(API_DATA_BASE + `/users/${fborgg.id}`)
+              .then((res) => res.json())
+              .then((data) => {
+                handleSubmitdn(data);
+              });
+          }
         }
       }
     } else {
-      if (tk == "" && mk == "" && cfmk == "") {
+      if (tk == "" && mk == "" && cfmk == "" && name == "") {
         setSpantk("Vui lòng nhập tài khoản.");
         setSpanmk("Vui lòng nhập mật khẩu.");
         setSpancf("Vui lòng xác nhận mật khẩu.");
+        setSpanName("Vui lòng nhập tên của bạn");
       } else {
+        if (name == "") {
+          setSpanName("Vui lòng nhập tài khoản.");
+        } else {
+          setSpanName(".");
+        }
         if (tk == "") {
           setSpantk("Vui lòng nhập tài khoản.");
         } else {
           setSpantk(".");
         }
-
-        if (mk == "") {
+        if (mk == "" && cfmk == "") {
           setSpanmk("Vui lòng nhập mật khẩu.");
+          setSpancf("Vui lòng nhập xác nhận mật khẩu.");
         } else {
-          setSpanmk(".");
-        }
-
-        if (mk != "" && mk != cfmk) {
-          setSpancf("Mật khẩu nhập lại không khớp.");
-        } else {
-          setSpancf(".");
+          if (mk == "") {
+            setSpanmk("Vui lòng nhập mật khẩu.");
+          } else {
+            setSpanmk(".");
+            if (mk != "" && mk != cfmk) {
+              setSpancf("Mật khẩu nhập lại không khớp.");
+            } else if (cfmk != "") {
+            } else {
+              setSpancf(".");
+            }
+          }
         }
       }
 
@@ -142,8 +206,7 @@ function Signin() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(useAuthen),
-            });
-            // ShowSuccessToast('Đăng ký thành công');
+            }).then(res => idd(2))
           }
         } else if (flag == true) {
           setSpantk("Tài khoản tồn tại");
@@ -203,7 +266,7 @@ function Signin() {
         function authen(data) {
           let flag = true;
           for (let i = 0; i < data.length; i++) {
-            if (tk != data[i].tk) {
+            if (tk != data[i].email) {
               flag = false;
               continue;
             } else {
@@ -241,7 +304,6 @@ function Signin() {
                           if (res.status == 200) {
                             localStorage.setItem("token", data1.accessToken);
                             setSpantk(".");
-
                             window.location.href = "/";
                           }
                         });
@@ -270,6 +332,7 @@ function Signin() {
   }
 
   function idd(id) {
+    setName("")
     setMk("");
     setTk("");
     setCfmk("");
@@ -287,7 +350,7 @@ function Signin() {
         height: "100vh",
       }}
     >
-      <a href="http://localhost:3001/" className="logo-sign">
+      <a href="http://localhost:3001/home" className="logo-sign">
         <div>
           <img
             src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/trello-header-logos/167dc7b9900a5b241b15ba21f8037cf8/trello-logo-blue.svg"
@@ -311,6 +374,23 @@ function Signin() {
           </div>
           <div className={common == 2 ? "cuon" : "cuon1"}></div>
         </div>
+
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+          placeholder="Tên của bạn.."
+          style={common == 2 ? { display: "none" } : { display: "" }}
+        />
+        <p
+          style={
+            spanName == "."
+              ? { visibility: "hidden" }
+              : { visibility: "visible" }
+          }
+        >
+          {spanName}
+        </p>
 
         <input
           value={tk}

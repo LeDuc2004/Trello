@@ -8,20 +8,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 import { todoPage } from "../../store/todoPage";
+import { scrollToBottom } from "../../utils/scrollBottom";
 
 type TaskItem = {
   id: number;
   content: string;
 };
 
-function Column({ column, tasks, index, columnId, active, onclick }: any) {
+export default React.memo(function Column({
+  setStores,
+  stores,
+  column,
+  tasks,
+  index,
+  columnId,
+  active,
+  onclick,
+}: any) {
+  
   const [toggle, setToggle] = useState<boolean>(false);
+  const [toggleColumn, setToggleColumn] = useState<boolean>(false);
   const [value, setValue] = useState("");
-  const [indexColumn, setIndexColumn] = useState<string>("");
-  const [rows, setRows] = useState(1);
+  const [valueInput, setValueInput] = useState(column.title);
+
+  const [rows, setRows] = useState(3);
   const { id } = useParams();
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textColumn = useRef<any>(null);
 
   // click outside add task
   useEffect(() => {
@@ -29,6 +43,7 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
       if (!textareaRef.current?.contains(event.target as Node)) {
         setToggle(false);
         setValue("");
+        setToggleColumn(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -65,44 +80,22 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
         };
         putData(`/dataTable/${id}`, newColumn).then((res) => {
           setValue("");
-          handleVisibleAddTask(index);
+          handleVisibleAddTask(columnId);
           dispatch(todoPage.actions.updateTable(newColumn));
-          setTimeout(() => {
-            const container = document.querySelector(".list__columns");
-
-            if (container) {
-              console.log(container.scrollTop);
-              console.log(container.scrollHeight);
-
-              container.scrollTop = container.scrollHeight;
-            }
-          }, 0);
+          scrollToBottom(columnId, textareaRef, 0);
         });
       });
     }
   }
 
   const handleVisibleAddTask = (columnId: string) => {
+    setValue("");
     onclick();
-    setIndexColumn(columnId);
     setToggle(true);
-    setTimeout(() => {
-      const container = document.querySelector(".list__columns");
-
-      if (container) {
-        console.log(container.scrollTop);
-        console.log(container.scrollHeight);
-
-        container.scrollTop = container.scrollHeight;
-      }
-      if (textareaRef.current) {
-        textareaRef.current.focus();
-      }
-    }, 0);
+    scrollToBottom(columnId, textareaRef, 0);
   };
   const handleCloceAddTask = () => {
     setToggle(false);
-    setValue("");
   };
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -115,15 +108,7 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
     ) as HTMLTextAreaElement;
     textarea.style.height = "auto";
     textarea.style.height = `${textarea.scrollHeight}px`;
-
-    const container = document.querySelector(".list__columns");
-
-    if (container) {
-      console.log(container.scrollTop);
-      console.log(container.scrollHeight);
-
-      container.scrollTop = container.scrollHeight;
-    }
+    scrollToBottom(columnId, textareaRef, 1);
     setRows(textarea.rows);
   }, [value]);
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -131,7 +116,41 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
       AddTask();
     }
   };
+  function visibleInputColumn() {
+    onclick();
+    setToggleColumn(true);
+    setTimeout(() => {
+      if (textColumn.current) {
+        textColumn.current.focus();
+      }
+    }, 0);
+  }
+  function handleEnterColumn(e: any) {
+    if (e === "Enter") {
+      updateNameColumn();
+    }
+  }
+  function updateNameColumn() {
+    if (valueInput && valueInput != column.title) {
+      setToggleColumn(false);
 
+      let newStore = {
+        ...stores,
+        columns: {
+          ...stores.columns,
+          [`${columnId}`]: {
+            ...stores.columns[`${columnId}`],
+            title: valueInput,
+          },
+        },
+      };
+      dispatch(todoPage.actions.updateTable(newStore));
+      setStores(newStore);
+      putData(`/dataTable/${newStore.id}`, newStore);
+    } else {
+      setValueInput(column.title);
+    }
+  }
   return (
     <>
       <Draggable draggableId={column.id} index={index}>
@@ -139,21 +158,50 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
           <div
             {...provided.draggableProps}
             ref={provided.innerRef}
-            className="column-todo drag-ignore-events"
+            className="column-todo"
             onMouseDown={handleChildMouseDown}
           >
-            <div {...provided.dragHandleProps} className="column-todo__name">
-              {column.title}
+            <div className="update-clumn">
+              <input
+                onKeyDown={(e) => handleEnterColumn(e.key)}
+                value={valueInput}
+                onChange={(e) => setValueInput(e.target.value)}
+                className={`input__column ${
+                  toggleColumn && active ? "" : "hide"
+                }`}
+                onBlur={updateNameColumn}
+                ref={textColumn}
+                type="text"
+              />
+              <div
+                onClick={() => visibleInputColumn()}
+                {...provided.dragHandleProps}
+                className="column-todo__name"
+              >
+                {column.title}
+              </div>
             </div>
-            <div className="list__columns">
+            <div
+              className={`list__columns ${columnId}`}
+              style={
+                toggle && active ? { maxHeight: "calc(100vh - 200px)" } : {}
+              }
+            >
               <Droppable droppableId={column.id} type="task">
                 {(provided, snapshot) => (
                   <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <div style={{ paddingTop: "1px", width: "100%" }}></div>
+
                     {tasks.map((task: TaskItem, indextask: number) => (
-                      <Task key={indextask} task={task} index={indextask} />
+                      <Task
+                        setStores={setStores}
+                        stores={stores}
+                        key={indextask}
+                        task={task}
+                        index={indextask}
+                      />
                     ))}
                     {provided.placeholder}
-
                     <div className="options-add">
                       <div
                         className={`add__task ${
@@ -170,7 +218,6 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
                           placeholder="Nhập tiêu đề cho thẻ này"
                           required
                           onKeyDown={handleKeyPress}
-                          // onKeyPress={}
                         ></textarea>
                         <div className="options task">
                           <div onClick={() => AddTask()} className="btn-add">
@@ -183,25 +230,24 @@ function Column({ column, tasks, index, columnId, active, onclick }: any) {
                           />
                         </div>
                       </div>
-                      <div
-                        onClick={() => handleVisibleAddTask(columnId)}
-                        className={`btn__add_task ${
-                          toggle && active ? "hide" : ""
-                        }`}
-                      >
-                        <div className="icon-plus">+</div>
-                        <div>Thêm thẻ</div>
-                      </div>
                     </div>
                   </div>
                 )}
               </Droppable>
+            </div>
+            <div className="options-add">
+              <div
+                onClick={() => handleVisibleAddTask(columnId)}
+                className={`btn__add_task ${toggle && active ? "hide" : ""}`}
+              >
+                <div className="icon-plus">+</div>
+                <div>Thêm thẻ</div>
+              </div>
             </div>
           </div>
         )}
       </Draggable>
     </>
   );
-}
+})
 
-export default Column;

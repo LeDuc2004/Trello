@@ -79,6 +79,8 @@ function authenToken(req, res, next) {
     if (data) {
       req.user = data;
       next();
+    }else{
+      res.send(404)
     }
   });
 }

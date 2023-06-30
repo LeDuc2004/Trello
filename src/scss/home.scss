@@ -85,6 +85,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
+  position: relative;
   .tb {
 
     position: relative;
@@ -94,10 +95,8 @@
     background-color: black;
     margin-right: 2%;
     border-radius: 3px;
-    overflow: hidden;
     background-size: cover;
     background-position: center;
-    backdrop-filter:blur(5px);
     margin-bottom: 45px;
     .background__blur{
         transition: all 0.1s ease;
@@ -111,8 +110,6 @@
     }
     .tb__text {
       word-wrap: break-word;
-      display: inline-block;
-      flex: 0 0 auto;
       font-size: 16px;
       font-weight: 700;
       margin:10px 15px;
@@ -124,9 +121,27 @@
     justify-content: center;
     align-items: center;
     background-color: #f1f2f4;
+
   }
   .btn__creacttb:hover {
     background-color: #e4e9f5;
 
+  }
+}
+.background-home{
+  width: 100%;
+  background: url(//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266e…/white-wave-bg.svg) center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  img{
+    width: 50%;
+  }
+  div{
+    color: white;
+    font-size: 50px;
+    font-weight: 600;
+    margin-top: 50px;
+    margin-left: 20px;
   }
 }

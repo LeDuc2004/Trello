@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect, RefObject } from "react";
-import "../../scss/todo.scss";
-import Column from "./Column";
+import "../../scss/table.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { getData, putData } from "../../services";
-import { fetchTableLess, todoPage } from "../../store/todoPage";
+import { todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
-import TodosTable from "../todoTable/TodosTable";
+import ColumnTable from "./ColumnTable";
 type Task = {
   id: number;
   content: string;
@@ -30,11 +29,16 @@ interface Item {
 interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
-  table: Item;
+  stores: Item;
+  setStores:any
 }
 
-function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
-  const [stores, setStores] = useState<Item>(table);
+function TodosTable({
+  slidebarToTodos,
+  setSlidebarToTodos,
+  stores,
+  setStores
+}: SideBarProps) {
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,7 +48,6 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
-  const [typeTable, setTypeTable] = useState<string>("table1");
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   // <scroll-x>
@@ -52,8 +55,8 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   const textareaRef = useRef<any>(null);
 
   useEffect(() => {
-    setStores(table);
-  }, [table]);
+    setStores(stores);
+  }, [stores]);
 
   // click outside add task
   useEffect(() => {
@@ -137,11 +140,14 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
     const start = stores.columns[source.droppableId];
     const finish = stores.columns[destination.droppableId];
 
+
     if (start === finish) {
       const newTaskIds = [...start?.taskIds];
+      console.log(newTaskIds);
 
       newTaskIds.splice(source.index, 1);
       newTaskIds.splice(destination.index, 0, draggableId);
+
       const newColumn = {
         ...start,
         taskIds: newTaskIds,
@@ -201,6 +207,35 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   const handleCloceAddColumn = () => {
     setToggle(true);
   };
+  // const listColumn: ListColumn = {
+  //   id: 0,
+  //   background: "./imgtable/photo-1686903431112-9b426ee61dad.jpg",
+  //   name: "fathin",
+  //   tasks: {
+  //     "task-0": { id: 0, content: "Rửa bát" },
+  //     "task-1": { id: 1, content: "Quét nhà" },
+  //     "task-2": { id: 2, content: "Gặt đồ" },
+  //     "task-3": { id: 3, content: "Nấu cơm" },
+  //     "task-4": { id: 4, content: "Chơi game" },
+  //     "task-5": { id: 5, content: "Ăn cơm" },
+  //     "task-6": { id: 6, content: "Nấu cơm" },
+  //     "task-7": { id: 7, content: "Chơi game" },
+  //     "task-8": { id: 8, content: "Ăn cơm" },
+  //   },
+  //   columns: {
+  //     "column-1": {
+  //       id: "column-1",
+  //       title: "Todos",
+  //       taskIds: ["task-0", "task-1", "task-2", "task-3"],
+  //     },
+  //     "column-2": {
+  //       id: "column-2",
+  //       title: "Doing",
+  //       taskIds: ["task-4", "task-5"],
+  //     }
+  //   },
+  //   columnOrder: ["column-1", "column-2"],
+  // };
   function AddColumn() {
     if (textClumn) {
       getData(`/dataTable/${stores.id}`).then((data) => {
@@ -238,144 +273,53 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
       AddColumn();
     }
   };
-  function removeScreen() {
-    setTypeTable("table2");
-  }
 
   return (
-    <div
-      className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
-      ref={elementRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
-      <div className={`todo-slideBar ${slidebarToTodos ? "fullscreen" : ""}`}>
-        <div className="todo-slideBar__left">
-          <i
-            onClick={() => setSlidebarToTodos(!slidebarToTodos)}
-            className={`fa-solid fa-circle-chevron-left ${
-              slidebarToTodos ? "hien" : ""
-            }`}
-          ></i>
-          <div className="todo-slideBar__name">{stores.name}</div>
-          <div
-            onClick={() => setTypeTable("table1")}
-            className={`todo-slideBar__table ${
-              typeTable === "table1" ? "curent" : ""
-            }`}
-          >
-            <i
-              style={{ rotate: "180deg" }}
-              className="fa-solid fa-chart-simple"
-            ></i>
-            <div>Bảng</div>
-          </div>
-          <div
-            onClick={() => removeScreen()}
-            className={`todo-slideBar__table ${
-              typeTable === "table2" ? "curent" : ""
-            }`}
-          >
-            <i className="fa-solid fa-table-cells"></i>
-            <div>Bảng</div>
-          </div>
-        </div>
-
-        <div className="todo-slideBar__right">
-          <div className="todo-slideBar__filer">
-            <i className="fa-solid fa-arrow-down-short-wide"></i>
-            <div>Lọc</div>
-          </div>
-          <span></span>
-        </div>
-      </div>
-      {typeTable === "table1" ? (
-        <div className="list-column">
-          <DragDropContext onDragEnd={handleDragAndDrop}>
-            <Droppable
-              droppableId="all-columns"
-              direction="horizontal"
-              type="column"
-            >
-              {(provided) => (
-                <div
-                  style={{ display: "flex" }}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {stores.columnOrder.map((columnId, index) => {
-                    const column = stores.columns[columnId];
-                    const tasks = column.taskIds?.map(
-                      (taskId) => stores.tasks[taskId]
-                    );
-
-                    return (
-                      <Column
-                        setStores={setStores}
-                        stores={stores}
-                        column={column}
-                        tasks={tasks}
-                        key={columnId}
-                        index={index}
-                        columnId={columnId}
-                        active={activeTextArea === columnId}
-                        onclick={() => handleClickTextArea(columnId)}
-                      />
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <div
-            id="add-list"
-            style={{ position: "relative", width: "max-content" }}
-          >
+    <div className="column-table">
+      <DragDropContext onDragEnd={handleDragAndDrop}>
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
+          {(provided) => (
             <div
-              ref={textareaRef}
-              className={`column-todo addtodo ${toggle ? "hide" : ""}`}
+              className="list__table"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
             >
-              <input
-                ref={inputRef}
-                type="text"
-                value={textClumn}
-                placeholder="Nhập tiêu đề danh sách..."
-                onChange={(e) => setTextClumn(e.target.value)}
-                onKeyDown={handleKeyPress}
-              />
-              <div className="options">
-                <div onClick={() => AddColumn()} className="btn-add">
-                  Thêm danh sách
-                </div>
-                <img
-                  onClick={() => handleCloceAddColumn()}
-                  src="/close.png"
-                  alt=""
-                />
+              <div className="column-table__silebar">
+                <div className="sile__40">Thẻ</div>
+                <div className="sile__20">Danh sách</div>
+                <div className="sile__20">Nhãn</div>
+                <div className="sile__20">Thành viên</div>
+                <div className="sile__20">Ngày hết hạn</div>
               </div>
+              {stores.columnOrder.map((columnId, index) => {
+                const column = stores.columns[columnId];
+                const tasks = column.taskIds?.map(
+                  (taskId) => stores.tasks[taskId]
+                );
+
+                return (
+                  <ColumnTable
+                    column={column}
+                    tasks={tasks}
+                    key={columnId}
+                    index={index}
+                    columnId={columnId}
+                    active={activeTextArea === columnId}
+                    onclick={() => handleClickTextArea(columnId)}
+                  />
+                );
+              })}
+              {provided.placeholder}
             </div>
-            <div
-              ref={containerRef}
-              className={`btn-tranfer ${toggle ? "" : "visible"}`}
-              onClick={() => handleVisibleAddColumn()}
-            >
-              <div className="icon-plus">+</div>
-              <div>Thêm vào danh sách</div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <TodosTable
-          slidebarToTodos={slidebarToTodos}
-          setSlidebarToTodos={setSlidebarToTodos}
-          setStores={setStores}
-          stores={stores}
-        />
-      )}
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
 
-export default React.memo(Todos);
+export default React.memo(TodosTable);

@@ -20,7 +20,6 @@ interface RootState {
 }
 function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
   const {id} = useParams()
-  
   const [curentChose , setCurentChose] = useState<number | string>("")
   const listTable = useSelector((state: RootState) => state.listTable);
   useEffect(()=>{
@@ -37,7 +36,7 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
           }`}
         ></i>
       </div>
-      <a href="/home" className={`slie-bar__table ${curentChose == "/home" ? "curent": ""}`}>
+      <a href="/listTable" className={`slie-bar__table ${curentChose == "/listTable" ? "curent": ""}`}>
         <i className="fa-brands fa-trello"></i>
         <div>Bảng</div>
       </a>

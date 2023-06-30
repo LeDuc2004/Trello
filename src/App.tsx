@@ -1,11 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import TodoPage from "./pages/TodoPage";
-import "../src/scss/zroot.scss"
 import Signin from "./components/authen/Signin";
+import { useEffect } from "react";
+import Home from "./pages/Home";
 function App() {
+  useEffect(()=>{
+   if (window.location.pathname == "/") {
+    window.location.href = "/listTable"
+   }
+  },[])
     let arr = [
-      { path: "/home", element: <HomePage></HomePage> },
+      { path: "/home", element: <Home></Home> },
+      { path: "/listTable", element: <HomePage></HomePage> },
       { path: "/todo/:id", element: <TodoPage></TodoPage> },
       { path: "/signin", element:<Signin></Signin>},
 

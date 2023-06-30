@@ -1,29 +1,60 @@
 .task-todo {
   user-select: none;
   width: calc(100% - 15px);
-  min-height: 30px;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 1px;
   background-color: white;
   padding: 5px;
   margin-bottom: 8px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+  box-shadow: 0px 1px 1px #1767f040, 0px 0px 1px #091e424f;
   z-index: 555;
   padding-left: 10px;
-
-  span {
-    width: 200px;
-
-    overflow-wrap: break-word;
-    word-break: break-all;
+  position: relative;
+  word-wrap: break-word;
+  .wrap__fa-pen-to-square {
+    width: 100%;
+    padding: 5px 0;
+    textarea {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: calc(100% - 15px);
+      border: 2.5px solid #388bff;
+      height: calc(100% - 10px);
+      outline: none;
+      background-color: white;
+      font-size: 19px;
+      border-radius: 6px;
+      resize: none;
+      padding: 5px;
+      padding-left: 10px;
+      z-index: 1000000000;
+    }
+    div {
+      display: none;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      cursor: pointer;
+      padding:  10px;
+      border-radius: 5px;
+    }
+  }
+  .text__area.hide {
+   display: none;
   }
 }
+
 .task-todo:hover {
   background-color: #f1f2f4;
+}
+.task-todo:hover .wrap__fa-pen-to-square div {
+  display: block;
+  color: rgba(128, 128, 128, 0.63);
+}
+.task-todo .wrap__fa-pen-to-square div:hover {
+  background-color: #c6c9cf69;
+  color: gray;
 }
 .task-todo.moune {
   background-color: lightgreen;

@@ -7,8 +7,6 @@ export const createTable = createSlice({
     addTable:(state : any , action: { payload: any }) => {
       state.table.push(action.payload)
       return state
-      
-
     },
   },
   extraReducers: (builder) => {

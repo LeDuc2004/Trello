@@ -1,21 +1,46 @@
+@import "./global.scss";
 .column-todo {
+  .update-clumn{
+    position: relative;
+    width: 100%;
+    .input__column{
+      font-weight: 500;
+      position: absolute;
+      top: -5px;
+      left: -8px;
+      font-size: 17px;
+    }
+    .input__column.hide{
+   display: none;
+    }
+  }
   .column-todo__name {
     font-weight: 550;
     margin-left: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
+    cursor: pointer;
   }
   .list__columns {
     overflow-x: hidden;
     overflow-y: auto;
     height: max-content;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 235px);
     width: 100%;
     padding-right: 5px;
+    position: relative;
+  }
+  .list__columnsTable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    padding-right: 5px;
+    position: relative;
   }
   ::-webkit-scrollbar {
     width: 10px;
   }
-  ::-webkit-scrollbar-thumb {  
+  ::-webkit-scrollbar-thumb {
     background: rgb(186, 183, 183);
     border-radius: 5px;
   }
@@ -31,12 +56,11 @@
   height: max-content;
   margin: 0 6px;
   vertical-align: top;
-  white-space: nowrap;
   width: 302px;
   border-radius: 12px;
   background-color: #f1f2f4;
   padding: 10px;
-
+  overflow: hidden;
   input {
     width: calc(100% - 40px);
     border: 2.5px solid #388bff;
@@ -57,7 +81,6 @@
     align-items: center;
     margin: 0 10px;
     margin-top: 10px;
-
     .btn-add {
       color: white;
       padding: 6px 10px;
@@ -117,6 +140,7 @@
   cursor: pointer;
   position: relative;
   flex-direction: column;
+  bottom: 0;
 
   div {
     cursor: pointer;
@@ -134,7 +158,7 @@
       resize: none;
       overflow: hidden;
       height: auto;
-      min-height: 50px;
+      min-height: 70px;
       padding-left: 5px;
       padding-right: 5px;
       overflow-wrap: break-word;

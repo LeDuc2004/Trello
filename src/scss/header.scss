@@ -1,3 +1,6 @@
+* {
+  text-decoration: none;
+}
 @import "./global.scss";
 .header {
   user-select: none;
@@ -10,9 +13,8 @@
   color: white;
   background-color: hsl(198deg 39.4% 33% / 100%);
   ::placeholder {
-  color: white; /* Màu chữ mong muốn */
-}
-
+    color: white; /* Màu chữ mong muốn */
+  }
 }
 
 .header__left {
@@ -43,11 +45,9 @@
       align-items: center;
       padding: 6px 9px;
       border-radius: 3px;
-
-      i {
-        font-size: smaller;
-        margin-top: 2px;
+      .fa-chevron-down {
         margin-left: 5px;
+        margin-top: 2px;
       }
     }
     display: flex;
@@ -103,7 +103,18 @@
     margin-top: -1px;
   }
 }
-#imguser{
+.imguser{
+  font-size: 20px;
+  width: 41px;
+  height: 41px;border-radius: 50%;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: tomato;
+  margin: 0 10px;
+}
+#imguser {
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -155,7 +166,6 @@
       top: 12px;
       right: 10px;
       font-size: large;
-
     }
   }
   .table__fontimg {
@@ -170,14 +180,15 @@
     align-items: center;
     justify-content: center;
     margin: 10px 0;
-    img{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
+    img {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
     }
   }
-  .background__font{
+  .background__font {
     width: 90%;
     color: #44546f;
     display: block;
@@ -186,17 +197,17 @@
     line-height: 16px;
     margin-bottom: 4px;
     margin-top: 12px;
-    .text{
+    .text {
       font-size: 13px;
       margin-bottom: 5px;
       margin-left: -2px;
     }
-    .list__font{
+    .list__font {
       display: flex;
       width: 100%;
       justify-content: space-evenly;
       cursor: pointer;
-      div{
+      div {
         position: relative;
         width: 25%;
         height: 45px;
@@ -205,33 +216,31 @@
         background-size: cover;
         background-position: center;
         overflow: hidden;
-        .fa-check{
+        .fa-check {
           color: white;
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50% , -50%);
+          transform: translate(-50%, -50%);
           display: none;
         }
-        .fa-check.cr{
+        .fa-check.cr {
           display: block;
         }
 
-        span{
+        span {
           display: block;
           width: 100%;
           height: 100%;
           background-color: transparent;
         }
-        span:hover{
+        span:hover {
           background-color: rgba(65, 60, 60, 0.228);
-
         }
-
       }
     }
   }
-  .topic__table{
+  .topic__table {
     width: 90%;
     color: #44546f;
     display: block;
@@ -240,12 +249,12 @@
     line-height: 16px;
     margin-bottom: 4px;
     margin-top: 12px;
-    .text{
+    .text {
       font-size: 13px;
       margin-bottom: 5px;
       margin-left: -2px;
     }
-    input{
+    input {
       border: none;
       box-sizing: border-box;
       color: black;
@@ -259,7 +268,7 @@
       transition-timing-function: ease;
       border-radius: 3px;
       padding: 8px 12px;
-     border: 2px solid tomato;
+      border: 2px solid tomato;
       background-color: white;
       width: 100%;
       margin-bottom: 0;
@@ -267,7 +276,7 @@
       padding-left: 10px;
     }
   }
-  .btn__newcreate{
+  .btn__newcreate {
     color: white;
     padding: 8px 9px;
     border-radius: 3px;
@@ -278,14 +287,92 @@
     cursor: pointer;
     margin-bottom: 15px;
   }
-  .btn__newcreate:hover{
+  .btn__newcreate:hover {
     background-color: #2f56cd;
   }
-  .btn__newcreate.white{
+  .btn__newcreate.white {
     background-color: rgba(211, 211, 211, 0.541);
     cursor: not-allowed;
   }
 }
+.header__table.home1 {
+  top: 61px;
+  left: 430px;
+}
 .header__table.hide {
   display: none;
+}
+.menu__user {
+  z-index: 9999;
+  background-color: white;
+  color: black;
+  width: 280px;
+  position: absolute;
+  right: 5px;
+  top: 55px;
+  border-radius: 5px;
+  box-shadow: -3px 0px 5px rgba(10, 39, 90, 0.251),
+    0px 0px 1px rgba(9, 30, 66, 0.3098039216);
+  .account {
+    margin-left: 13px;
+    font-size: 19px;
+    padding: 10px 0;
+    font-weight: 600;
+  }
+  .wrap__user {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #d3d3d38f;
+    padding: 10px 0;
+    .wrap__img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-left: 20px;
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      div{
+        margin: 0;
+        color: white;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      .name {
+        font-size: 19px;
+      }
+    }
+  }
+  .btn {
+    margin: 5px;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: rgba(211, 211, 211, 0.525);
+  }
+}
+.menu__user.hide {
+ display: none;
+}
+.btn__dkdn{
+  display: flex;
+  cursor: pointer;
+  .btn__dn{
+    padding: 10px 15px;
+    background-color: #0065ff;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: white;
+  }
+  .btn__dn:hover{
+    background-color: #1b68dc;
+
+  }
+
 }
