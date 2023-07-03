@@ -14,24 +14,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { todoPage } from "../../store/todoPage";
 
-
 type TaskProps = {
   task: {
     id: number;
     content: string;
   };
   index: number;
-  setStores:any,
-  stores:any
+  setStores: any;
+  stores: any;
 };
 
-function Task({ task, index , setStores , stores }: TaskProps) {
-  
+function Task({ task, index, setStores, stores }: TaskProps) {
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
   const refTextArea = useRef<any>(null);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -52,20 +49,24 @@ function Task({ task, index , setStores , stores }: TaskProps) {
       }
     }, 0);
   }
+  function handleEnter(e: any) {
+    if (e === "Enter") {
+      onblurTextArea();
+    }
+  }
   function onblurTextArea() {
     if (textArea && textArea != task.content) {
       setToggleTextArea(false);
 
       let newStore = {
         ...stores,
-        tasks:{
+        tasks: {
           ...stores.tasks,
-          [`task-${task.id}`] : {
-            id:task.id,
-            content: textArea
-          }
-
-        }
+          [`task-${task.id}`]: {
+            id: task.id,
+            content: textArea,
+          },
+        },
       };
 
       dispatch(todoPage.actions.updateTable(newStore));
@@ -74,13 +75,12 @@ function Task({ task, index , setStores , stores }: TaskProps) {
     } else {
       setTextArea(task.content);
     }
-
-    
   }
   return (
     <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
       {(provided: DraggableProvided, snapshot) => (
         <div
+        draggable={false}
           style={{ wordWrap: "break-word" }}
           className={`task-todo ${snapshot.isDragging ? "moune" : ""}`}
           ref={provided.innerRef}
@@ -91,6 +91,7 @@ function Task({ task, index , setStores , stores }: TaskProps) {
             className={`wrap__fa-pen-to-square ${toggleTextArea ? "" : "hide"}`}
           >
             <textarea
+              onKeyDown={(e) => handleEnter(e.key)}
               onChange={(e) => setTextArea(e.target.value)}
               onBlur={() => onblurTextArea()}
               ref={refTextArea}

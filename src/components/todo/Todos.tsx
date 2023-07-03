@@ -291,8 +291,8 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
         </div>
       </div>
       {typeTable === "table1" ? (
-        <div className="list-column">
-          <DragDropContext onDragEnd={handleDragAndDrop}>
+        <div  className="list-column">
+          <DragDropContext  onDragEnd={handleDragAndDrop}>
             <Droppable
               droppableId="all-columns"
               direction="horizontal"

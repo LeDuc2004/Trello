@@ -153,9 +153,10 @@ export default React.memo(function Column({
   }
   return (
     <>
-      <Draggable draggableId={column.id} index={index}>
+      <Draggable  draggableId={column.id} index={index}>
         {(provided, snapshot) => (
           <div
+
             {...provided.draggableProps}
             ref={provided.innerRef}
             className="column-todo"
