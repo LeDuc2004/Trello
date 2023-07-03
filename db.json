@@ -13,6 +13,11 @@
           "id": 0.14450270559187173,
           "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
           "name": "vv"
+        },
+        {
+          "id": 0.9919347971252419,
+          "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
+          "name": "cc"
         }
       ]
     },
@@ -51,7 +56,7 @@
       "tasks": {
         "task-0": {
           "id": 0,
-          "content": "1"
+          "content": "71"
         },
         "task-1": {
           "id": 1,
@@ -94,37 +99,52 @@
         "column-0": {
           "id": "column-0",
           "title": "column1",
-          "taskIds": [
-            "task-0"
-          ]
+          "taskIds": []
         },
         "column-1": {
           "id": "column-1",
           "title": "column2",
           "taskIds": [
-            "task-1",
-            "task-6",
-            "task-8",
-            "task-7"
+            "task-0"
           ]
         },
         "column-2": {
           "id": "column-2",
           "title": "column3",
           "taskIds": [
-            "task-3",
             "task-9",
             "task-2",
+            "task-6",
+            "task-8",
             "task-5",
-            "task-4"
+            "task-4",
+            "task-1",
+            "task-7",
+            "task-3"
           ]
         }
       },
       "columnOrder": [
-        "column-0",
+        "column-2",
         "column-1",
-        "column-2"
+        "column-0"
       ]
+    },
+    {
+      "id": 0.9919347971252419,
+      "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
+      "name": "cc",
+      "member": [
+        {
+          "id": "108043588203461517800",
+          "tk": "Lê Ðức",
+          "img": "https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c",
+          "position": "boss"
+        }
+      ],
+      "tasks": {},
+      "columns": {},
+      "columnOrder": []
     }
   ]
 }
