@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/addTable", authenToken , (req ,res)=>{
+app.post("/addTable", authenToken, (req, res) => {
   const id = req.user.id;
   const TableToUser = req.body
   fetch(`http://localhost:3000/users/${id}`, {
@@ -17,11 +17,10 @@ app.post("/addTable", authenToken , (req ,res)=>{
     .then((res) => res.json())
     .then((data) => {
       let arrayIdTable = data.idTable.slice()
-      arrayIdTable.push(TableToUser)  
-      console.log(arrayIdTable);
+      arrayIdTable.push(TableToUser)
       let newData = {
         ...data,
-        idTable:arrayIdTable 
+        idTable: arrayIdTable
       }
       fetch(`http://localhost:3000/users/${id}`, {
         method: "PUT",
@@ -51,14 +50,20 @@ app.post("/login", (req, res) => {
 });
 app.get("/user", authenToken, (req, res) => {
   const user = req.user;
-  res.send({ user });
+  fetch(`http://localhost:3000/users/${user.id}`)
+    .then((res) => res.json())
+    .then((data) => {
+
+      res.send({ user :data});
+    });
+
 });
 app.post("/logout", (req, res) => {
   let user = req.body;
   fetch(`http://localhost:3000/users/${user.iduser}`)
     .then((res) => res.json())
     .then((data) => {
-      data.token = data.token.filter((item) => item != user.token);
+      data.token = data?.token?.filter((item) => item != user.token);
 
       fetch(`http://localhost:3000/users/${user.iduser}`, {
         method: "PUT",
@@ -79,7 +84,7 @@ function authenToken(req, res, next) {
     if (data) {
       req.user = data;
       next();
-    }else{
+    } else {
       res.send(404)
     }
   });
