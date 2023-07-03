@@ -32,10 +32,10 @@ interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   table: Item;
+  btnShare:any;
 }
 
-function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
-  console.log(table);
+function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBarProps) {
 
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
@@ -48,7 +48,6 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
-  console.log(stores)
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   // <scroll-x>
   const { id } = useParams();
@@ -263,160 +262,166 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   }
 
   return (
-    <div
-      className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
-      ref={elementRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
-      <div className={`todo-slideBar ${slidebarToTodos ? "fullscreen" : ""}`}>
-        <div className="todo-slideBar__left">
-          <i
-            onClick={() => setSlidebarToTodos(!slidebarToTodos)}
-            className={`fa-solid fa-circle-chevron-left ${slidebarToTodos ? "hien" : ""
-              }`}
-          ></i>
-          <div className="todo-slideBar__name">{stores.name}</div>
-          <div
-            onClick={() => setTypeTable("table1")}
-            className={`todo-slideBar__table ${typeTable === "table1" ? "curent" : ""
-              }`}
-          >
+    <>
+
+      <div
+        className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
+        ref={elementRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+
+
+        <div className={`todo-slideBar ${slidebarToTodos ? "fullscreen" : ""}`}>
+          <div className="todo-slideBar__left">
             <i
-              style={{ rotate: "180deg" }}
-              className="fa-solid fa-chart-simple"
+              onClick={() => setSlidebarToTodos(!slidebarToTodos)}
+              className={`fa-solid fa-circle-chevron-left ${slidebarToTodos ? "hien" : ""
+                }`}
             ></i>
-            <div>Bảng</div>
-          </div>
-          <div
-            onClick={() => removeScreen()}
-            className={`todo-slideBar__table ${typeTable === "table2" ? "curent" : ""
-              }`}
-          >
-            <i className="fa-solid fa-table-cells"></i>
-            <div>Bảng</div>
-          </div>
-        </div>
-
-
-
-
-        <div className="todo-slideBar__right">
-          <div className="todo-slideBar__filer">
-            <i className="fa-solid fa-arrow-down-short-wide"></i>
-            <div>Lọc</div>
-          </div>
-          <span></span>
-          <div className="list__member">
-            {stores.member.map((item: any) => <div className="member">
-              {item.img ?
-                <div className="wrapnt1">
-                  <img className="pictureuser" src={item.img} alt="" />
-                  <img className="icon__arrow-up" style={item.position === "boss" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
-
-                </div>
-                :
-                <div className="wrapnt1" >
-                  <div className="wrapnt" style={{ backgroundColor: `${item.color}` }}>{layChuCaiDau(item.tk)}</div>
-                  <img className="icon__arrow-up" style={item.position === "boss" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
-                </div>}
-            </div>)}
-          </div>
-          <div className="btn__share">
-            <img src="/add-contact.png" alt="" />
-            <div>chia sẻ</div>
-          </div>
-
-
-        </div>
-
-      </div>
-      {typeTable === "table1" ? (
-        <div  className="list-column">
-          <DragDropContext  onDragEnd={handleDragAndDrop}>
-            <Droppable
-              droppableId="all-columns"
-              direction="horizontal"
-              type="column"
-            >
-              {(provided) => (
-                <div
-                  style={{ display: "flex" }}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {stores?.columnOrder?.map((columnId, index) => {
-                    const column = stores.columns[columnId];
-                    const tasks = column.taskIds?.map(
-                      (taskId) => stores.tasks[taskId]
-                    );
-
-                    return (
-                      <Column
-                        setStores={setStores}
-                        stores={stores}
-                        column={column}
-                        tasks={tasks}
-                        key={columnId}
-                        index={index}
-                        columnId={columnId}
-                        active={activeTextArea === columnId}
-                        onclick={() => handleClickTextArea(columnId)}
-                      />
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <div
-            id="add-list"
-            style={{ position: "relative", width: "max-content" }}
-          >
+            <div className="todo-slideBar__name">{stores.name}</div>
             <div
-              ref={textareaRef}
-              className={`column-todo addtodo ${toggle ? "hide" : ""}`}
+              onClick={() => setTypeTable("table1")}
+              className={`todo-slideBar__table ${typeTable === "table1" ? "curent" : ""
+                }`}
             >
-              <input
-                ref={inputRef}
-                type="text"
-                value={textClumn}
-                placeholder="Nhập tiêu đề danh sách..."
-                onChange={(e) => setTextClumn(e.target.value)}
-                onKeyDown={handleKeyPress}
-              />
-              <div className="options">
-                <div onClick={() => AddColumn()} className="btn-add">
-                  Thêm danh sách
-                </div>
-                <img
-                  onClick={() => handleCloceAddColumn()}
-                  src="/close.png"
-                  alt=""
+              <i
+                style={{ rotate: "180deg" }}
+                className="fa-solid fa-chart-simple"
+              ></i>
+              <div>Bảng</div>
+            </div>
+            <div
+              onClick={() => removeScreen()}
+              className={`todo-slideBar__table ${typeTable === "table2" ? "curent" : ""
+                }`}
+            >
+              <i className="fa-solid fa-table-cells"></i>
+              <div>Bảng</div>
+            </div>
+          </div>
+
+
+
+
+          <div className="todo-slideBar__right">
+            <div className="todo-slideBar__filer">
+              <i className="fa-solid fa-arrow-down-short-wide"></i>
+              <div>Lọc</div>
+            </div>
+            <span></span>
+            <div className="list__member">
+              {stores.member.map((item: any) => <div key={item.id} className="member">
+                {item.img ?
+                  <div className="wrapnt1">
+                    <img className="pictureuser" src={item.img} alt="" />
+                    <img className="icon__arrow-up" style={item.position === "Quản trị viên" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
+
+                  </div>
+                  :
+                  <div className="wrapnt1" >
+                    <div className="wrapnt" style={{ backgroundColor: `${item.color}` }}>{layChuCaiDau(item.tk)}</div>
+                    <img className="icon__arrow-up" style={item.position === "Quản trị viên" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
+                  </div>}
+              </div>)}
+            </div>
+            <div onClick={()=>btnShare(true)} className="btn__share">
+              <img src="/add-contact.png" alt="" />
+              <div>chia sẻ</div>
+            </div>
+
+
+          </div>
+
+        </div>
+        {typeTable === "table1" ? (
+          <div className="list-column">
+            <DragDropContext onDragEnd={handleDragAndDrop}>
+              <Droppable
+                droppableId="all-columns"
+                direction="horizontal"
+                type="column"
+              >
+                {(provided) => (
+                  <div
+                    style={{ display: "flex" }}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {stores?.columnOrder?.map((columnId, index) => {
+                      const column = stores.columns[columnId];
+                      const tasks = column.taskIds?.map(
+                        (taskId) => stores.tasks[taskId]
+                      );
+
+                      return (
+                        <Column
+                          setStores={setStores}
+                          stores={stores}
+                          column={column}
+                          tasks={tasks}
+                          key={columnId}
+                          index={index}
+                          columnId={columnId}
+                          active={activeTextArea === columnId}
+                          onclick={() => handleClickTextArea(columnId)}
+                        />
+                      );
+                    })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+            <div
+              id="add-list"
+              style={{ position: "relative", width: "max-content" }}
+            >
+              <div
+                ref={textareaRef}
+                className={`column-todo addtodo ${toggle ? "hide" : ""}`}
+              >
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={textClumn}
+                  placeholder="Nhập tiêu đề danh sách..."
+                  onChange={(e) => setTextClumn(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
+                <div className="options">
+                  <div onClick={() => AddColumn()} className="btn-add">
+                    Thêm danh sách
+                  </div>
+                  <img
+                    onClick={() => handleCloceAddColumn()}
+                    src="/close.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div
+                ref={containerRef}
+                className={`btn-tranfer ${toggle ? "" : "visible"}`}
+                onClick={() => handleVisibleAddColumn()}
+              >
+                <div className="icon-plus">+</div>
+                <div>Thêm vào danh sách</div>
               </div>
             </div>
-            <div
-              ref={containerRef}
-              className={`btn-tranfer ${toggle ? "" : "visible"}`}
-              onClick={() => handleVisibleAddColumn()}
-            >
-              <div className="icon-plus">+</div>
-              <div>Thêm vào danh sách</div>
-            </div>
           </div>
-        </div>
-      ) : (
-        <TodosTable
-          slidebarToTodos={slidebarToTodos}
-          setSlidebarToTodos={setSlidebarToTodos}
-          setStores={setStores}
-          stores={stores}
-        />
-      )}
-    </div>
+        ) : (
+          <TodosTable
+            slidebarToTodos={slidebarToTodos}
+            setSlidebarToTodos={setSlidebarToTodos}
+            setStores={setStores}
+            stores={stores}
+          />
+        )}
+      </div>
+
+    </>
   );
 }
 

@@ -143,7 +143,6 @@ function TodosTable({
 
     if (start === finish) {
       const newTaskIds = [...start?.taskIds];
-      console.log(newTaskIds);
 
       newTaskIds.splice(source.index, 1);
       newTaskIds.splice(destination.index, 0, draggableId);

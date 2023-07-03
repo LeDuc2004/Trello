@@ -90,7 +90,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 id: data.id,
                 tk: data.tk,
                 img: data.img,
-                position: "boss"
+                position: "Quản trị viên"
               }],
               tasks: {},
               columns: {},
@@ -104,7 +104,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 id: data.id,
                 tk: data.tk,
                 color: data.color,
-                position: "boss"
+                position: "Quản trị viên"
               }],
               tasks: {},
               columns: {},

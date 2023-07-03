@@ -72,7 +72,6 @@ function Header({ sign }: any) {
           }
         })
         .then((data) => {
-          console.log(data);
           
           dispatch(fetchTable(data.user.id));
           setUser(true);
@@ -136,7 +135,6 @@ function Header({ sign }: any) {
         })
         .then((data1) => {
           let data = data1.user
-          console.log(data);
           
           if (textNameTable) {
             let idTable = Math.random();
@@ -153,7 +151,7 @@ function Header({ sign }: any) {
                 id: data.id,
                 tk: data.tk,
                 img: data.img,
-                position: "boss"
+                position: "Quản trị viên"
               }],
               tasks: {},
               columns: {},
@@ -167,13 +165,12 @@ function Header({ sign }: any) {
                 id: data.id,
                 tk: data.tk,
                 color: data.color,
-                position: "boss"
+                position: "Quản trị viên"
               }],
               tasks: {},
               columns: {},
               columnOrder: [],
             };
-            console.log(data);
             
             if (data.img) {
               postData("/dataTable", TableToDataBase1);

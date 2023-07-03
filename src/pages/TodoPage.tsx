@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { fetchTableLess } from "../store/todoPage";
 import { useParams } from "react-router-dom";
+import { SelectPosition } from "../components/Select";
 type Task = {
   id: number;
   content: string;
@@ -26,7 +27,7 @@ interface Item {
   columnOrder: string[];
 }
 interface RootState {
-  
+
   table: {
     status: string;
     Table: Item;
@@ -34,19 +35,65 @@ interface RootState {
 }
 function TodoPage() {
   const { id } = useParams();
-  const [updateScreen, setUpdateScreen] = useState<boolean>(true);
+  const [toggle, setToggle] = useState<boolean>(false);
   const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
- 
-  
+
+
   useEffect(() => {
     dispatch(fetchTableLess(id));
   }, []);
   const table = useSelector((state: RootState) => state.table);
- 
+
+  function hideWrapTb() {
+    setToggle(false)
+  }
+
   return (
     <>
+      <div onClick={() => hideWrapTb()} style={toggle ? {} : { display: "none" }} className="wrap__tb__share">
+
+
+      </div>
+      <div style={toggle ? {} : { display: "none" }} className="tb__share">
+        <div className="tb__share_top">
+          <div>chia sẻ bảng</div>
+          <i onClick={() => hideWrapTb()} className="fa-solid fa-xmark"></i>
+        </div>
+        <div className="tb__share_middle">
+          <input type="text" placeholder="Địa chỉ email hoặc tên" />
+          <SelectPosition position={"Thành viên"}></SelectPosition>
+          <div className="btn_share">
+            chia sẻ
+          </div>
+        </div>
+
+        <div className="tb__share_bottom">
+          <div className="sun__share">
+            <div className="img__name">
+              <img src="https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c" alt="" />
+              <div>Lê Đức</div>
+            </div>
+            <SelectPosition></SelectPosition>
+          </div>
+          <div className="sun__share">
+            <div className="img__name">
+              <img src="https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c" alt="" />
+              <div>Lê Đức</div>
+            </div>
+            <SelectPosition></SelectPosition>
+          </div>
+          <div className="sun__share">
+            <div className="img__name">
+              <img src="https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c" alt="" />
+              <div>Lê Đức</div>
+            </div>
+            <SelectPosition></SelectPosition>
+          </div>
+        </div>
+
+      </div>
       <Header></Header>
 
       <div
@@ -66,7 +113,8 @@ function TodoPage() {
         ></SileBar>
         {table.status === "idle" ? (
           <Todos
-            table={table.Table} 
+            btnShare={setToggle}
+            table={table.Table}
             slidebarToTodos={slidebarToTodos}
             setSlidebarToTodos={setSlidebarToTodos}
           ></Todos>

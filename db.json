@@ -58,7 +58,7 @@
           "id": "108043588203461517800",
           "tk": "Lê Ðức",
           "img": "https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c",
-          "position": "boss"
+          "position": "Quản trị viên"
         }
       ],
       "tasks": {
@@ -100,33 +100,34 @@
         },
         "task-9": {
           "id": 9,
-          "content": "10\n"
+          "content": "1011"
         }
       },
       "columns": {
         "column-0": {
           "id": "column-0",
           "title": "column1",
-          "taskIds": []
+          "taskIds": [
+            "task-8",
+            "task-4",
+            "task-2"
+          ]
         },
         "column-1": {
           "id": "column-1",
-          "title": "column2",
+          "title": "column23",
           "taskIds": [
-            "task-9",
+            "task-0",
             "task-5",
-            "task-0"
+            "task-1",
+            "task-6",
+            "task-9"
           ]
         },
         "column-2": {
           "id": "column-2",
           "title": "column32",
           "taskIds": [
-            "task-6",
-            "task-2",
-            "task-8",
-            "task-4",
-            "task-1",
             "task-7",
             "task-3"
           ]
@@ -147,7 +148,7 @@
           "id": "108043588203461517800",
           "tk": "Lê Ðức",
           "img": "https://lh3.googleusercontent.com/a/AAcHTtcpadAkUAMhP8PABYqkxXe_GiYJuOznhIpkfo1z=s96-c",
-          "position": "boss"
+          "position": "Quản trị viên"
         }
       ],
       "tasks": {},
