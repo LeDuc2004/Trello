@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import "../scss/home.scss";
-import { postData, putData } from "../services";
+import { getData, postData, putData } from "../services";
 import { createTable, fetchTable } from "../store/createTable";
 
 interface SideBarProps {
@@ -59,37 +59,86 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
   });
 
   function handlecreatTable() {
-    if (textNameTable) {
-      let idTable = Math.random();
-      let TableToUser = {
-        id: idTable,
-        background: defaultImg,
-        name: textNameTable,
-      };
-      let TableToDataBase = {
-        id: idTable,
-        background: defaultImg,
-        name: textNameTable,
-        tasks: {},
-        columns: {},
-        columnOrder: [],
-      };
-      postData("/dataTable", TableToDataBase);
-      fetch("http://localhost:5000/addTable", {
-        method: "POST",
+    if (localStorage.getItem("token") != null) {
+      fetch("http://localhost:5000/user", {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           authorization: `Beaer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(TableToUser),
-      }).then((res) => {
-        if (res.status == 200) {
-          dispatch(createTable.actions.addTable(TableToUser));
-          setToggleCreateTable(false);
-          setTextNameTable("");
-        }
-      });
+      })
+        .then((res) => {
+          return res.json();
+
+        })
+        .then((data1) => {
+          let data = data1.user
+          getData(`/users/${data.id}`)
+          .then(data =>{
+                      if (textNameTable) {
+            let idTable = Math.random();
+            let TableToUser = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+            };
+            let TableToDataBase1 = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+              member: [{
+                id: data.id,
+                tk: data.tk,
+                img: data.img,
+                position: "boss"
+              }],
+              tasks: {},
+              columns: {},
+              columnOrder: [],
+            };
+            let TableToDataBase2 = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+              member: [{
+                id: data.id,
+                tk: data.tk,
+                color: data.color,
+                position: "boss"
+              }],
+              tasks: {},
+              columns: {},
+              columnOrder: [],
+            };
+            if (data.img) {
+
+              postData("/dataTable", TableToDataBase1);
+            } else {
+              postData("/dataTable", TableToDataBase2);
+
+            }
+            fetch("http://localhost:5000/addTable", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Beaer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify(TableToUser),
+            }).then((res) => {
+              if (res.status == 200) {
+                dispatch(createTable.actions.addTable(TableToUser));
+                setToggleCreateTable(false);
+                setTextNameTable("");
+              }
+            });
+          }
+          })
+
+
+        });
     }
+
+
   }
   function handleTable() {
     setToggleCreateTable(!toggleCreateTable);
@@ -104,9 +153,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
       <div className="home__table">
         <i
           onClick={() => setSlidebarToTodos(!slidebarToTodos)}
-          className={`fa-solid fa-circle-chevron-left ${
-            slidebarToTodos ? "hien" : ""
-          }`}
+          className={`fa-solid fa-circle-chevron-left ${slidebarToTodos ? "hien" : ""
+            }`}
         ></i>
         <div>Bảng</div>
       </div>
@@ -162,9 +210,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 >
                   <span onClick={() => setFontBackground([1, 0, 0, 0])}></span>
                   <i
-                    className={`fa-solid fa-check ${
-                      fontBackground[0] === 1 ? "cr" : ""
-                    }`}
+                    className={`fa-solid fa-check ${fontBackground[0] === 1 ? "cr" : ""
+                      }`}
                   ></i>
                 </div>
                 <div
@@ -174,9 +221,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 >
                   <span onClick={() => setFontBackground([0, 1, 0, 0])}></span>
                   <i
-                    className={`fa-solid fa-check ${
-                      fontBackground[1] === 1 ? "cr" : ""
-                    }`}
+                    className={`fa-solid fa-check ${fontBackground[1] === 1 ? "cr" : ""
+                      }`}
                   ></i>
                 </div>
                 <div
@@ -186,9 +232,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 >
                   <span onClick={() => setFontBackground([0, 0, 1, 0])}></span>
                   <i
-                    className={`fa-solid fa-check ${
-                      fontBackground[2] === 1 ? "cr" : ""
-                    }`}
+                    className={`fa-solid fa-check ${fontBackground[2] === 1 ? "cr" : ""
+                      }`}
                   ></i>
                 </div>
                 <div
@@ -198,9 +243,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 >
                   <span onClick={() => setFontBackground([0, 0, 0, 1])}></span>
                   <i
-                    className={`fa-solid fa-check ${
-                      fontBackground[3] === 1 ? "cr" : ""
-                    }`}
+                    className={`fa-solid fa-check ${fontBackground[3] === 1 ? "cr" : ""
+                      }`}
                   ></i>
                 </div>
               </div>
@@ -216,9 +260,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
             </div>
             <div
               onClick={() => handlecreatTable()}
-              className={`btn__newcreate ${
-                textNameTable === "" ? "white" : ""
-              }`}
+              className={`btn__newcreate ${textNameTable === "" ? "white" : ""
+                }`}
             >
               Tạo mới
             </div>
@@ -226,20 +269,20 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
         </div>
         {listTable?.length > 0
           ? listTable.map((item) => {
-              return (
-                <a
-                  href={`http://localhost:3001/todo/${item.id}`}
-                  key={item.id}
-                  className="tb"
-                  style={{
-                    backgroundImage: `url(${item.background})`,
-                  }}
-                >
-                  <div className="background__blur"></div>
-                  <div className="tb__text">{item.name}</div>
-                </a>
-              );
-            })
+            return (
+              <a
+                href={`http://localhost:3001/todo/${item.id}`}
+                key={item.id}
+                className="tb"
+                style={{
+                  backgroundImage: `url(${item.background})`,
+                }}
+              >
+                <div className="background__blur"></div>
+                <div className="tb__text">{item.name}</div>
+              </a>
+            );
+          })
           : ""}
       </div>
     </div>

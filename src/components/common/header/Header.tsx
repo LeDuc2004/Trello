@@ -9,6 +9,7 @@ import { fetchTable } from "../../../store/createTable";
 
 function Header({ sign }: any) {
   const [tblVisible, setTblVisible] = useState<boolean>(false);
+  const [color , setColor] = useState<string>("")
   const [user, setUser] = useState<boolean>(false);
   const [info, setInfor] = useState<string>("");
   const [iduser, setIduser] = useState<string>("");
@@ -71,12 +72,16 @@ function Header({ sign }: any) {
           }
         })
         .then((data) => {
+          console.log(data);
+          
           dispatch(fetchTable(data.user.id));
           setUser(true);
-          setInfor(data.user.name);
+          setInfor(data.user.tk);
           setIduser(data.user.id);
           if (data.user.img) {
             setImg(data.user.img);
+          }else{
+             setColor(data.user.color)
           }
         });
     }
@@ -117,37 +122,83 @@ function Header({ sign }: any) {
   }
 
   function handlecreatTable() {
-    if (textNameTable) {
-      let idTable = Math.random();
-      let TableToUser = {
-        id: idTable,
-        background: defaultImg,
-        name: textNameTable,
-      };
-      let TableToDataBase = {
-        id: idTable,
-        background: defaultImg,
-        name: textNameTable,
-        tasks: {},
-        columns: {},
-        columnOrder: [],
-      };
-      postData("/dataTable", TableToDataBase);
-      fetch("http://localhost:5000/addTable", {
-        method: "POST",
+    if (localStorage.getItem("token") != null) {
+      fetch("http://localhost:5000/user", {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           authorization: `Beaer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(TableToUser),
-      }).then((res) => {
-        if (res.status == 200) {
-          dispatch(createTable.actions.addTable(TableToUser));
-          setToggleCreateTable(false);
-          setTextNameTable("");
-        }
-      });
+      })
+        .then((res) => {
+          return res.json();
+
+        })
+        .then((data1) => {
+          let data = data1.user
+          console.log(data);
+          
+          if (textNameTable) {
+            let idTable = Math.random();
+            let TableToUser = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+            };
+            let TableToDataBase1 = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+              member: [{
+                id: data.id,
+                tk: data.tk,
+                img: data.img,
+                position: "boss"
+              }],
+              tasks: {},
+              columns: {},
+              columnOrder: [],
+            };
+            let TableToDataBase2 = {
+              id: idTable,
+              background: defaultImg,
+              name: textNameTable,
+              member: [{
+                id: data.id,
+                tk: data.tk,
+                color: data.color,
+                position: "boss"
+              }],
+              tasks: {},
+              columns: {},
+              columnOrder: [],
+            };
+            console.log(data);
+            
+            if (data.img) {
+              postData("/dataTable", TableToDataBase1);
+            } else {
+              postData("/dataTable", TableToDataBase2);
+
+            }
+            fetch("http://localhost:5000/addTable", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Beaer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify(TableToUser),
+            }).then((res) => {
+              if (res.status == 200) {
+                dispatch(createTable.actions.addTable(TableToUser));
+                setToggleCreateTable(false);
+                setTextNameTable("");
+              }
+            });
+          }
+        });
     }
+
   }
   function handleTable() {
     setToggleCreateTable(!toggleCreateTable);
@@ -326,7 +377,7 @@ function Header({ sign }: any) {
             style={{ position: "relative" }}
           >
             {imguser === "" ? (
-              <div className="imguser">{layChuCaiDau(info)}</div>
+              <div style={{backgroundColor:`${color}`}} className="imguser">{layChuCaiDau(info)}</div>
             ) : (
               <img id="imguser" src={imguser} alt="" />
             )}
@@ -335,7 +386,7 @@ function Header({ sign }: any) {
               <div className="wrap__user">
                 <div className="wrap__img">
                   {imguser === "" ? (
-                    <div className="imguser">{layChuCaiDau(info)}</div>
+                    <div style={{backgroundColor:`${color}`}} className="imguser">{layChuCaiDau(info)}</div>
                   ) : (
                     <img id="imguser" src={imguser} alt="" />
                   )}

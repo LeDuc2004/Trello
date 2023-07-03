@@ -19,6 +19,7 @@ type Column = {
 interface Item {
   id: number | string;
   background: string;
+  member: any;
   name: string;
   tasks: { [taskId: string]: Task };
   columns: { [columnId: string]: Column };

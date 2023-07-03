@@ -22,6 +22,7 @@ type Column = {
 interface Item {
   id: number | string;
   background: string;
+  member: any;
   name: string;
   tasks: { [taskId: string]: Task };
   columns: { [columnId: string]: Column };
@@ -34,6 +35,8 @@ interface SideBarProps {
 }
 
 function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
+  console.log(table);
+
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +48,7 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
-
+  console.log(stores)
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   // <scroll-x>
   const { id } = useParams();
@@ -68,6 +71,23 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
+  function layChuCaiDau(ten: string) {
+    if (ten && ten.trim() !== '') {
+
+      const tenDaXuLi = ten.split(" ");
+      const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
+
+      const chuCaiDau = tenDaXuLi[0].charAt(0);
+      if (tenDaXuLi.length > 1) {
+
+        return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
+      } else {
+        return chuCaiDau.toUpperCase()
+
+      }
+    }
+    return '';
+  }
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -254,16 +274,14 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
         <div className="todo-slideBar__left">
           <i
             onClick={() => setSlidebarToTodos(!slidebarToTodos)}
-            className={`fa-solid fa-circle-chevron-left ${
-              slidebarToTodos ? "hien" : ""
-            }`}
+            className={`fa-solid fa-circle-chevron-left ${slidebarToTodos ? "hien" : ""
+              }`}
           ></i>
           <div className="todo-slideBar__name">{stores.name}</div>
           <div
             onClick={() => setTypeTable("table1")}
-            className={`todo-slideBar__table ${
-              typeTable === "table1" ? "curent" : ""
-            }`}
+            className={`todo-slideBar__table ${typeTable === "table1" ? "curent" : ""
+              }`}
           >
             <i
               style={{ rotate: "180deg" }}
@@ -273,14 +291,16 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
           </div>
           <div
             onClick={() => removeScreen()}
-            className={`todo-slideBar__table ${
-              typeTable === "table2" ? "curent" : ""
-            }`}
+            className={`todo-slideBar__table ${typeTable === "table2" ? "curent" : ""
+              }`}
           >
             <i className="fa-solid fa-table-cells"></i>
             <div>Bảng</div>
           </div>
         </div>
+
+
+
 
         <div className="todo-slideBar__right">
           <div className="todo-slideBar__filer">
@@ -288,7 +308,29 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
             <div>Lọc</div>
           </div>
           <span></span>
+          <div className="list__member">
+            {stores.member.map((item: any) => <div className="member">
+              {item.img ?
+                <div className="wrapnt1">
+                  <img className="pictureuser" src={item.img} alt="" />
+                  <img className="icon__arrow-up" style={item.position === "boss" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
+
+                </div>
+                :
+                <div className="wrapnt1" >
+                  <div className="wrapnt" style={{ backgroundColor: `${item.color}` }}>{layChuCaiDau(item.tk)}</div>
+                  <img className="icon__arrow-up" style={item.position === "boss" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
+                </div>}
+            </div>)}
+          </div>
+          <div className="btn__share">
+            <img src="/add-contact.png" alt="" />
+            <div>chia sẻ</div>
+          </div>
+
+
         </div>
+
       </div>
       {typeTable === "table1" ? (
         <div  className="list-column">
@@ -304,7 +346,7 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table }: SideBarProps) {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {stores.columnOrder.map((columnId, index) => {
+                  {stores?.columnOrder?.map((columnId, index) => {
                     const column = stores.columns[columnId];
                     const tasks = column.taskIds?.map(
                       (taskId) => stores.tasks[taskId]
