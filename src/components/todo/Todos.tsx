@@ -36,6 +36,7 @@ interface SideBarProps {
 }
 
 function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBarProps) {
+  
 
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);

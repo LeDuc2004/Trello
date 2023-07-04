@@ -57,6 +57,20 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
+  useEffect(() => {
+    if (fontBackground[0] === 1) {
+      setDefaultImg("/imgtable/photo-1685625762287-5d08e37d5292.jpg");
+    }
+    if (fontBackground[1] === 1) {
+      setDefaultImg("/imgtable/photo-1686903431112-9b426ee61dad.jpg");
+    }
+    if (fontBackground[2] === 1) {
+      setDefaultImg("/imgtable/photo-1686995309003-9a141da8a6e6.jpg");
+    }
+    if (fontBackground[3] === 1) {
+      setDefaultImg("/imgtable/photo-1687220297381-f8fddaa09163.jpg");
+    }
+  }, [fontBackground]);
 
   function handlecreatTable() {
     if (localStorage.getItem("token") != null) {
@@ -89,6 +103,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
               member: [{
                 id: data.id,
                 tk: data.tk,
+                email:data.email,
                 img: data.img,
                 position: "Quản trị viên"
               }],
@@ -103,6 +118,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
               member: [{
                 id: data.id,
                 tk: data.tk,
+                email:data.email,
                 color: data.color,
                 position: "Quản trị viên"
               }],
@@ -141,7 +157,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
 
   }
   function handleTable() {
-    setToggleCreateTable(!toggleCreateTable);
+    setToggleCreateTable(true);
     setTimeout(() => {
       if (refInput.current) {
         refInput.current.focus();

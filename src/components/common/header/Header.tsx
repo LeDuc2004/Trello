@@ -151,6 +151,7 @@ function Header({ sign }: any) {
                 id: data.id,
                 tk: data.tk,
                 img: data.img,
+                email:data.email,
                 position: "Quản trị viên"
               }],
               tasks: {},
@@ -164,6 +165,7 @@ function Header({ sign }: any) {
               member: [{
                 id: data.id,
                 tk: data.tk,
+                email:data.email,
                 color: data.color,
                 position: "Quản trị viên"
               }],

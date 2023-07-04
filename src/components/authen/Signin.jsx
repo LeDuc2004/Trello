@@ -40,6 +40,7 @@ function Signin() {
       handleSubmitdk(user);
     } else {
       let response = jwt_decode(responseStart.credential);
+      
       const user = {
         email: response.email,
         name: response.name,
@@ -54,7 +55,7 @@ function Signin() {
   let useAuthen = {
     id: Math.random(),
     tk:name,
-    email: tk,
+    email:tk,
     color:getRandomColor(),
     mk: mk,
     token: [],
@@ -66,6 +67,7 @@ function Signin() {
         let user = {
           id: fborgg.id,
           tk: fborgg.name,
+          email: fborgg.email,
           img: fborgg.image,
           token: [],
           idTable: [],
@@ -188,7 +190,7 @@ function Signin() {
       function authen(data) {
         let flag = "";
         for (let i = 0; i < data.length; i++) {
-          if (tk != data[i].tk) {
+          if (tk != data[i].email) {
             flag = false;
             continue;
           } else {
