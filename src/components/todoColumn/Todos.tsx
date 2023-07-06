@@ -8,6 +8,7 @@ import { getData, putData } from "../../services";
 import { fetchTableLess, todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
 import TodosTable from "../todoTable/TodosTable";
+import BarChart from "../todoChart/Chart";
 type Task = {
   id: number;
   content: string;
@@ -41,6 +42,8 @@ function Todos({
   table,
   btnShare,
 }: SideBarProps) {
+  console.log(table);
+
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -262,7 +265,7 @@ function Todos({
           },
           columnOrder: columnOrder,
         };
-        dispatch(todoPage.actions.updateTable(newColumn));
+        setStores(newColumn);
         putData(`/dataTable/${stores.id}`, newColumn).then((res) =>
           handleVisibleAddColumn()
         );
@@ -381,7 +384,7 @@ function Todos({
                 </div>
               ))}
             </div>
-            <div onClick={() => btnShare(true)} className="btn__share">
+            <div onClick={() => btnShare("share")} className="btn__share">
               <img src="/add-contact.png" alt="" />
               <div>chia sẻ</div>
             </div>
@@ -406,6 +409,7 @@ function Todos({
                       const tasks = column.taskIds?.map(
                         (taskId) => stores.tasks[taskId]
                       );
+                      console.log(tasks);
 
                       return (
                         <Column
@@ -464,16 +468,31 @@ function Todos({
             </div>
           </div>
         ) : (
+          ""
+        )}
+        {typeTable === "table2" ? (
           <TodosTable
             slidebarToTodos={slidebarToTodos}
             setSlidebarToTodos={setSlidebarToTodos}
             setStores={setStores}
             stores={stores}
           />
+        ) : (
+          ""
+        )}
+        {typeTable === "table3" ? (
+          <div className="todo_chart">
+            <BarChart columns={stores.columns}></BarChart>
+            <BarChart columns={stores.columns}></BarChart>
+            <BarChart columns={stores.columns}></BarChart>
+            <BarChart columns={stores.columns}></BarChart>
+          </div>
+        ) : (
+          ""
         )}
       </div>
     </>
   );
 }
 
-export default React.memo(Todos);
+export default Todos;

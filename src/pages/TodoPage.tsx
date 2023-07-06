@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import Header from "../components/common/header/Header";
-import SileBar from "../components/todo/SileBar";
-import Todos from "../components/todo/Todos";
+import SileBar from "../components/todoColumn/SileBar";
+import Todos from "../components/todoColumn/Todos";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { fetchTableLess } from "../store/todoPage";
 import { useParams } from "react-router-dom";
-import { SelectPosition ,SelectPosition1} from "../components/Select";
+import { SelectPosition, SelectPosition1 } from "../components/Select";
 import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
+
 type Task = {
   id: number;
   content: string;
@@ -29,11 +30,11 @@ interface Item {
   columnOrder: string[];
 }
 interface User {
-  id: string | number,
-  tk: string,
-  color: any,
-  email: string,
-  img: any,
+  id: string | number;
+  tk: string;
+  color: any;
+  email: string;
+  img: any;
 }
 interface RootState {
   table: {
@@ -43,135 +44,154 @@ interface RootState {
 }
 interface ListUser {
   listTable: {
-    status: string,
-    users: User[]
-  }
+    status: string;
+    users: User[];
+  };
 }
 function TodoPage() {
   const { id } = useParams();
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean | string>("task");
   const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
-  const [searchEmail, setSearchEmail] = useState<string>("")
-  const [position, setPosition] = useState<string>("Thành viên")
-  const [idUser, setIdUser] = useState<number | string>("")
+  const [searchEmail, setSearchEmail] = useState<string>("");
+  const [position, setPosition] = useState<string>("Thành viên");
+  const [idUser, setIdUser] = useState<number | string>("");
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  
-
 
   useEffect(() => {
     dispatch(fetchTableLess(id));
-    dispatch(fetchUsers())
+    dispatch(fetchUsers());
   }, []);
 
-
   const table = useSelector((state: RootState) => state.table);
-  const User = useSelector((state: ListUser) => state.listTable.users).filter(user => user.email === searchEmail)
+  const User = useSelector((state: ListUser) => state.listTable.users).filter(
+    (user) => user.email === searchEmail
+  );
 
   function hideWrapTb() {
-    setToggle(false)
+    setToggle(false);
   }
   function layChuCaiDau(ten: string) {
-    if (ten && ten.trim() !== '') {
-
+    if (ten && ten.trim() !== "") {
       const tenDaXuLi = ten.split(" ");
       const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
 
       const chuCaiDau = tenDaXuLi[0].charAt(0);
       if (tenDaXuLi.length > 1) {
-
         return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
       } else {
-        return chuCaiDau.toUpperCase()
-
+        return chuCaiDau.toUpperCase();
       }
     }
-    return '';
+    return "";
   }
 
-  function handleIdUser(user:any) {
-    
-    setSearchEmail(user[0].tk)
-    setIdUser(user[0].id)
+  function handleIdUser(user: any) {
+    setSearchEmail(user[0].tk);
+    setIdUser(user[0].id);
   }
   function handleAddMember() {
-    getData(`/users/${idUser}`)
-    .then((data)=>{
+    getData(`/users/${idUser}`).then((data) => {
       let idTable1 = {
-        id:table.Table.id,
-        background:table.Table.background,
-        name:table.Table.name
-      }
-      data.idTable.push(idTable1)
-      putData(`/users/${idUser}`, data)
-      .then(res=>{
+        id: table.Table.id,
+        background: table.Table.background,
+        name: table.Table.name,
+      };
+      data.idTable.push(idTable1);
+      putData(`/users/${idUser}`, data).then((res) => {
         let newMember = {
-          id:data.id,
-          tk:data.tk,
-          email:data.email,
-          color:data.color ?? false,
-          img:data.img ?? false,
-          position:position
-        }
+          id: data.id,
+          tk: data.tk,
+          email: data.email,
+          color: data.color ?? false,
+          img: data.img ?? false,
+          position: position,
+        };
 
         let newTable = {
-        ...table.Table,
-        member:[
-          ...table.Table.member,
-          newMember
-        ]
+          ...table.Table,
+          member: [...table.Table.member, newMember],
+        };
+        setSearchEmail("");
+        setPosition("Thành viên");
 
-       }
-       console.log(newTable);
-       
-       putData(`/dataTable/${table.Table.id}`,newTable)
-       .then(res => dispatch(fetchTableLess(id)))
-      })
-      
-
-    })
-    
+        putData(`/dataTable/${table.Table.id}`, newTable).then((res) =>
+          dispatch(fetchTableLess(id))
+        );
+      });
+    });
   }
 
   return (
     <>
-      <div onClick={() => hideWrapTb()} style={toggle ? {} : { display: "none" }} className="wrap__tb__share">
-      </div>
-      <div style={toggle ? {} : { display: "none" }} className="tb__share">
+      <div
+        onClick={() => hideWrapTb()}
+        style={toggle ? {} : { display: "none" }}
+        className="wrap__tb__share"
+      ></div>
+      <div
+        style={toggle === "share" ? {} : { display: "none" }}
+        className="tb__share"
+      >
         <div className="tb__share_top">
           <div>chia sẻ bảng</div>
           <i onClick={() => hideWrapTb()} className="fa-solid fa-xmark"></i>
         </div>
         <div className="tb__share_middle">
           <div className="input">
-            <input value={searchEmail} onChange={(e) => setSearchEmail(e.target.value)} type="text" placeholder="Địa chỉ email hoặc tài khoản" />
-            {User.length > 0 ? <div onClick={() => handleIdUser(User)} className="value_search">
-              <div className="wrap_img">
-                {User[0].img ?
-                  <img src={User[0].img} alt="" />
-                  : <div className="name" style={{ backgroundColor: User[0].color }}>{layChuCaiDau(User[0].tk)}</div>}
+            <input
+              value={searchEmail}
+              onChange={(e) => setSearchEmail(e.target.value)}
+              type="text"
+              placeholder="Địa chỉ email hoặc tài khoản"
+            />
+            {User.length > 0 ? (
+              <div onClick={() => handleIdUser(User)} className="value_search">
+                <div className="wrap_img">
+                  {User[0].img ? (
+                    <img src={User[0].img} alt="" />
+                  ) : (
+                    <div
+                      className="name"
+                      style={{ backgroundColor: User[0].color }}
+                    >
+                      {layChuCaiDau(User[0].tk)}
+                    </div>
+                  )}
+                </div>
+                <div className="value_search_info">
+                  <div>{User[0].tk}</div>
+                  <div className="email">{User[0].email}</div>
+                </div>
               </div>
-              <div className="value_search_info">
-                <div >{User[0].tk}</div>
-                <div className="email">{User[0].email}</div>
-              </div>
-            </div> : ""}
-
+            ) : (
+              ""
+            )}
           </div>
-          <SelectPosition setPosition={setPosition} position={"Thành viên"}></SelectPosition>
-          <div onClick={()=>handleAddMember()} className="btn_share">
+          <SelectPosition
+            setPosition={setPosition}
+            position={"Thành viên"}
+          ></SelectPosition>
+          <div onClick={() => handleAddMember()} className="btn_share">
             chia sẻ
           </div>
         </div>
         <div className="member__inTable">Thành viên trong bảng</div>
         <div className="tb__share_bottom">
-          {table.status === "idle" ?
+          {table.status === "idle" ? (
             <>
-              {table.Table.member.map((member: any) =>
+              {table.Table.member.map((member: any) => (
                 <div className="sun__share">
                   <div className="img__name">
-                    {member.img ? <img src={member.img} alt="" /> :
-                      <div style={{backgroundColor:member.color}} className="name">{layChuCaiDau(member.tk)}</div>}
-
+                    {member.img ? (
+                      <img src={member.img} alt="" />
+                    ) : (
+                      <div
+                        style={{ backgroundColor: member.color }}
+                        className="name"
+                      >
+                        {layChuCaiDau(member.tk)}
+                      </div>
+                    )}
 
                     <div className="wrap_info">
                       <div>{member.tk}</div>
@@ -179,12 +199,44 @@ function TodoPage() {
                     </div>
                   </div>
                   <SelectPosition1 position={member.position}></SelectPosition1>
-                </div>)}
+                </div>
+              ))}
             </>
-            : ""}
+          ) : (
+            ""
+          )}
         </div>
-
       </div>
+
+      <div
+        style={toggle === "task" ? {} : { display: "none" }}
+        className="tb__share"
+      >
+        <div className="tb__share_top">
+          <div>Task_content</div>
+          <i onClick={() => hideWrapTb()} className="fa-solid fa-xmark"></i>
+        </div>
+        <div className="tb__task_left">
+          <div>
+            <div>Thành viên</div>
+            <div className="add_member">
+              <div className="wrap_img">LD</div>
+              <div className="wrap_img">LD</div>
+              <div className="wrap_icon_plus">
+                <i className="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+          <div className="date_line">
+            <div>Ngày hết hạn</div>
+            <div className="wrap_input_date">
+              <input type="checkbox" />
+            </div>
+          </div>
+        </div>
+        <div className="tb_task_right"></div>
+      </div>
+
       <Header></Header>
 
       <div

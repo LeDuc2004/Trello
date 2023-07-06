@@ -25,6 +25,8 @@ type TaskProps = {
 };
 
 function Task({ task, index, setStores, stores }: TaskProps) {
+  console.log("task");
+  
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
   const refTextArea = useRef<any>(null);
@@ -83,6 +85,7 @@ function Task({ task, index, setStores, stores }: TaskProps) {
         draggable={false}
           style={{ wordWrap: "break-word" }}
           className={`task-todo ${snapshot.isDragging ? "moune" : ""}`}
+
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -113,4 +116,4 @@ function Task({ task, index, setStores, stores }: TaskProps) {
   );
 }
 
-export default React.memo(Task);
+export default Task;

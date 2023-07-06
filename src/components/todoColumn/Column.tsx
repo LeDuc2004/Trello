@@ -15,7 +15,7 @@ type TaskItem = {
   content: string;
 };
 
-export default React.memo(function Column({
+export default function Column({
   setStores,
   stores,
   column,
@@ -81,7 +81,7 @@ export default React.memo(function Column({
         putData(`/dataTable/${id}`, newColumn).then((res) => {
           setValue("");
           handleVisibleAddTask(columnId);
-          dispatch(todoPage.actions.updateTable(newColumn));
+          setStores(newColumn)
           scrollToBottom(columnId, textareaRef, 0);
         });
       });
@@ -251,5 +251,5 @@ export default React.memo(function Column({
       </Draggable>
     </>
   );
-})
+}
 
