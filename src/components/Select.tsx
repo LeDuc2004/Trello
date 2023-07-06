@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Space, Radio } from 'antd';
-import type { RadioChangeEvent } from 'antd';
-import type { SelectCommonPlacement } from 'antd/es/_util/motion';
+
 
 
 export function SelectPosition({ position , setPosition }: any) {
