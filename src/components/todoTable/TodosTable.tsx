@@ -30,14 +30,15 @@ interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   stores: Item;
-  setStores:any
+  setStores:any;
 }
 
 function TodosTable({
   slidebarToTodos,
   setSlidebarToTodos,
   stores,
-  setStores
+  setStores,
+
 }: SideBarProps) {
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);

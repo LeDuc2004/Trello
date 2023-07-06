@@ -202,7 +202,7 @@ export default React.memo(function Column({
                         index={indextask}
                       />
                     ))}
-                    {provided.placeholder}
+                    
                     <div className="options-add">
                       <div
                         className={`add__task ${
@@ -232,6 +232,7 @@ export default React.memo(function Column({
                         </div>
                       </div>
                     </div>
+                    {provided.placeholder}
                   </div>
                 )}
               </Droppable>
