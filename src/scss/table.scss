@@ -15,16 +15,17 @@
     border-radius: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
+    
 }
 ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgb(186, 183, 183);
+    background: rgba(186, 183, 183, 0.651);
     border-radius: 5px;
   }
   ::-webkit-scrollbar-track {
-    background-color: rgba(211, 211, 211, 0.712);
+    background-color: rgba(211, 211, 211, 0.11);
     border-radius: 5px;
   }
   .column-table__silebar{

@@ -61,6 +61,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-beautiful-dnd": "^13.1.4"
+    "@types/react-beautiful-dnd": "^13.1.4",
+    "prettier": "2.8.8"
   }
 }

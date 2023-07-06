@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Select, Space, Radio } from 'antd';
 
 
+let optionsBoss 
 
 export function SelectPosition({ position , setPosition }: any) {
   return (
@@ -30,6 +31,8 @@ export function SelectPosition1({ position }: any) {
           { value: 'boss', label: 'Quản trị viện' },
           { value: 'member', label: 'Thành viên' },
           { value: 'viewer', label: 'Quan sát viên' },
+          { value: 'out', label: 'Rời khỏi bảng' },
+
         ]}
       />
     </Space>

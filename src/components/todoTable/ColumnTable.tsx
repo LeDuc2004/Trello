@@ -22,7 +22,6 @@ function ColumnTable({ column, tasks, index, columnId, active, onclick }: any) {
   const { id } = useParams();
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
   // click outside add task
 
   function AddTask() {

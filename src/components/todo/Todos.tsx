@@ -32,12 +32,15 @@ interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   table: Item;
-  btnShare:any;
+  btnShare: any;
 }
 
-function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBarProps) {
-  
-
+function Todos({
+  slidebarToTodos,
+  setSlidebarToTodos,
+  table,
+  btnShare,
+}: SideBarProps) {
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,13 +52,31 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
+  const [position, setPosition] = useState<string>("");
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   // <scroll-x>
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
 
   useEffect(() => {
-    setStores(table);
+    if (localStorage.getItem("token") != null) {
+      fetch("http://localhost:5000/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Beaer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          let identifyPosition = table.member.find(
+            (member: any) => member.id === data.user.id
+          );
+          if (identifyPosition) {
+            setPosition(identifyPosition.position);
+          }
+        });
+    }
   }, [table]);
 
   // click outside add task
@@ -72,21 +93,18 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
     };
   });
   function layChuCaiDau(ten: string) {
-    if (ten && ten.trim() !== '') {
-
+    if (ten && ten.trim() !== "") {
       const tenDaXuLi = ten.split(" ");
       const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
 
       const chuCaiDau = tenDaXuLi[0].charAt(0);
       if (tenDaXuLi.length > 1) {
-
         return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
       } else {
-        return chuCaiDau.toUpperCase()
-
+        return chuCaiDau.toUpperCase();
       }
     }
-    return '';
+    return "";
   }
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -128,82 +146,86 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
       }
     };
   }, []);
+
   const handleDragAndDrop = (results: any) => {
-    const { source, destination, draggableId, type } = results;
+    if (position && position !== "Quan sát viên") {
+      const { source, destination, draggableId, type } = results;
 
-    if (!destination) return;
+      if (!destination) return;
 
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
-      return;
-    }
-    if (type === "column") {
-      const newColumnOrder = Array.from(stores?.columnOrder);
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
+      if (
+        source.droppableId === destination.droppableId &&
+        source.index === destination.index
+      ) {
+        return;
+      }
+      if (type === "column") {
+        const newColumnOrder = Array.from(stores?.columnOrder);
+        newColumnOrder.splice(source.index, 1);
+        newColumnOrder.splice(destination.index, 0, draggableId);
 
-      const newState = {
-        ...stores,
-        columnOrder: newColumnOrder,
-      };
-      setStores(newState);
-      putData(`/dataTable/${id}`, newState);
+        const newState = {
+          ...stores,
+          columnOrder: newColumnOrder,
+        };
+        setStores(newState);
+        putData(`/dataTable/${id}`, newState);
 
-      return;
-    }
+        return;
+      }
 
-    const start = stores.columns[source.droppableId];
-    const finish = stores.columns[destination.droppableId];
+      const start = stores.columns[source.droppableId];
+      const finish = stores.columns[destination.droppableId];
 
-    if (start === finish) {
-      const newTaskIds = [...start?.taskIds];
+      if (start === finish) {
+        const newTaskIds = [...start?.taskIds];
 
-      newTaskIds.splice(source.index, 1);
-      newTaskIds.splice(destination.index, 0, draggableId);
-      const newColumn = {
+        newTaskIds.splice(source.index, 1);
+        newTaskIds.splice(destination.index, 0, draggableId);
+        const newColumn = {
+          ...start,
+          taskIds: newTaskIds,
+        };
+        const newState = {
+          ...stores,
+          columns: {
+            ...stores.columns,
+            [newColumn.id]: newColumn,
+          },
+        };
+        setStores(newState);
+        putData(`/dataTable/${id}`, newState);
+
+        return;
+      }
+      // chuyển task qua lại giữa các cột
+      const startTaskIds = Array.from(start.taskIds);
+      startTaskIds.splice(source.index, 1);
+      const newStart = {
         ...start,
-        taskIds: newTaskIds,
+        taskIds: startTaskIds,
       };
+
+      const finishTaskIds = Array.from(finish.taskIds);
+      finishTaskIds.splice(destination.index, 0, draggableId);
+      const newFinish = {
+        ...finish,
+        taskIds: finishTaskIds,
+      };
+
       const newState = {
         ...stores,
         columns: {
           ...stores.columns,
-          [newColumn.id]: newColumn,
+          [newStart.id]: newStart,
+          [newFinish.id]: newFinish,
         },
       };
       setStores(newState);
       putData(`/dataTable/${id}`, newState);
-
-      return;
     }
-    // chuyển task qua lại giữa các cột
-    const startTaskIds = Array.from(start.taskIds);
-    startTaskIds.splice(source.index, 1);
-    const newStart = {
-      ...start,
-      taskIds: startTaskIds,
-    };
-
-    const finishTaskIds = Array.from(finish.taskIds);
-    finishTaskIds.splice(destination.index, 0, draggableId);
-    const newFinish = {
-      ...finish,
-      taskIds: finishTaskIds,
-    };
-
-    const newState = {
-      ...stores,
-      columns: {
-        ...stores.columns,
-        [newStart.id]: newStart,
-        [newFinish.id]: newFinish,
-      },
-    };
-    setStores(newState);
-    putData(`/dataTable/${id}`, newState);
   };
+
   const handleVisibleAddColumn = () => {
     setTextClumn("");
     setTimeout(() => {
@@ -258,13 +280,12 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
       AddColumn();
     }
   };
-  function removeScreen() {
-    setTypeTable("table2");
+  function removeScreen(number: number) {
+    setTypeTable(`table${number}`);
   }
 
   return (
     <>
-
       <div
         className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
         ref={elementRef}
@@ -272,20 +293,20 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-
-
         <div className={`todo-slideBar ${slidebarToTodos ? "fullscreen" : ""}`}>
           <div className="todo-slideBar__left">
             <i
               onClick={() => setSlidebarToTodos(!slidebarToTodos)}
-              className={`fa-solid fa-circle-chevron-left ${slidebarToTodos ? "hien" : ""
-                }`}
+              className={`fa-solid fa-circle-chevron-left ${
+                slidebarToTodos ? "hien" : ""
+              }`}
             ></i>
             <div className="todo-slideBar__name">{stores.name}</div>
             <div
-              onClick={() => setTypeTable("table1")}
-              className={`todo-slideBar__table ${typeTable === "table1" ? "curent" : ""
-                }`}
+              onClick={() => removeScreen(1)}
+              className={`todo-slideBar__table ${
+                typeTable === "table1" ? "curent" : ""
+              }`}
             >
               <i
                 style={{ rotate: "180deg" }}
@@ -294,17 +315,25 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
               <div>Bảng</div>
             </div>
             <div
-              onClick={() => removeScreen()}
-              className={`todo-slideBar__table ${typeTable === "table2" ? "curent" : ""
-                }`}
+              onClick={() => removeScreen(2)}
+              className={`todo-slideBar__table ${
+                typeTable === "table2" ? "curent" : ""
+              }`}
             >
-              <i className="fa-solid fa-table-cells"></i>
+              <i className="fa-solid fa-table-list"></i>
               <div>Bảng</div>
             </div>
+            <div
+              onClick={() => removeScreen(3)}
+              className={`todo-slideBar__table ${
+                typeTable === "table3" ? "curent" : ""
+              }`}
+            >
+              <i className="fa-solid fa-chart-column"></i>
+
+              <div>Biểu đồ</div>
+            </div>
           </div>
-
-
-
 
           <div className="todo-slideBar__right">
             <div className="todo-slideBar__filer">
@@ -313,28 +342,50 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
             </div>
             <span></span>
             <div className="list__member">
-              {stores.member.map((item: any) => <div key={item.id} className="member">
-                {item.img ?
-                  <div className="wrapnt1">
-                    <img className="pictureuser" src={item.img} alt="" />
-                    <img className="icon__arrow-up" style={item.position === "Quản trị viên" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
-
-                  </div>
-                  :
-                  <div className="wrapnt1" >
-                    <div className="wrapnt" style={{ backgroundColor: `${item.color}` }}>{layChuCaiDau(item.tk)}</div>
-                    <img className="icon__arrow-up" style={item.position === "Quản trị viên" ? {} : { display: "none" }} src="https://trello.com/assets/88a4454280d68a816b89.png" alt="" />
-                  </div>}
-              </div>)}
+              {stores.member.map((item: any) => (
+                <div key={item.id} className="member">
+                  {item.img ? (
+                    <div className="wrapnt1">
+                      <img className="pictureuser" src={item.img} alt="" />
+                      <img
+                        className="icon__arrow-up"
+                        style={
+                          item.position === "Quản trị viên"
+                            ? {}
+                            : { display: "none" }
+                        }
+                        src="https://trello.com/assets/88a4454280d68a816b89.png"
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    <div className="wrapnt1">
+                      <div
+                        className="wrapnt"
+                        style={{ backgroundColor: `${item.color}` }}
+                      >
+                        {layChuCaiDau(item.tk)}
+                      </div>
+                      <img
+                        className="icon__arrow-up"
+                        style={
+                          item.position === "Quản trị viên"
+                            ? {}
+                            : { display: "none" }
+                        }
+                        src="https://trello.com/assets/88a4454280d68a816b89.png"
+                        alt=""
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-            <div onClick={()=>btnShare(true)} className="btn__share">
+            <div onClick={() => btnShare(true)} className="btn__share">
               <img src="/add-contact.png" alt="" />
               <div>chia sẻ</div>
             </div>
-
-
           </div>
-
         </div>
         {typeTable === "table1" ? (
           <div className="list-column">
@@ -421,7 +472,6 @@ function Todos({ slidebarToTodos, setSlidebarToTodos, table, btnShare }: SideBar
           />
         )}
       </div>
-
     </>
   );
 }

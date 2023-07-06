@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { fetchTableLess } from "../store/todoPage";
 import { useParams } from "react-router-dom";
-import { SelectPosition } from "../components/Select";
+import { SelectPosition ,SelectPosition1} from "../components/Select";
 import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
 type Task = {
@@ -31,9 +31,9 @@ interface Item {
 interface User {
   id: string | number,
   tk: string,
-  color: string,
+  color: any,
   email: string,
-  img: string,
+  img: any,
 }
 interface RootState {
   table: {
@@ -54,14 +54,16 @@ function TodoPage() {
   const [searchEmail, setSearchEmail] = useState<string>("")
   const [position, setPosition] = useState<string>("Thành viên")
   const [idUser, setIdUser] = useState<number | string>("")
-
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  
 
 
   useEffect(() => {
     dispatch(fetchTableLess(id));
     dispatch(fetchUsers())
   }, []);
+
+
   const table = useSelector((state: RootState) => state.table);
   const User = useSelector((state: ListUser) => state.listTable.users).filter(user => user.email === searchEmail)
 
@@ -87,7 +89,9 @@ function TodoPage() {
   }
 
   function handleIdUser(user:any) {
-    setSearchEmail(user.tk)
+    
+    setSearchEmail(user[0].tk)
+    setIdUser(user[0].id)
   }
   function handleAddMember() {
     getData(`/users/${idUser}`)
@@ -101,15 +105,26 @@ function TodoPage() {
       putData(`/users/${idUser}`, data)
       .then(res=>{
         let newMember = {
-          id:idUser,
-          tk:searchEmail
+          id:data.id,
+          tk:data.tk,
+          email:data.email,
+          color:data.color ?? false,
+          img:data.img ?? false,
+          position:position
         }
 
         let newTable = {
         ...table.Table,
-
+        member:[
+          ...table.Table.member,
+          newMember
+        ]
 
        }
+       console.log(newTable);
+       
+       putData(`/dataTable/${table.Table.id}`,newTable)
+       .then(res => dispatch(fetchTableLess(id)))
       })
       
 
@@ -163,7 +178,7 @@ function TodoPage() {
                       <div>{member.email}</div>
                     </div>
                   </div>
-                  <SelectPosition position={member.position}></SelectPosition>
+                  <SelectPosition1 position={member.position}></SelectPosition1>
                 </div>)}
             </>
             : ""}
