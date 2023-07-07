@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { createTable } from "../../../store/createTable";
+import { createTable } from "../../store/createTable";
 
-import "../../../scss/header.scss";
-import { postData } from "../../../services";
-import { fetchTable } from "../../../store/createTable";
+import "../../scss/header.scss";
+import { postData } from "../../services";
+import { fetchTable } from "../../store/createTable";
 
 function Header({ sign }: any) {
   const [tblVisible, setTblVisible] = useState<boolean>(false);

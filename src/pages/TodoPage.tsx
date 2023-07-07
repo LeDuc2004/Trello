@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/common/header/Header";
+import Header from "../components/common/Header";
 import SileBar from "../components/todoColumn/SileBar";
 import Todos from "../components/todoColumn/Todos";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { SelectPosition, SelectPosition1 } from "../components/Select";
 import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
+import TableAddMember from "../components/common/TableAddMember";
+import TableAddTags from "../components/common/TableAddTags";
 
 type Task = {
   id: number;
@@ -50,11 +52,15 @@ interface ListUser {
 }
 function TodoPage() {
   const { id } = useParams();
-  const [toggle, setToggle] = useState<boolean | string>("task");
+  const [toggle, setToggle] = useState<boolean | string>(false);
   const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
   const [searchEmail, setSearchEmail] = useState<string>("");
   const [position, setPosition] = useState<string>("Thành viên");
   const [idUser, setIdUser] = useState<number | string>("");
+  const [tableAddMember, setTableAddMember] = useState<boolean>(false);
+  const [tableAddTags, setTableAddTags] = useState<boolean>(false);
+  const [textTime, setTextTime] = useState<string>("table0");
+  const [dataTask , setDataTask] = useState<any>({})
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   useEffect(() => {
@@ -120,14 +126,36 @@ function TodoPage() {
       });
     });
   }
+  function handleTableMember() {
+    var div = document.getElementById("your-div");
+    var div1 = document.getElementById("wrap__tb__share");
+
+    if (div && div1) {
+      div.style.pointerEvents = "none";
+      div1.style.pointerEvents = "none";
+    }
+    setTableAddMember(true);
+  }
+  function handleTableTags() {
+    var div = document.getElementById("your-div");
+    var div1 = document.getElementById("wrap__tb__share");
+
+    if (div && div1) {
+      div.style.pointerEvents = "none";
+      div1.style.pointerEvents = "none";
+    }
+    setTableAddTags(true);
+  }
+
 
   return (
     <>
       <div
         onClick={() => hideWrapTb()}
         style={toggle ? {} : { display: "none" }}
-        className="wrap__tb__share"
+        id="wrap__tb__share"
       ></div>
+
       <div
         style={toggle === "share" ? {} : { display: "none" }}
         className="tb__share"
@@ -210,36 +238,92 @@ function TodoPage() {
 
       <div
         style={toggle === "task" ? {} : { display: "none" }}
-        className="tb__share"
+        className="tb__share task"
       >
         <div className="tb__share_top">
-          <div>Task_content</div>
+          <div>{dataTask.content}</div>
           <i onClick={() => hideWrapTb()} className="fa-solid fa-xmark"></i>
         </div>
-        <div className="tb__task_left">
-          <div>
-            <div>Thành viên</div>
-            <div className="add_member">
-              <div className="wrap_img">LD</div>
-              <div className="wrap_img">LD</div>
-              <div className="wrap_icon_plus">
-                <i className="fa-solid fa-plus"></i>
+        <div className="wrap_left_right">
+
+          <div className="tb__task_left">
+
+            <div style={dataTask?.member ? {} : {display:"none"}} className="thanh__fasolid">
+              <div className="text">Thành viên</div>
+              <div className="add_member">
+                <div className="wrap_img">LD</div>
+                <div className="wrap_img">LD</div>
+                <div className="wrap_icon_plus">
+                  <i className="fa-solid fa-plus"></i>
+                </div>
               </div>
             </div>
+
+            <div style={dataTask?.tags ? {} : {display:"none"}} className="tag_task">
+              <div className="text">Nhãn</div>
+              <div className="list_tag">
+                <div className="tag"></div>
+                <div className="tag"></div>
+                <div className="tag"></div>
+                <div className="tag"></div>
+                <div className="wrap_icon_plus">
+                  <i className="fa-solid fa-plus"></i>
+                </div>
+              </div>
+            </div>
+
+            <div style={dataTask?.date ? {} : {display:"none"}} className="date_line">
+              <div className="text">Ngày hết hạn</div>
+              <div className="wrap_input_date">
+                <input type="checkbox" />
+                <div>29 tháng 7 lúc 15:09</div>
+              </div>
+            </div>
+
+            <div className="discription">
+            <div className="text">Mô tả</div>
+
+            </div>
           </div>
-          <div className="date_line">
-            <div>Ngày hết hạn</div>
-            <div className="wrap_input_date">
-              <input type="checkbox" />
+
+          <div className="tb_task_right">
+            <div className="tb_task_right__top">Thêm vào thẻ</div>
+            <div style={{ position: "relative" }}>
+              <TableAddMember
+                setTextTime={setTextTime}
+                setTableAddMember={setTableAddMember}
+                tableAddMember={tableAddMember}
+              ></TableAddMember>
+              <div onClick={() => handleTableMember()} className="btn_add user">
+                <i className="fa-regular fa-user"></i>
+                <div>Thành viên</div>
+              </div>
+            </div>
+
+            <div style={{ position: "relative" }}>
+              <TableAddTags
+                setTextTime={setTextTime}
+                hide={tableAddTags}
+                setTableAddTags={setTableAddTags}
+              ></TableAddTags>
+              <div onClick={() => handleTableTags()} className="btn_add tag">
+                <i className="fa-solid fa-tags"></i>
+                <div>Nhãn</div>
+              </div>
+            </div>
+
+            <div className="btn_add clock_date">
+              <i className="fa-regular fa-clock"></i>
+              <div>Ngày</div>
             </div>
           </div>
         </div>
-        <div className="tb_task_right"></div>
       </div>
 
       <Header></Header>
 
       <div
+        id="your-div"
         style={{
           display: "flex",
           width: "100%",
@@ -260,6 +344,7 @@ function TodoPage() {
             table={table.Table}
             slidebarToTodos={slidebarToTodos}
             setSlidebarToTodos={setSlidebarToTodos}
+            setDataTask={setDataTask}
           ></Todos>
         ) : (
           ""

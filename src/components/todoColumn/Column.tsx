@@ -24,6 +24,8 @@ export default function Column({
   columnId,
   active,
   onclick,
+  btnShare,
+  setDataTask,
 }: any) {
   
   const [toggle, setToggle] = useState<boolean>(false);
@@ -200,6 +202,8 @@ export default function Column({
                         key={indextask}
                         task={task}
                         index={indextask}
+                        btnShare={btnShare}
+                        setDataTask={setDataTask}
                       />
                     ))}
                     

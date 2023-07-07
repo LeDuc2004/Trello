@@ -1,4 +1,4 @@
-import Header from "../common/header/Header";
+import Header from "../common/Header";
 import React, { useState, useEffect } from "react";
 import "./signin.scss";
 import jwt_decode from "jwt-decode";

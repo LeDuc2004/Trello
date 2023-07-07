@@ -34,6 +34,7 @@ interface SideBarProps {
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   table: Item;
   btnShare: any;
+  setDataTask:any
 }
 
 function Todos({
@@ -41,9 +42,8 @@ function Todos({
   setSlidebarToTodos,
   table,
   btnShare,
+  setDataTask
 }: SideBarProps) {
-  console.log(table);
-
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -409,8 +409,6 @@ function Todos({
                       const tasks = column.taskIds?.map(
                         (taskId) => stores.tasks[taskId]
                       );
-                      console.log(tasks);
-
                       return (
                         <Column
                           setStores={setStores}
@@ -422,6 +420,8 @@ function Todos({
                           columnId={columnId}
                           active={activeTextArea === columnId}
                           onclick={() => handleClickTextArea(columnId)}
+                          btnShare={btnShare}
+                          setDataTask={setDataTask}
                         />
                       );
                     })}

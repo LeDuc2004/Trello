@@ -15,18 +15,16 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { todoPage } from "../../store/todoPage";
 
 type TaskProps = {
-  task: {
-    id: number;
-    content: string;
-  };
+  task: any,
   index: number;
   setStores: any;
   stores: any;
+  btnShare:any,
+  setDataTask:any
 };
 
-function Task({ task, index, setStores, stores }: TaskProps) {
-  console.log("task");
-  
+function Task({ task, index, setStores, stores ,btnShare , setDataTask}: TaskProps) {
+  const [stateTask , setStateTask] = useState(task)
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
   const refTextArea = useRef<any>(null);
@@ -78,19 +76,23 @@ function Task({ task, index, setStores, stores }: TaskProps) {
       setTextArea(task.content);
     }
   }
+  function handleTask(dataTask:any) {
+    setDataTask(dataTask)
+    btnShare("task")
+  }
   return (
-    <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
+    <Draggable key={stateTask.id} draggableId={`task-${stateTask.id}`} index={index}>
       {(provided: DraggableProvided, snapshot) => (
         <div
-        draggable={false}
+          draggable={false}
           style={{ wordWrap: "break-word" }}
           className={`task-todo ${snapshot.isDragging ? "moune" : ""}`}
-
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
           <div
+            onClick={() => handleTask(stateTask)}
             className={`wrap__fa-pen-to-square ${toggleTextArea ? "" : "hide"}`}
           >
             <textarea
@@ -108,7 +110,7 @@ function Task({ task, index, setStores, stores }: TaskProps) {
             <div onClick={() => handleUpdateTask()}>
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
-            {task.content}
+            {stateTask.content}
           </div>
         </div>
       )}

@@ -31,7 +31,7 @@
       "email": "levanduc2052004@gmail.com",
       "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
       "token": [
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODg0NTkxNjB9.hid1SAnaSuJa2D3mwSEi0nGAWTXRnYlBvq_MRD2hf1U"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODg2OTEwMTF9.dsoPQ8cuGsM63tic7jMiHEReLSA_xSZ9ea11QzdoYxk"
       ],
       "idTable": [
         {
@@ -181,11 +181,8 @@
           "id": "column-0",
           "title": "todo",
           "taskIds": [
-            "task-4",
-            "task-0",
-            "task-1",
-            "task-2",
             "task-6",
+            "task-0",
             "task-7",
             "task-8"
           ]
@@ -194,6 +191,7 @@
           "id": "column-1",
           "title": "doing",
           "taskIds": [
+            "task-3",
             "task-5",
             "task-9",
             "task-10"
@@ -203,7 +201,6 @@
           "id": "column-2",
           "title": "done",
           "taskIds": [
-            "task-3",
             "task-11",
             "task-12",
             "task-13"
@@ -212,7 +209,11 @@
         "column-3": {
           "id": "column-3",
           "title": "đ",
-          "taskIds": []
+          "taskIds": [
+            "task-2",
+            "task-1",
+            "task-4"
+          ]
         }
       },
       "columnOrder": [
@@ -361,6 +362,7 @@
           "taskIds": [
             "task-3",
             "task-11",
+            "task-6",
             "task-14",
             "task-16"
           ]
@@ -374,7 +376,6 @@
             "task-18",
             "task-7",
             "task-19",
-            "task-6",
             "task-1",
             "task-4",
             "task-20",
@@ -517,7 +518,6 @@
             "task-12",
             "task-4",
             "task-0",
-            "task-10",
             "task-11"
           ]
         },
@@ -527,6 +527,7 @@
           "taskIds": [
             "task-7",
             "task-5",
+            "task-10",
             "task-8"
           ]
         },
