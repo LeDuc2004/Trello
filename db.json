@@ -97,10 +97,18 @@
           "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
           "position": "Quản trị viên"
         }
-      ],  
+      ],
       "tasks": {},
-      "columns": {},
-      "columnOrder": []
+      "columns": {
+        "column-0": {
+          "id": "column-0",
+          "title": "cc",
+          "taskIds": []
+        }
+      },
+      "columnOrder": [
+        "column-0"
+      ]
     },
     {
       "id": 0.8912938598550411,

@@ -48,6 +48,7 @@ app.post("/login", (req, res) => {
     res.status(404).send("ERROR");
   }
 });
+
 app.get("/user", authenToken, (req, res) => {
   const user = req.user;
   fetch(`http://localhost:3000/users/${user.id}`)
