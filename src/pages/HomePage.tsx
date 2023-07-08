@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Header from "../components/common/header/Header";
-import SileBar from "../components/todo/SileBar";
+import Header from "../components/common/Header";
+import SileBar from "../components/todoColumn/SileBar";
 import Home from "../components/Home";
 
 function HomePage() {

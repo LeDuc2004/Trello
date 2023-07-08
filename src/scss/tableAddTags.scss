@@ -1,0 +1,42 @@
+.Tag_color{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    border-radius: 3px;
+    input{
+        margin-right: 10px;
+        width: 15px;
+        aspect-ratio: 1/1;
+        cursor: pointer;
+
+    }
+    .color_content{
+        box-sizing: border-box;
+        flex: 1;
+        height: 32px;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        padding-left: 10px;
+        padding-bottom: 5px;
+        
+
+    }
+    .color_content:hover{
+        filter: saturate(85%) brightness(85%);
+        cursor: pointer;
+    }
+    i{
+        margin-left: 5px;
+        padding: 10px ;
+        margin-right: 0 !important;
+        border-radius: 3px;
+    }
+    i:hover{
+        background-color: rgba(211, 211, 211, 0.541);
+        cursor: pointer;
+
+    }
+}
