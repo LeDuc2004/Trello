@@ -85,6 +85,7 @@ function Column({
           handleVisibleAddTask(columnId);
           setStores(newColumn)
           scrollToBottom(columnId, textareaRef, 0);
+          dispatch(todoPage.actions.updateTable(newColumn))
         });
       });
     }
@@ -169,7 +170,7 @@ function Column({
                 onKeyDown={(e) => handleEnterColumn(e.key)}
                 value={valueInput}
                 onChange={(e) => setValueInput(e.target.value)}
-                className={`input__column ${
+                className={`input__column input_in_column ${
                   toggleColumn && active ? "" : "hide"
                 }`}
                 onBlur={updateNameColumn}

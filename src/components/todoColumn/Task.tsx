@@ -33,7 +33,7 @@ function Task({
   setDataTask,
 }: TaskProps) {
   const [stateTask, setStateTask] = useState(task);
-  console.log(stateTask);
+  console.log(task);
 
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
@@ -89,15 +89,14 @@ function Task({
     setDataTask(dataTask);
     btnShare("task");
   }
-  function handleCheckBox(value:any) {
+  function handleCheckBox(value: any) {
     value.stopPropagation();
     console.log(value);
-    
   }
   return (
     <Draggable
-      key={stateTask.id}
-      draggableId={`task-${stateTask.id}`}
+      key={task.id}
+      draggableId={`task-${task.id}`}
       index={index}
     >
       {(provided: DraggableProvided, snapshot) => (
@@ -128,22 +127,32 @@ function Task({
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
 
-            
-            <div onClick={() => handleTask(stateTask)} className="task-text">{stateTask.content}</div>
+            <div onClick={() => handleTask(task)} className="task-text">
+              {task.content}
+            </div>
             <div className="task-bottom">
               <div className="task-date">
                 <i className="fa-regular fa-clock"></i>
-                <input className="input-check" onChange={handleCheckBox} type="checkbox" />
-                27 tháng 7
-                <i className="fa-solid fa-align-right"></i>
+                <input
+                  className="input-check"
+                  onChange={handleCheckBox}
+                  type="checkbox"
+                />
+                27 tháng 7<i className="fa-solid fa-align-right"></i>
               </div>
               <div className="task-member">
-                {stateTask?.member?.length > 0
-                  ? stateTask.member.map((item: any) => {
+                {task?.member?.length > 0
+                  ? task.member.map((item: any) => {
                       return item.img ? (
-                        <img className="wrap-img" src={item.img} alt="" />
+                        <img
+                          key={item.id}
+                          className="wrap-img"
+                          src={item.img}
+                          alt=""
+                        />
                       ) : (
                         <div
+                          key={item.id}
                           className="wrap-img"
                           style={{ backgroundColor: `${item.color}` }}
                         >

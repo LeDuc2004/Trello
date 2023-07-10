@@ -43,9 +43,12 @@ function TableAddMember({
     };
   });
   function addMember(member: any) {
-    if (stores.tasks[`task-${idTask}`].member) {
-      let arrMember = stores.tasks[`task-${idTask}`].member.slice();
-      arrMember.push(member);
+    let xemcochua = stores.tasks[`task-${idTask}`].member?.find(
+      (item: any) => item.id == member.id
+    );
+    console.log(xemcochua);
+    if (xemcochua) {
+      let arrMember = stores.tasks[`task-${idTask}`].member.filter((item:any)=> item.id != member.id)      
       let newStore = {
         ...stores,
         tasks: {
@@ -60,20 +63,38 @@ function TableAddMember({
         dispatch(todoPage.actions.updateTable(newStore));
       });
     } else {
-      let arrMember = [member];
-      let newStore = {
-        ...stores,
-        tasks: {
-          ...stores.tasks,
-          [`task-${idTask}`]: {
-            ...stores.tasks[`task-${idTask}`],
-            member: arrMember,
+      if (stores.tasks[`task-${idTask}`].member) {
+        let arrMember = stores.tasks[`task-${idTask}`].member.slice();
+        arrMember.push(member);
+        let newStore = {
+          ...stores,
+          tasks: {
+            ...stores.tasks,
+            [`task-${idTask}`]: {
+              ...stores.tasks[`task-${idTask}`],
+              member: arrMember,
+            },
           },
-        },
-      };
-      putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
-        dispatch(todoPage.actions.updateTable(newStore));
-      });
+        };
+        putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
+          dispatch(todoPage.actions.updateTable(newStore));
+        });
+      } else {
+        let arrMember = [member];
+        let newStore = {
+          ...stores,
+          tasks: {
+            ...stores.tasks,
+            [`task-${idTask}`]: {
+              ...stores.tasks[`task-${idTask}`],
+              member: arrMember,
+            },
+          },
+        };
+        putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
+          dispatch(todoPage.actions.updateTable(newStore));
+        });
+      }
     }
   }
   return (

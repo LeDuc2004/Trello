@@ -11,7 +11,7 @@ import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
 import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
-import React from 'react'
+import React from "react";
 
 type Task = {
   id: number;
@@ -147,6 +147,7 @@ function TodoPage() {
     }
     setTableAddTags(true);
   }
+console.log(dataTask.id);
 
   return (
     <>
@@ -249,7 +250,7 @@ function TodoPage() {
             <div className="tb__task_left">
               <div
                 style={
-                  table.Table?.tasks[`task-${dataTask?.id}`].member?.length > 0
+                  table.Table?.tasks[`task-${dataTask?.id}`]?.member?.length > 0
                     ? {}
                     : { display: "none" }
                 }
@@ -257,8 +258,8 @@ function TodoPage() {
               >
                 <div className="text">Thành viên</div>
                 <div className="add_member">
-                  {table.Table?.tasks[`task-${dataTask?.id}`].member
-                    ? table.Table?.tasks[`task-${dataTask?.id}`].member.map(
+                  {table.Table?.tasks[`task-${dataTask?.id}`]?.member
+                    ? table.Table?.tasks[`task-${dataTask?.id}`]?.member.map(
                         (item: any) => {
                           return item.img ? (
                             <img

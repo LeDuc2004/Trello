@@ -34,7 +34,7 @@ interface SideBarProps {
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   table: Item;
   btnShare: any;
-  setDataTask:any
+  setDataTask: any;
 }
 
 function Todos({
@@ -42,10 +42,8 @@ function Todos({
   setSlidebarToTodos,
   table,
   btnShare,
-  setDataTask
+  setDataTask,
 }: SideBarProps) {
-  
-  
   const [stores, setStores] = useState<Item>(table);
   console.log(stores.tasks);
   const [toggle, setToggle] = useState<boolean>(true);
@@ -64,7 +62,7 @@ function Todos({
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
   useEffect(() => {
-    setStores(table)
+    setStores(table);
     if (localStorage.getItem("token") != null) {
       fetch("http://localhost:5000/user", {
         method: "GET",
@@ -123,7 +121,6 @@ function Todos({
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     if (!isDragging) return;
-
     const scrollX = event.pageX - (elementRef.current?.offsetLeft || 0);
     const deltaScrollX = scrollX - startX;
     if (elementRef.current) {
@@ -269,9 +266,10 @@ function Todos({
           columnOrder: columnOrder,
         };
         setStores(newColumn);
-        putData(`/dataTable/${stores.id}`, newColumn).then((res) =>
-          handleVisibleAddColumn()
-        );
+        putData(`/dataTable/${stores.id}`, newColumn).then((res) => {
+          dispatch(todoPage.actions.updateTable(newColumn));
+          handleVisibleAddColumn();
+        });
       });
     }
   }
@@ -448,6 +446,7 @@ function Todos({
                   placeholder="Nhập tiêu đề danh sách..."
                   onChange={(e) => setTextClumn(e.target.value)}
                   onKeyDown={handleKeyPress}
+                  className="input_in_column"
                 />
                 <div className="options">
                   <div onClick={() => AddColumn()} className="btn-add">
