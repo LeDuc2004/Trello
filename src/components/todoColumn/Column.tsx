@@ -15,7 +15,7 @@ type TaskItem = {
   content: string;
 };
 
-export default function Column({
+function Column({
   setStores,
   stores,
   column,
@@ -256,4 +256,5 @@ export default function Column({
     </>
   );
 }
+export default React.memo(Column)
 

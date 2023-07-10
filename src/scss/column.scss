@@ -1,17 +1,17 @@
 @import "./global.scss";
 .column-todo {
-  .update-clumn{
+  .update-clumn {
     position: relative;
     width: 100%;
-    .input__column{
+    .input__column {
       font-weight: 500;
       position: absolute;
       top: -5px;
       left: -8px;
       font-size: 17px;
     }
-    .input__column.hide{
-   display: none;
+    .input__column.hide {
+      display: none;
     }
   }
   .column-todo__name {
@@ -61,7 +61,7 @@
   background-color: #f1f2f4;
   padding: 10px;
   overflow: hidden;
-  input {
+  .input__column {
     width: calc(100% - 40px);
     border: 2.5px solid #388bff;
     height: 30px;
@@ -72,7 +72,7 @@
     border-radius: 2px;
     margin: 0 10px;
   }
-  input::placeholder {
+  .input__column::placeholder {
     color: rgb(112, 111, 111); /* Màu chữ mong muốn */
   }
 

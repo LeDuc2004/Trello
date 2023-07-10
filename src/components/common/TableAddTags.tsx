@@ -58,7 +58,7 @@ function TableAddTags({ hide, setTableAddTags, setTextTime }: Boolean) {
         />
         <div className="text">Nhãn</div>
         {listColor.map((color) => (
-          <div className="Tag_color">
+          <div key={color} className="Tag_color">
             <input type="checkbox" />
             <div
               style={{ backgroundColor: `${color}` }}

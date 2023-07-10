@@ -11,6 +11,7 @@ import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
 import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
+import React from 'react'
 
 type Task = {
   id: number;
@@ -27,7 +28,7 @@ interface Item {
   background: string;
   member: any;
   name: string;
-  tasks: { [taskId: string]: Task };
+  tasks: any;
   columns: { [columnId: string]: Column };
   columnOrder: string[];
 }
@@ -60,7 +61,7 @@ function TodoPage() {
   const [tableAddMember, setTableAddMember] = useState<boolean>(false);
   const [tableAddTags, setTableAddTags] = useState<boolean>(false);
   const [textTime, setTextTime] = useState<string>("table0");
-  const [dataTask , setDataTask] = useState<any>({})
+  const [dataTask, setDataTask] = useState<any>({ id: 0 });
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   useEffect(() => {
@@ -147,7 +148,6 @@ function TodoPage() {
     setTableAddTags(true);
   }
 
-
   return (
     <>
       <div
@@ -208,7 +208,7 @@ function TodoPage() {
           {table.status === "idle" ? (
             <>
               {table.Table.member.map((member: any) => (
-                <div className="sun__share">
+                <div key={member.id} className="sun__share">
                   <div className="img__name">
                     {member.img ? (
                       <img src={member.img} alt="" />
@@ -245,54 +245,91 @@ function TodoPage() {
           <i onClick={() => hideWrapTb()} className="fa-solid fa-xmark"></i>
         </div>
         <div className="wrap_left_right">
+          {table.status === "idle" ? (
+            <div className="tb__task_left">
+              <div
+                style={
+                  table.Table?.tasks[`task-${dataTask?.id}`].member?.length > 0
+                    ? {}
+                    : { display: "none" }
+                }
+                className="thanh__fasolid"
+              >
+                <div className="text">Thành viên</div>
+                <div className="add_member">
+                  {table.Table?.tasks[`task-${dataTask?.id}`].member
+                    ? table.Table?.tasks[`task-${dataTask?.id}`].member.map(
+                        (item: any) => {
+                          return item.img ? (
+                            <img
+                              key={item.id}
+                              className="wrap_img"
+                              src={item.img}
+                              alt=""
+                            />
+                          ) : (
+                            <div
+                              key={item.id}
+                              style={{ backgroundColor: `${item.color}` }}
+                              className="wrap_img"
+                            >
+                              {layChuCaiDau(item.tk)}
+                            </div>
+                          );
+                        }
+                      )
+                    : ""}
 
-          <div className="tb__task_left">
-
-            <div style={dataTask?.member ? {} : {display:"none"}} className="thanh__fasolid">
-              <div className="text">Thành viên</div>
-              <div className="add_member">
-                <div className="wrap_img">LD</div>
-                <div className="wrap_img">LD</div>
-                <div className="wrap_icon_plus">
-                  <i className="fa-solid fa-plus"></i>
+                  <div className="wrap_icon_plus">
+                    <i className="fa-solid fa-plus"></i>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div style={dataTask?.tags ? {} : {display:"none"}} className="tag_task">
-              <div className="text">Nhãn</div>
-              <div className="list_tag">
-                <div className="tag"></div>
-                <div className="tag"></div>
-                <div className="tag"></div>
-                <div className="tag"></div>
-                <div className="wrap_icon_plus">
-                  <i className="fa-solid fa-plus"></i>
+              <div
+                style={dataTask?.tags ? {} : { display: "none" }}
+                className="tag_task"
+              >
+                <div className="text">Nhãn</div>
+                <div className="list_tag">
+                  <div className="tag"></div>
+                  <div className="tag"></div>
+                  <div className="tag"></div>
+                  <div className="tag"></div>
+                  <div className="wrap_icon_plus">
+                    <i className="fa-solid fa-plus"></i>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div style={dataTask?.date ? {} : {display:"none"}} className="date_line">
-              <div className="text">Ngày hết hạn</div>
-              <div className="wrap_input_date">
-                <input type="checkbox" />
-                <div>29 tháng 7 lúc 15:09</div>
+              <div
+                style={dataTask?.date ? {} : { display: "none" }}
+                className="date_line"
+              >
+                <div className="text">Ngày hết hạn</div>
+                <div className="wrap_input_date">
+                  <input type="checkbox" />
+                  <div>29 tháng 7 lúc 15:09</div>
+                </div>
+              </div>
+
+              <div className="discription">
+                <div className="text">Mô tả</div>
               </div>
             </div>
-
-            <div className="discription">
-            <div className="text">Mô tả</div>
-
-            </div>
-          </div>
+          ) : (
+            ""
+          )}
 
           <div className="tb_task_right">
             <div className="tb_task_right__top">Thêm vào thẻ</div>
             <div style={{ position: "relative" }}>
               <TableAddMember
-                setTextTime={setTextTime}
                 setTableAddMember={setTableAddMember}
                 tableAddMember={tableAddMember}
+                member={table.Table.member}
+                stores={table.Table}
+                idTask={dataTask.id}
               ></TableAddMember>
               <div onClick={() => handleTableMember()} className="btn_add user">
                 <i className="fa-regular fa-user"></i>
@@ -354,4 +391,4 @@ function TodoPage() {
   );
 }
 
-export default TodoPage;
+export default React.memo(TodoPage);

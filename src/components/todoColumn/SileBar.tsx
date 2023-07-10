@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React from 'react'
 
 import "../../scss/silebar.scss";
 import { useParams } from "react-router-dom";
@@ -74,4 +75,4 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
   );
 }
 
-export default SileBar;
+export default React.memo(SileBar);

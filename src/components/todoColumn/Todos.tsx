@@ -44,7 +44,10 @@ function Todos({
   btnShare,
   setDataTask
 }: SideBarProps) {
+  
+  
   const [stores, setStores] = useState<Item>(table);
+  console.log(stores.tasks);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,8 +63,8 @@ function Todos({
   // <scroll-x>
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
-
   useEffect(() => {
+    setStores(table)
     if (localStorage.getItem("token") != null) {
       fetch("http://localhost:5000/user", {
         method: "GET",
@@ -495,4 +498,4 @@ function Todos({
   );
 }
 
-export default Todos;
+export default React.memo(Todos);

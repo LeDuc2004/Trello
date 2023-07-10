@@ -11,7 +11,14 @@
   padding-left: 10px;
   position: relative;
   word-wrap: break-word;
+
+  .text__area.hide {
+   display: none;
+  }
+}
   .wrap__fa-pen-to-square {
+    position: relative;
+    z-index: 1;
     width: 100%;
     padding: 5px 0;
     textarea {
@@ -30,7 +37,7 @@
       padding-left: 10px;
       z-index: 1000000000;
     }
-    div {
+    .update-content {
       display: none;
       position: absolute;
       top: 0px;
@@ -39,22 +46,57 @@
       padding:  10px;
       border-radius: 5px;
     }
-  }
-  .text__area.hide {
-   display: none;
-  }
-}
+    .task-text{
 
+      width: 100%;
+    }
+    .task-bottom{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 5px;
+      .task-date{
+        display: flex;
+        align-items: center;
+        .input-check{
+          position: relative;
+          z-index: 3;
+        }
+        .fa-align-right{
+          rotate: 180deg;
+        }
+      }
+      .task-member{
+        display: flex;
+        align-items: center;
+        .wrap-img{
+          width: 27px;
+          height: 27px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 500;
+        }
+        .wrap-img + .wrap-img{
+          margin-left: 3px;
+        }
+      }
+    }
+
+  }
 .task-todo:hover {
   background-color: #f1f2f4;
 }
-.task-todo:hover .wrap__fa-pen-to-square div {
+.task-todo:hover .wrap__fa-pen-to-square .update-content {
   display: block;
   color: rgba(128, 128, 128, 0.63);
 }
-.task-todo .wrap__fa-pen-to-square div:hover {
+.task-todo .wrap__fa-pen-to-square .update-content:hover {
   background-color: #c6c9cf69;
   color: gray;
+  z-index: 2;
 }
 .task-todo.moune {
   background-color: lightgreen;

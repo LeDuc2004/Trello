@@ -5,8 +5,6 @@ export const todoPage = createSlice({
   initialState: { status: "loading", Table: {} },
   reducers: {
     updateTable: (state: any, action: { payload: any }) => {
-      console.log(1);
-      
       state.Table = action.payload;
     },
   },

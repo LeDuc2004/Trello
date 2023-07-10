@@ -57,10 +57,6 @@ export default function BarChart({ columns }: TaskChartProps) {
           display: false,
           borderDash: [5, 5],
         },
-        ticks:{
-          
-        }
-
       },
       y: {
         min: 0,
