@@ -8,7 +8,7 @@ import { getData, putData } from "../../services";
 import { fetchTableLess, todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
 import TodosTable from "../todoTable/TodosTable";
-import BarChart from "../todoChart/Chart";
+import {BarChart, BarChartTags} from "../todoChart/Chart";
 type Task = {
   id: number;
   content: string;
@@ -45,7 +45,6 @@ function Todos({
   setDataTask,
 }: SideBarProps) {
   const [stores, setStores] = useState<Item>(table);
-  console.log(stores.tasks);
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -172,8 +171,9 @@ function Todos({
           columnOrder: newColumnOrder,
         };
         setStores(newState);
-        putData(`/dataTable/${id}`, newState);
-
+        putData(`/dataTable/${id}`, newState)
+        .then(res=>dispatch(todoPage.actions.updateTable(newState)))
+        
         return;
       }
 
@@ -197,7 +197,8 @@ function Todos({
           },
         };
         setStores(newState);
-        putData(`/dataTable/${id}`, newState);
+        putData(`/dataTable/${id}`, newState)
+        .then(res=>dispatch(todoPage.actions.updateTable(newState)))
 
         return;
       }
@@ -225,7 +226,10 @@ function Todos({
         },
       };
       setStores(newState);
-      putData(`/dataTable/${id}`, newState);
+      putData(`/dataTable/${id}`, newState)
+      .then(res=>dispatch(todoPage.actions.updateTable(newState)))
+
+
     }
   };
 
@@ -487,7 +491,7 @@ function Todos({
             <BarChart columns={stores.columns}></BarChart>
             <BarChart columns={stores.columns}></BarChart>
             <BarChart columns={stores.columns}></BarChart>
-            <BarChart columns={stores.columns}></BarChart>
+            <BarChartTags tasks={stores.tasks}></BarChartTags>
           </div>
         ) : (
           ""

@@ -65,6 +65,9 @@ body {
 
     div {
       font-size: 22px;
+      white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     }
 
     i {
@@ -447,10 +450,6 @@ body {
     margin: 15px 10px;
     border-radius: 10px;
     overflow: hidden;
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
   }
 }
 
@@ -526,7 +525,7 @@ body {
         border-radius: 5px;
         margin-right: 5px;
       }
-      .wrap_icon_plus{
+      .wrap_icon_plus {
         padding: 7.5px 11px;
         background-color: #e4e6eaaf;
         border-radius: 3px;
@@ -574,23 +573,48 @@ body {
     input {
       width: 15px;
       height: 15px;
-    }
-    div {
-      display: flex;
-      align-items: center;
-      padding: 7px 10px;
-      background: rgba(228, 230, 234, 0.5803921569);
-      width: 143px;
-      border-radius: 5px;
-      font-size: 14px;
       cursor: pointer;
-      margin-left: 5px;
     }
   }
 }
-.discription{
-  .text{
-    font-size: 17px;
+.discription {
+
+  .text {
+    font-size: 12px;
     font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 10px;
   }
+  .discription_input{
+    width: calc(100% - 15px);
+    border: 2.5px solid white;
+    height: 60px;
+    outline: none;
+    background-color: #091e420f;
+    font-size: 13px;
+    border-radius: 6px;
+    resize: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  .discription_input:focus{
+    border: 2.5px solid #388bff;
+    background-color: white;
+
+  }
+
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker {
+  border-color: lightgray;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  border-inline-end-width: 1px;
+  outline: 0;
+  width: 176px !important;
+  height: 36px !important;
+  margin-left: 10px;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-picker:focus {
+  border-color: #4096ff;
+
 }

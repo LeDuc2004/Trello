@@ -33,8 +33,6 @@ function Task({
   setDataTask,
 }: TaskProps) {
   const [stateTask, setStateTask] = useState(task);
-  console.log(task);
-
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
   const refTextArea = useRef<any>(null);
@@ -78,9 +76,10 @@ function Task({
         },
       };
 
-      dispatch(todoPage.actions.updateTable(newStore));
       setStores(newStore);
-      putData(`/dataTable/${newStore.id}`, newStore);
+      putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+        dispatch(todoPage.actions.updateTable(newStore))
+      );
     } else {
       setTextArea(task.content);
     }
@@ -89,16 +88,29 @@ function Task({
     setDataTask(dataTask);
     btnShare("task");
   }
-  function handleCheckBox(value: any) {
-    value.stopPropagation();
-    console.log(value);
+  function handleCheckBox() {
+    let newStore = {
+      ...stores,
+      tasks: {
+        ...stores.tasks,
+        [`task-${task.id}`]: {
+          ...stores.tasks[`task-${task.id}`],
+          date: {
+            ...stores.tasks[`task-${task.id}`].date,
+            status: !stores.tasks[`task-${task.id}`].date.status,
+          },
+        },
+      },
+    };
+
+    setStores(newStore);
+    putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+      dispatch(todoPage.actions.updateTable(newStore))
+    );
   }
+
   return (
-    <Draggable
-      key={task.id}
-      draggableId={`task-${task.id}`}
-      index={index}
-    >
+    <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
       {(provided: DraggableProvided, snapshot) => (
         <div
           draggable={false}
@@ -126,20 +138,49 @@ function Task({
             <div className="update-content" onClick={() => handleUpdateTask()}>
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
-
+            <div className="task-top">
+              {task?.tags.map((item: any) =>
+                item.status ? (
+                  <div
+                    key={item.id}
+                    style={{ backgroundColor: `${item.color}` }}
+                    className="tag-top"
+                  ></div>
+                ) : (
+                  ""
+                )
+              )}
+            </div>
             <div onClick={() => handleTask(task)} className="task-text">
               {task.content}
             </div>
             <div className="task-bottom">
-              <div className="task-date">
-                <i className="fa-regular fa-clock"></i>
-                <input
-                  className="input-check"
-                  onChange={handleCheckBox}
-                  type="checkbox"
-                />
-                27 tháng 7<i className="fa-solid fa-align-right"></i>
-              </div>
+              {task.date?.time ? (
+                <div className="task-date">
+                  <div
+                    className={`date-iid ${task.date?.status ? "done" : ""}`}
+                  >
+                    <i className="fa-regular fa-clock"></i>
+                    <input
+                      checked={task.date?.status}
+                      className="input-check"
+                      onChange={handleCheckBox}
+                      type="checkbox"
+                    />
+                    <div onClick={()=>handleCheckBox()} className="date-text">
+                      {task.date.time.split(" ")[0]}
+                    </div>
+                  </div>
+                  {task.direction ? (
+                    <i className="fa-solid fa-align-right"></i>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+
               <div className="task-member">
                 {task?.member?.length > 0
                   ? task.member.map((item: any) => {

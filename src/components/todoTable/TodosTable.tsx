@@ -55,10 +55,6 @@ function TodosTable({
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
 
-  useEffect(() => {
-    setStores(stores);
-  }, [stores]);
-
   // click outside add task
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -310,6 +306,8 @@ function TodosTable({
                     columnId={columnId}
                     active={activeTextArea === columnId}
                     onclick={() => handleClickTextArea(columnId)}
+                    stores={stores}
+                    setStores={setStores}
                   />
                 );
               })}

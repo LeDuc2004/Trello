@@ -1,7 +1,7 @@
 import "../../scss/tableAddMember.scss";
 import { useRef, useEffect } from "react";
 import layChuCaiDau from "../../utils/laychucaidau";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { todoPage } from "../../store/todoPage";
 import { putData } from "../../services";
@@ -46,7 +46,6 @@ function TableAddMember({
     let xemcochua = stores.tasks[`task-${idTask}`].member?.find(
       (item: any) => item.id == member.id
     );
-    console.log(xemcochua);
     if (xemcochua) {
       let arrMember = stores.tasks[`task-${idTask}`].member.filter((item:any)=> item.id != member.id)      
       let newStore = {
@@ -131,7 +130,7 @@ function TableAddMember({
               </div>
             )}
 
-            <div className="info">Lê Văn đức (levanduc20)</div>
+            <div className="info">{item.tk} ({item.email})</div>
           </div>
         ))}
       </div>

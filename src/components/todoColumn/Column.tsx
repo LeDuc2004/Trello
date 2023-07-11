@@ -27,7 +27,6 @@ function Column({
   btnShare,
   setDataTask,
 }: any) {
-  
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleColumn, setToggleColumn] = useState<boolean>(false);
   const [value, setValue] = useState("");
@@ -70,6 +69,15 @@ function Column({
             [`task-${Object.keys(data.tasks).length}`]: {
               id: Object.keys(data.tasks).length,
               content: value,
+              tags: [
+                { id: 0, color: "#4bce97", status: false, content: "" },
+                { id: 1, color: "#e2b203", status: false, content: "" },
+                { id: 2, color: "#faa53d", status: false, content: "" },
+                { id: 3, color: "#f87462", status: false, content: "" },
+                { id: 4, color: "#9f8fef", status: false, content: "" },
+                { id: 5, color: "#579dff", status: false, content: "" },
+
+              ],
             },
           },
           columns: {
@@ -80,12 +88,12 @@ function Column({
             },
           },
         };
+        setStores(newColumn);
+        setValue("");
+        handleVisibleAddTask(columnId);
+        scrollToBottom(columnId, textareaRef, 0);
         putData(`/dataTable/${id}`, newColumn).then((res) => {
-          setValue("");
-          handleVisibleAddTask(columnId);
-          setStores(newColumn)
-          scrollToBottom(columnId, textareaRef, 0);
-          dispatch(todoPage.actions.updateTable(newColumn))
+          dispatch(todoPage.actions.updateTable(newColumn));
         });
       });
     }
@@ -156,10 +164,9 @@ function Column({
   }
   return (
     <>
-      <Draggable  draggableId={column.id} index={index}>
+      <Draggable draggableId={column.id} index={index}>
         {(provided, snapshot) => (
           <div
-
             {...provided.draggableProps}
             ref={provided.innerRef}
             className="column-todo"
@@ -207,7 +214,7 @@ function Column({
                         setDataTask={setDataTask}
                       />
                     ))}
-                    
+
                     <div className="options-add">
                       <div
                         className={`add__task ${
@@ -257,5 +264,4 @@ function Column({
     </>
   );
 }
-export default React.memo(Column)
-
+export default React.memo(Column);

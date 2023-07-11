@@ -15,7 +15,7 @@ type TaskItem = {
   content: string;
 };
 
-function ColumnTable({ column, tasks, index, columnId, active, onclick }: any) {
+function ColumnTable({ column, tasks, index, columnId, active, onclick ,setStores,stores }: any) {
   const [toggle, setToggle] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [rows, setRows] = useState(3);
@@ -85,6 +85,8 @@ function ColumnTable({ column, tasks, index, columnId, active, onclick }: any) {
                         task={task}
                         index={indextask}
                         namecolumn={column.title}
+                        setStores={setStores}
+                        stores={stores}
                       />
                     ))}
                     {provided.placeholder}

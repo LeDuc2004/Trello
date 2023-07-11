@@ -12,6 +12,7 @@ import { getData, putData } from "../services";
 import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
 import React from "react";
+import DatePick from "../components/DatePicker";
 
 type Task = {
   id: number;
@@ -147,7 +148,6 @@ function TodoPage() {
     }
     setTableAddTags(true);
   }
-console.log(dataTask.id);
 
   return (
     <>
@@ -257,6 +257,7 @@ console.log(dataTask.id);
                 className="thanh__fasolid"
               >
                 <div className="text">Thành viên</div>
+                
                 <div className="add_member">
                   {table.Table?.tasks[`task-${dataTask?.id}`]?.member
                     ? table.Table?.tasks[`task-${dataTask?.id}`]?.member.map(
@@ -281,41 +282,45 @@ console.log(dataTask.id);
                       )
                     : ""}
 
-                  <div className="wrap_icon_plus">
+                  <div onClick={() => handleTableMember()} className="wrap_icon_plus">
                     <i className="fa-solid fa-plus"></i>
                   </div>
                 </div>
               </div>
 
-              <div
-                style={dataTask?.tags ? {} : { display: "none" }}
-                className="tag_task"
-              >
-                <div className="text">Nhãn</div>
-                <div className="list_tag">
-                  <div className="tag"></div>
-                  <div className="tag"></div>
-                  <div className="tag"></div>
-                  <div className="tag"></div>
-                  <div className="wrap_icon_plus">
-                    <i className="fa-solid fa-plus"></i>
-                  </div>
-                </div>
+              <div className="tag_task">
+                {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.length > 0 ? (
+                  <>
+                    <div className="text">Nhãn</div>
+                    <div className="list_tag">
+                      {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map((item:any)=> item.status ? <div key={item.id} style={{backgroundColor:`${item.color}`}} className="tag"></div>:"")}
+                      <div onClick={() => handleTableTags()} className="wrap_icon_plus">
+                        <i className="fa-solid fa-plus"></i>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div
-                style={dataTask?.date ? {} : { display: "none" }}
                 className="date_line"
               >
                 <div className="text">Ngày hết hạn</div>
                 <div className="wrap_input_date">
                   <input type="checkbox" />
-                  <div>29 tháng 7 lúc 15:09</div>
+                  <DatePick 
+                  date={table.Table?.tasks[`task-${dataTask?.id}`]?.date}
+                  stores={table.Table}
+                  idTask={dataTask.id}
+                  ></DatePick>
                 </div>
               </div>
 
               <div className="discription">
                 <div className="text">Mô tả</div>
+                <textarea className="discription_input" name="" id="" cols={30} rows={10} placeholder="Thêm mô tả chi tiết hơn..."></textarea>
               </div>
             </div>
           ) : (
@@ -340,9 +345,10 @@ console.log(dataTask.id);
 
             <div style={{ position: "relative" }}>
               <TableAddTags
-                setTextTime={setTextTime}
-                hide={tableAddTags}
                 setTableAddTags={setTableAddTags}
+                hide={tableAddTags}
+                stores={table.Table}
+                idTask={dataTask.id}
               ></TableAddTags>
               <div onClick={() => handleTableTags()} className="btn_add tag">
                 <i className="fa-solid fa-tags"></i>
@@ -350,10 +356,10 @@ console.log(dataTask.id);
               </div>
             </div>
 
-            <div className="btn_add clock_date">
+            {/* <div className="btn_add clock_date">
               <i className="fa-regular fa-clock"></i>
               <div>Ngày</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
