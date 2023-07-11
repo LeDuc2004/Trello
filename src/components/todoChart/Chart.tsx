@@ -34,7 +34,6 @@ export function BarChart({ columns }: TaskChartProps) {
   const taskCounts = Object.keys(columns).map(
     (key) => columns[key].taskIds.length
   );
-
   const data = {
     labels: columnTitles,
     datasets: [
@@ -48,22 +47,35 @@ export function BarChart({ columns }: TaskChartProps) {
   };
   const options: {} = {
     responsive: true,
-
     scales: {
       x: {
         grid: {
           display: false,
         },
+        ticks: {
+          font: {
+            size: 15, 
+          },
+        }
       },
       y: {
         min: 0,
+        border:{dash: [4, 4]}, // for the grid lines
         grid: {
-          display: true,
-          borderDash: [5, 5],
+            color: '#aaa', 
+            tickColor: '#000', 
+            tickBorderDash: [2, 3],
+            tickLength: 10, 
+            tickWidth: 2,
+            offset: false,
+            drawTicks: false, 
+            drawOnChartArea: true 
         },
         max: Math.max(...taskCounts) + 2,
-
         ticks: {
+          font: {
+            size: 17, 
+          },
           count: Math.max(...taskCounts) + 3,
 
           callback: function (value: number) {
@@ -83,6 +95,7 @@ export function BarChart({ columns }: TaskChartProps) {
   };
   return (
     <div>
+      <h3>Số thẻ mỗi thành viên</h3>
       <Bar
         style={{
           backgroundColor: "white",
@@ -129,6 +142,7 @@ export function BarChartTags({ tasks }: any) {
     "#9f8fef": "tía",
     "#579dff": "xanh nước biển",
   };
+  
   const data = {
     labels: Result.map((item) => colorLabels[item.color]), // Danh sách các color
     datasets: [
@@ -142,24 +156,38 @@ export function BarChartTags({ tasks }: any) {
 
   const options: {} = {
     responsive: true,
-
     scales: {
       x: {
         grid: {
           display: false,
           borderDash: [5, 5],
         },
+        ticks: {
+          font: {
+            size: 15, //this change the font size
+          },
+        }
       },
       y: {
         min: 0,
+        border:{dash: [4, 4]}, // for the grid lines
         grid: {
-          display: true,
-          borderDash: [5, 5],
+            color: '#aaa', 
+            tickColor: '#000', 
+            tickBorderDash: [2, 3],
+            tickLength: 10, 
+            tickWidth: 2,
+            offset: false,
+            drawTicks: false, 
+            drawOnChartArea: true 
         },
         beginAtZero: true,
         max: Math.max(...Result.map((item) => item.total)) + 1,
         ticks: {
-          count: Math.max(...Result.map((item) => item.total)) + 3,
+            font: {
+              size: 17, //this change the font size
+            },
+          count: Math.max(...Result.map((item) => item.total)) + 2,
 
           callback: function (value: number) {
             if (value % 1 === 0) {
@@ -178,6 +206,7 @@ export function BarChartTags({ tasks }: any) {
   };
   return (
     <div>
+      <h3>Số thẻ mỗi nhãn</h3>
       <Bar
         style={{
           backgroundColor: "white",

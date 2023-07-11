@@ -1424,10 +1424,8 @@
           "title": "todo",
           "taskIds": [
             "task-24",
-            "task-25",
-            "task-26",
-            "task-0",
-            "task-27"
+            "task-6",
+            "task-28"
           ]
         },
         "column-1": {
@@ -1436,8 +1434,9 @@
           "taskIds": [
             "task-3",
             "task-14",
+            "task-25",
             "task-4",
-            "task-1",
+            "task-9",
             "task-5"
           ]
         },
@@ -1454,12 +1453,13 @@
         },
         "column-3": {
           "id": "column-3",
-          "title": "làm xong trước kì vọng vọngvvvvvvvvvvv",
+          "title": "làm xong",
           "taskIds": [
-            "task-28",
             "task-7",
             "task-17",
-            "task-21",
+            "task-27",
+            "task-1",
+            "task-16",
             "task-13"
           ]
         },
@@ -1478,10 +1478,10 @@
           "title": "Loại bỏ",
           "taskIds": [
             "task-20",
-            "task-16",
-            "task-6",
-            "task-9",
-            "task-12"
+            "task-12",
+            "task-26",
+            "task-0",
+            "task-21"
           ]
         }
       },

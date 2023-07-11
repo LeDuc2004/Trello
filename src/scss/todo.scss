@@ -446,10 +446,14 @@ body {
     width: calc(50% - 20px);
     box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f,
       0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
-    background-color: transparent;
     margin: 15px 10px;
     border-radius: 10px;
     overflow: hidden;
+    background-color: white;
+    canvas{
+      width: 100% !important;
+      height: calc(100% - 50px) !important;
+    }
   }
 }
 
@@ -617,4 +621,33 @@ body {
 :where(.css-dev-only-do-not-override-14wwjjs).ant-picker:focus {
   border-color: #4096ff;
 
+}
+@media only screen and (max-width: 1500px) {
+  .todo_chart {
+    width: calc(100% - 52px);
+    height: calc(100vh - 182px);
+    margin-top: 70px;
+    background-color: #f1f2f4;
+    margin-left: 10px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 15px;
+    flex-direction: column;
+    div{
+      h3{
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      width: 100%;
+      min-height: 110%;
+      box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.2509803922), 0px 0px 1px rgba(9, 30, 66, 0.3098039216), 0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
+      margin: 15px 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+}
 }
