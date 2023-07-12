@@ -122,6 +122,9 @@ function Column({
     scrollToBottom(columnId, textareaRef, 1);
     setRows(textarea.rows);
   }, [value]);
+
+
+  
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       AddTask();

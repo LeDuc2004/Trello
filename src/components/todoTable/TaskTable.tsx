@@ -90,7 +90,7 @@ function Task({ task, index, namecolumn ,stores,setStores}: any) {
           {task.date?.time ? (
                 <div className="task-date">
                   <div
-                    className={`date-iid ${task.date?.status ? "done" : ""}`}
+                    className={`date-iid ${task.date?.status ? "done" : task.date?.status == null ? "late":""}`}
                   >
                     <i className="fa-regular fa-clock"></i>
                     <input

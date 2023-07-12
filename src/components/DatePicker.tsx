@@ -17,6 +17,8 @@ function DatePick({date, stores, idTask}: any) {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   function onChange(value: any, dateString: [string, string] | string) {
+    const currentTime = new Date().getTime();
+    const taskTime = new Date(dateString.toString()).getTime();
     let newStore = {
         ...stores,
         tasks: {
@@ -25,22 +27,23 @@ function DatePick({date, stores, idTask}: any) {
             ...stores.tasks[`task-${idTask}`],
             date:{
               time:dateString,
-              status:false
+              status:currentTime > taskTime ? null : false
             }
           },
         },
       };
-
       putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
         dispatch(todoPage.actions.updateTable(newStore));
       });
   }
   
-  if (date) {
+
+  if (date?.time) {
+    
     return (
       <Space direction="vertical" size={12}>
         <DatePicker
-          value={dayjs(date, dateTimeFormat)}
+          value={dayjs(date.time, dateTimeFormat)}
           showTime
           onChange={onChange}
           onOk={onOk}

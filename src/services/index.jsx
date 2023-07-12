@@ -34,6 +34,7 @@ export async function postData(endpoint, data, authorization) {
 }
 
 export async function putData(endpoint, data) {
+  console.log(1);
   try {
     const response = await fetch(`${Api+endpoint}`, {
       method: 'PUT',

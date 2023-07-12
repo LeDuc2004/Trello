@@ -37,6 +37,34 @@ function Task({
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
   const refTextArea = useRef<any>(null);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  useEffect(() => {
+    if (task?.date?.time) {
+      const currentTime = new Date().getTime();
+      const taskTime = new Date(task.date.time).getTime();
+
+      if (taskTime < currentTime && task.date.status == false) {
+        let newStore = {
+          ...stores,
+          tasks: {
+            ...stores.tasks,
+            [`task-${task.id}`]: {
+              ...stores.tasks[`task-${task.id}`],
+              date: {
+                ...stores.tasks[`task-${task.id}`].date,
+                status: null,
+              },
+            },
+          },
+        };
+
+        putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
+          dispatch(todoPage.actions.updateTable(newStore));
+        });
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!refTextArea.current?.contains(event.target as Node)) {
@@ -70,7 +98,7 @@ function Task({
         tasks: {
           ...stores.tasks,
           [`task-${task.id}`]: {
-            id: task.id,
+            ...stores.tasks[`task-${task.id}`],
             content: textArea,
           },
         },
@@ -89,24 +117,28 @@ function Task({
     btnShare("task");
   }
   function handleCheckBox() {
-    let newStore = {
-      ...stores,
-      tasks: {
-        ...stores.tasks,
-        [`task-${task.id}`]: {
-          ...stores.tasks[`task-${task.id}`],
-          date: {
-            ...stores.tasks[`task-${task.id}`].date,
-            status: !stores.tasks[`task-${task.id}`].date.status,
+    const currentTime = new Date().getTime();
+    const taskTime = new Date(task.date.time).getTime();
+    const statusDate = stores.tasks[`task-${task.id}`].date.status
+      let newStore = {
+        ...stores,
+        tasks: {
+          ...stores.tasks,
+          [`task-${task.id}`]: {
+            ...stores.tasks[`task-${task.id}`],
+            date: {
+              ...stores.tasks[`task-${task.id}`].date,
+              status:taskTime > currentTime ? !statusDate : statusDate ? null : true ,
+            },
           },
         },
-      },
-    };
+      };
 
-    setStores(newStore);
-    putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
-      dispatch(todoPage.actions.updateTable(newStore))
-    );
+      setStores(newStore);
+      putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+        dispatch(todoPage.actions.updateTable(newStore))
+      );
+    
   }
 
   return (
@@ -138,19 +170,24 @@ function Task({
             <div className="update-content" onClick={() => handleUpdateTask()}>
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
-            <div className="task-top">
-              {task?.tags.map((item: any) =>
-                item.status ? (
-                  <div
-                    key={item.id}
-                    style={{ backgroundColor: `${item.color}` }}
-                    className="tag-top"
-                  ></div>
-                ) : (
-                  ""
-                )
-              )}
-            </div>
+            {task?.tags ? (
+              <div className="task-top">
+                {task?.tags.map((item: any) =>
+                  item.status ? (
+                    <div
+                      key={item.id}
+                      style={{ backgroundColor: `${item.color}` }}
+                      className="tag-top"
+                    ></div>
+                  ) : (
+                    ""
+                  )
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+
             <div onClick={() => handleTask(task)} className="task-text">
               {task.content}
             </div>
@@ -158,7 +195,13 @@ function Task({
               {task.date?.time ? (
                 <div className="task-date">
                   <div
-                    className={`date-iid ${task.date?.status ? "done" : ""}`}
+                    className={`date-iid ${
+                      task.date?.status
+                        ? "done"
+                        : task.date?.status == null
+                        ? "late"
+                        : ""
+                    }`}
                   >
                     <i className="fa-regular fa-clock"></i>
                     <input
@@ -167,7 +210,7 @@ function Task({
                       onChange={handleCheckBox}
                       type="checkbox"
                     />
-                    <div onClick={()=>handleCheckBox()} className="date-text">
+                    <div onClick={() => handleCheckBox()} className="date-text">
                       {task.date.time.split(" ")[0]}
                     </div>
                   </div>

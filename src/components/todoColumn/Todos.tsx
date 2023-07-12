@@ -8,10 +8,13 @@ import { getData, putData } from "../../services";
 import { fetchTableLess, todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
 import TodosTable from "../todoTable/TodosTable";
-import {BarChart, BarChartTags} from "../todoChart/Chart";
+import BarChartTaskOfMember, {BarChart, BarChartDate, BarChartTags } from "../todoChart/Chart";
 type Task = {
   id: number;
   content: string;
+  member: any[];
+  tags: any[];
+  date: any;
 };
 
 type Column = {
@@ -60,6 +63,8 @@ function Todos({
   // <scroll-x>
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
+
+
   useEffect(() => {
     setStores(table);
     if (localStorage.getItem("token") != null) {
@@ -489,8 +494,8 @@ function Todos({
         {typeTable === "table3" ? (
           <div className="todo_chart">
             <BarChart columns={stores.columns}></BarChart>
-            <BarChart columns={stores.columns}></BarChart>
-            <BarChart columns={stores.columns}></BarChart>
+            <BarChartDate tasks={stores.tasks} ></BarChartDate>
+            <BarChartTaskOfMember tasks={Object.values(stores.tasks)} />
             <BarChartTags tasks={stores.tasks}></BarChartTags>
           </div>
         ) : (

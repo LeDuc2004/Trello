@@ -224,6 +224,11 @@ function Header({ sign }: any) {
       }
     });
   }
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      handlecreatTable()
+    }
+  };
   return (
     <div
       style={sign ? { backgroundColor: "white", height: "60px" } : {}}
@@ -347,6 +352,7 @@ function Header({ sign }: any) {
                     value={textNameTable}
                     onChange={(e) => setTextNameTable(e.target.value)}
                     type="text"
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
                 <div

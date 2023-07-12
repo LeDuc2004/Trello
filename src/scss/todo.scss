@@ -443,13 +443,21 @@ body {
   padding: 15px;
   justify-content: space-between;
   div {
-    width: calc(50% - 20px);
+    width: calc(50% - 60px);
     box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f,
       0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
-    margin: 15px 10px;
+    margin: 0px 10px;
     border-radius: 10px;
     overflow: hidden;
     background-color: white;
+    height: 60%;
+    padding: 0 20px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    h3{
+      margin-top: 10px;
+      margin-bottom: 10px;margin-left: 10px;
+    }
     canvas{
       width: 100% !important;
       height: calc(100% - 50px) !important;
@@ -467,14 +475,15 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 100%;
   }
 }
 .tb__task_left {
+  width: 78%;
   .text {
     font-size: 12px;
     font-weight: 700;
   }
-  flex: 1;
   .thanh__fasolid {
     display: flex;
     flex-direction: column;
@@ -523,17 +532,29 @@ body {
       margin-bottom: 15px;
       .tag {
         height: 35px;
-        max-width: 100%;
         min-width: 50px;
         background-color: tomato;
         border-radius: 5px;
         margin-right: 5px;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        margin-bottom: 5px;
+
+        div{
+          width: 100%;        
+          white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        }
       }
       .wrap_icon_plus {
         padding: 7.5px 11px;
         background-color: #e4e6eaaf;
         border-radius: 3px;
         margin-left: 3px;
+        font-size: 14px;
+        font-weight: 550;
       }
       .wrap_icon_plus:hover {
         background-color: #cdd3e2;
@@ -543,6 +564,7 @@ body {
   }
 }
 .tb_task_right {
+  flex: 1;
   .tb_task_right__top {
     font-size: 14px;
     font-weight: 550;
@@ -578,6 +600,19 @@ body {
       width: 15px;
       height: 15px;
       cursor: pointer;
+      margin-right: 10px;
+    }
+    .status_date{
+      margin-left: 10px;
+      background: #1f845a;
+      font-size: 14px;
+      padding: 2px 5px;
+      padding-bottom: 3px;
+      border-radius: 4px;
+      color: white;
+    }
+    .status_date.late{
+      background: #ca3521;
     }
   }
 }
@@ -616,7 +651,6 @@ body {
   outline: 0;
   width: 176px !important;
   height: 36px !important;
-  margin-left: 10px;
 }
 :where(.css-dev-only-do-not-override-14wwjjs).ant-picker:focus {
   border-color: #4096ff;

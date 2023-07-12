@@ -2,24 +2,24 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 const app = express();
-app.use(express.json()); 
+app.use(express.json());  
 app.use(cors());
-
+ 
 app.post("/addTable", authenToken, (req, res) => {
   const id = req.user.id;
   const TableToUser = req.body
-  fetch(`http://localhost:3000/users/${id}`, {
-    method: "GET",
+  fetch(`http://localhost:3000/users/${id}`, { 
+    method: "GET", 
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json", 
     },
   })
     .then((res) => res.json())
     .then((data) => {
-      let arrayIdTable = data.idTable.slice()
+      let arrayIdTable = data.idTable.slice() 
       arrayIdTable.push(TableToUser)
       let newData = {
-        ...data,
+        ...data, 
         idTable: arrayIdTable
       }
       fetch(`http://localhost:3000/users/${id}`, {
@@ -28,7 +28,7 @@ app.post("/addTable", authenToken, (req, res) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newData)
-      })
+      }) 
       res.status(200).send("ok");
     })
 })
@@ -44,8 +44,8 @@ app.post("/login", (req, res) => {
   if (req.headers.authorization == "levanduc") {
     const accessToken = jwt.sign(req.body, "levanduc");
     res.status(200).send({ accessToken });
-  } else {
-    res.status(404).send("ERROR");
+  } else {  
+    res.status(404).send("ERROR"); 
   }
 });
 
@@ -56,7 +56,7 @@ app.get("/user", authenToken, (req, res) => {
     .then((data) => {
 
       res.send({ user :data});
-    });
+    }); 
 
 });
 app.post("/logout", (req, res) => {

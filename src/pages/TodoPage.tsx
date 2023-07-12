@@ -4,7 +4,7 @@ import SileBar from "../components/todoColumn/SileBar";
 import Todos from "../components/todoColumn/Todos";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { fetchTableLess } from "../store/todoPage";
+import { fetchTableLess, todoPage } from "../store/todoPage";
 import { useParams } from "react-router-dom";
 import { SelectPosition, SelectPosition1 } from "../components/Select";
 import { fetchUsers } from "../store/createTable";
@@ -148,11 +148,34 @@ function TodoPage() {
     }
     setTableAddTags(true);
   }
+  function handleCheckBox() {
+    const currentTime = new Date().getTime();
+    const taskTime = new Date(table.Table?.tasks[`task-${dataTask?.id}`]?.date.time).getTime();
+    const statusDate = table.Table?.tasks[`task-${dataTask?.id}`]?.date.status
+      let newStore = {
+        ...table.Table,
+        tasks: {
+          ...table.Table?.tasks,
+          [`task-${table.Table?.tasks[`task-${dataTask?.id}`]}`]: {
+            ...table.Table?.tasks[`task-${dataTask?.id}`],
+            date: {
+              ...table.Table?.tasks[`task-${dataTask?.id}`]?.date,
+              status:taskTime > currentTime ? !statusDate : statusDate ? null : true ,
+            },
+          },
+        },
+      };
+console.log(newStore);
 
+      // putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+      //   dispatch(todoPage.actions.updateTable(newStore))
+      // );
+    
+  }
   return (
     <>
       <div
-        onClick={() => hideWrapTb()}
+        onClick={() => hideWrapTb()}    
         style={toggle ? {} : { display: "none" }}
         id="wrap__tb__share"
       ></div>
@@ -293,7 +316,7 @@ function TodoPage() {
                   <>
                     <div className="text">Nhãn</div>
                     <div className="list_tag">
-                      {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map((item:any)=> item.status ? <div key={item.id} style={{backgroundColor:`${item.color}`}} className="tag"></div>:"")}
+                      {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map((item:any)=> item.status ? <div key={item.id} style={{backgroundColor:`${item.color}`}} className="tag"><div>{item.content}</div></div>:"")}
                       <div onClick={() => handleTableTags()} className="wrap_icon_plus">
                         <i className="fa-solid fa-plus"></i>
                       </div>
@@ -309,12 +332,17 @@ function TodoPage() {
               >
                 <div className="text">Ngày hết hạn</div>
                 <div className="wrap_input_date">
-                  <input type="checkbox" />
+                  {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.time != "" ? <input onChange={handleCheckBox} checked={table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status} type="checkbox" />:""}
+                  
                   <DatePick 
                   date={table.Table?.tasks[`task-${dataTask?.id}`]?.date}
                   stores={table.Table}
                   idTask={dataTask.id}
                   ></DatePick>
+                  <div className={table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status ? "status_date" : table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status === null ? "status_date late": ""}>
+                    {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status ? "Hoàn thành" : table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status === null ? "Quá hạn": ""}
+                    
+                  </div>
                 </div>
               </div>
 
@@ -356,10 +384,10 @@ function TodoPage() {
               </div>
             </div>
 
-            {/* <div className="btn_add clock_date">
+            <div className="btn_add clock_date">
               <i className="fa-regular fa-clock"></i>
               <div>Ngày</div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -382,6 +410,7 @@ function TodoPage() {
           slidebarToTodos={slidebarToTodos}
           setSlidebarToTodos={setSlidebarToTodos}
         ></SileBar>
+        
         {table.status === "idle" ? (
           <Todos
             btnShare={setToggle}

@@ -160,6 +160,11 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
       }
     }, 0);
   }
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      handlecreatTable()
+    }
+  };
   return (
     <div className="home">
       <div className="home__table">
@@ -273,6 +278,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 value={textNameTable}
                 onChange={(e) => setTextNameTable(e.target.value)}
                 type="text"
+                onKeyDown={handleKeyPress}
               />
             </div>
             <div
