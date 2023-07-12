@@ -247,7 +247,7 @@
             }
           ],
           "date": {
-            "time": "2023-07-20 14:09:43",
+            "time": "",
             "status": false
           },
           "member": [
@@ -969,7 +969,7 @@
           ],
           "date": {
             "time": "2023-07-11 13:38:03",
-            "status": null
+            "status": true
           }
         },
         "task-17": {
@@ -1494,13 +1494,13 @@
             {
               "id": 0,
               "color": "#4bce97",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
               "id": 1,
               "color": "#e2b203",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
@@ -1544,7 +1544,11 @@
               "img": false,
               "position": "Thành viên"
             }
-          ]
+          ],
+          "date": {
+            "time": "2023-07-19 22:55:34",
+            "status": true
+          }
         },
         "task-[object Object]": {
           "id": 24,
@@ -1632,6 +1636,7 @@
           "id": "column-3",
           "title": "làm xong",
           "taskIds": [
+            "task-28",
             "task-2",
             "task-11",
             "task-27"
@@ -1650,7 +1655,6 @@
           "id": "column-5",
           "title": "Loại bỏ",
           "taskIds": [
-            "task-28",
             "task-1",
             "task-12",
             "task-26",

@@ -152,11 +152,12 @@ function TodoPage() {
     const currentTime = new Date().getTime();
     const taskTime = new Date(table.Table?.tasks[`task-${dataTask?.id}`]?.date.time).getTime();
     const statusDate = table.Table?.tasks[`task-${dataTask?.id}`]?.date.status
+    
       let newStore = {
         ...table.Table,
         tasks: {
           ...table.Table?.tasks,
-          [`task-${table.Table?.tasks[`task-${dataTask?.id}`]}`]: {
+          [`task-${dataTask?.id}`]: {
             ...table.Table?.tasks[`task-${dataTask?.id}`],
             date: {
               ...table.Table?.tasks[`task-${dataTask?.id}`]?.date,
@@ -165,11 +166,10 @@ function TodoPage() {
           },
         },
       };
-console.log(newStore);
 
-      // putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
-      //   dispatch(todoPage.actions.updateTable(newStore))
-      // );
+      putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+        dispatch(todoPage.actions.updateTable(newStore))
+      );
     
   }
   return (
