@@ -482,7 +482,7 @@ console.log(Result);
   };
   return (
     <div>
-      <h3>Số thẻ mỗi nhãn</h3>
+      <h3>Số thẻ mỗi ngày hết hạn</h3>
       <Bar
         style={{
           backgroundColor: "white",

@@ -135,6 +135,7 @@ function Column({
     }
   };
   function visibleInputColumn() {
+
     onclick();
     setToggleColumn(true);
     setTimeout(() => {
@@ -166,6 +167,8 @@ function Column({
       setStores(newStore);
       putData(`/dataTable/${newStore.id}`, newStore);
     } else {
+    setToggleColumn(false);
+
       setValueInput(column.title);
     }
   }

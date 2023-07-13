@@ -32,6 +32,7 @@ interface Item {
   tasks: any;
   columns: { [columnId: string]: Column };
   columnOrder: string[];
+  tagsname:any
 }
 interface User {
   id: string | number;
@@ -213,6 +214,8 @@ function TodoPage() {
     setTimeout(() => {
       if (refTextArea.current) {
         refTextArea.current.focus();
+        refTextArea.current.selectionStart = refTextArea.current.value.length;
+        refTextArea.current.selectionEnd = refTextArea.current.value.length;
       }
     }, 0);
   }
@@ -364,14 +367,14 @@ function TodoPage() {
                     <div className="text">Nhãn</div>
                     <div className="list_tag">
                       {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map(
-                        (item: any) =>
+                        (item: any, index:number) =>
                           item.status ? (
                             <div
                               key={item.id}
                               style={{ backgroundColor: `${item.color}` }}
                               className="tag"
                             >
-                              <div>{item.content}</div>
+                              <div>{table.Table.tagsname[index]}</div>
                             </div>
                           ) : (
                             ""

@@ -48,6 +48,19 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!refTags.current?.contains(event.target as Node)) {
+        setCurent(-1)
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
   function handleChoseTags(status: boolean, postion: number) {
     let currentTag = stores.tasks[`task-${idTask}`].tags[postion].status;
     if (currentTag) {
@@ -118,21 +131,20 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
       }
     }, 0);
   }
-  function handleNameTag(event:any) {
+  function handleNameTag(event: any) {
     if (event.key == "Enter") {
-      let newTagsName = [...stores.tagsname]
-      newTagsName[curent] = textTag
-      
+      setCurent(-1)
+      let newTagsName = [...stores.tagsname];
+      newTagsName[curent] = textTag;
+
       let newStore = {
         ...stores,
-        tagsname:newTagsName
-      }
+        tagsname: newTagsName,
+      };
       putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
-      dispatch(todoPage.actions.updateTable(newStore))
-    );
-      
+        dispatch(todoPage.actions.updateTable(newStore))
+      );
     }
-    
   }
 
   return (
@@ -172,9 +184,11 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
                       className="color_content"
                       onClick={() => handleChoseTags(item.status, index)}
                     >
-                      <div>{item.content}</div>
+                      <div>{stores.tagsname[index]}</div>
                     </div>
                     <input
+                      value={stores.tagsname[index]}
+                      ref={refTags}
                       onKeyDown={handleNameTag}
                       onChange={(e) => setTextTag(e.target.value)}
                       className="input-tags"
