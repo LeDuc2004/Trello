@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/common/Header";
 import SileBar from "../components/todoColumn/SileBar";
 import Todos from "../components/todoColumn/Todos";
@@ -63,12 +63,27 @@ function TodoPage() {
   const [tableAddTags, setTableAddTags] = useState<boolean>(false);
   const [textTime, setTextTime] = useState<string>("table0");
   const [dataTask, setDataTask] = useState<any>({ id: 0 });
+  const [textDescription, setTextDescription] = useState<string>("");
+  const [toggleDesciption, setToggleDescription] = useState<boolean>(true);
+  const refTextArea = useRef<any>(null)
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   useEffect(() => {
     dispatch(fetchTableLess(id));
     dispatch(fetchUsers());
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!refTextArea.current?.contains(event.target as Node)) {
+          setToggleDescription(true)
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
   const table = useSelector((state: RootState) => state.table);
   const User = useSelector((state: ListUser) => state.listTable.users).filter(
@@ -150,19 +165,40 @@ function TodoPage() {
   }
   function handleCheckBox() {
     const currentTime = new Date().getTime();
-    const taskTime = new Date(table.Table?.tasks[`task-${dataTask?.id}`]?.date.time).getTime();
-    const statusDate = table.Table?.tasks[`task-${dataTask?.id}`]?.date.status
-    
+    const taskTime = new Date(
+      table.Table?.tasks[`task-${dataTask?.id}`]?.date.time
+    ).getTime();
+    const statusDate = table.Table?.tasks[`task-${dataTask?.id}`]?.date.status;
+
+    let newStore = {
+      ...table.Table,
+      tasks: {
+        ...table.Table?.tasks,
+        [`task-${dataTask?.id}`]: {
+          ...table.Table?.tasks[`task-${dataTask?.id}`],
+          date: {
+            ...table.Table?.tasks[`task-${dataTask?.id}`]?.date,
+            status:
+              taskTime > currentTime ? !statusDate : statusDate ? null : true,
+          },
+        },
+      },
+    };
+
+    putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+      dispatch(todoPage.actions.updateTable(newStore))
+    );
+  }
+  function handleKeyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key === "Enter") {
+      setToggleDescription(true)
       let newStore = {
         ...table.Table,
         tasks: {
           ...table.Table?.tasks,
           [`task-${dataTask?.id}`]: {
             ...table.Table?.tasks[`task-${dataTask?.id}`],
-            date: {
-              ...table.Table?.tasks[`task-${dataTask?.id}`]?.date,
-              status:taskTime > currentTime ? !statusDate : statusDate ? null : true ,
-            },
+            description: textDescription.trim(),
           },
         },
       };
@@ -170,12 +206,20 @@ function TodoPage() {
       putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
         dispatch(todoPage.actions.updateTable(newStore))
       );
-    
+    }
+  }
+  function visibleInputColumn() {
+    setToggleDescription(false)
+    setTimeout(() => {
+      if (refTextArea.current) {
+        refTextArea.current.focus();
+      }
+    }, 0);
   }
   return (
     <>
       <div
-        onClick={() => hideWrapTb()}    
+        onClick={() => hideWrapTb()}
         style={toggle ? {} : { display: "none" }}
         id="wrap__tb__share"
       ></div>
@@ -231,7 +275,7 @@ function TodoPage() {
         <div className="tb__share_bottom">
           {table.status === "idle" ? (
             <>
-              {table.Table.member.map((member: any) => (
+              {table.Table?.member?.map((member: any) => (
                 <div key={member.id} className="sun__share">
                   <div className="img__name">
                     {member.img ? (
@@ -280,7 +324,7 @@ function TodoPage() {
                 className="thanh__fasolid"
               >
                 <div className="text">Thành viên</div>
-                
+
                 <div className="add_member">
                   {table.Table?.tasks[`task-${dataTask?.id}`]?.member
                     ? table.Table?.tasks[`task-${dataTask?.id}`]?.member.map(
@@ -305,7 +349,10 @@ function TodoPage() {
                       )
                     : ""}
 
-                  <div onClick={() => handleTableMember()} className="wrap_icon_plus">
+                  <div
+                    onClick={() => handleTableMember()}
+                    className="wrap_icon_plus"
+                  >
                     <i className="fa-solid fa-plus"></i>
                   </div>
                 </div>
@@ -316,8 +363,24 @@ function TodoPage() {
                   <>
                     <div className="text">Nhãn</div>
                     <div className="list_tag">
-                      {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map((item:any)=> item.status ? <div key={item.id} style={{backgroundColor:`${item.color}`}} className="tag"><div>{item.content}</div></div>:"")}
-                      <div onClick={() => handleTableTags()} className="wrap_icon_plus">
+                      {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map(
+                        (item: any) =>
+                          item.status ? (
+                            <div
+                              key={item.id}
+                              style={{ backgroundColor: `${item.color}` }}
+                              className="tag"
+                            >
+                              <div>{item.content}</div>
+                            </div>
+                          ) : (
+                            ""
+                          )
+                      )}
+                      <div
+                        onClick={() => handleTableTags()}
+                        className="wrap_icon_plus"
+                      >
                         <i className="fa-solid fa-plus"></i>
                       </div>
                     </div>
@@ -327,28 +390,83 @@ function TodoPage() {
                 )}
               </div>
 
-              <div
-                className="date_line"
-              >
+              <div className="date_line">
                 <div className="text">Ngày hết hạn</div>
                 <div className="wrap_input_date">
-                  {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.time != "" ? <input onChange={handleCheckBox} checked={table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status} type="checkbox" />:""}
-                  
-                  <DatePick 
-                  date={table.Table?.tasks[`task-${dataTask?.id}`]?.date}
-                  stores={table.Table}
-                  idTask={dataTask.id}
+                  {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.time !=
+                  "" ? (
+                    <input
+                      onChange={handleCheckBox}
+                      checked={
+                        table.Table?.tasks[`task-${dataTask?.id}`]?.date
+                          ?.status != true
+                          ? false
+                          : true
+                      }
+                      type="checkbox"
+                    />
+                  ) : (
+                    ""
+                  )}
+
+                  <DatePick
+                    date={table.Table?.tasks[`task-${dataTask?.id}`]?.date}
+                    stores={table.Table}
+                    idTask={dataTask.id}
                   ></DatePick>
-                  <div className={table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status ? "status_date" : table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status === null ? "status_date late": ""}>
-                    {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status ? "Hoàn thành" : table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status === null ? "Quá hạn": ""}
-                    
+                  <div
+                    className={
+                      table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status
+                        ? "status_date"
+                        : table.Table?.tasks[`task-${dataTask?.id}`]?.date
+                            ?.status === null
+                        ? "status_date late"
+                        : ""
+                    }
+                  >
+                    {table.Table?.tasks[`task-${dataTask?.id}`]?.date?.status
+                      ? "Hoàn thành"
+                      : table.Table?.tasks[`task-${dataTask?.id}`]?.date
+                          ?.status === null
+                      ? "Quá hạn"
+                      : ""}
                   </div>
                 </div>
               </div>
 
               <div className="discription">
                 <div className="text">Mô tả</div>
-                <textarea className="discription_input" name="" id="" cols={30} rows={10} placeholder="Thêm mô tả chi tiết hơn..."></textarea>
+                {table.Table?.tasks[`task-${dataTask?.id}`]?.description ? (
+                  <div  className="dcrt">
+                    {toggleDesciption ? (
+                     <div onClick={()=>visibleInputColumn()}>{table.Table?.tasks[`task-${dataTask?.id}`]?.description}</div> 
+                    ) : (
+                      <textarea
+                        ref={refTextArea}
+                        onKeyDown={handleKeyPress}
+                        value={textDescription}
+                        onChange={(e) => setTextDescription(e.target.value)}
+                        className="discription_input"
+                        name=""
+                        id=""
+                        cols={30}
+                        rows={10}
+                        placeholder="Thêm mô tả chi tiết hơn..."
+                      ></textarea>
+                    )}
+                  </div>
+                ) : (
+                  <textarea
+                    onKeyDown={handleKeyPress}
+                    onChange={(e) => setTextDescription(e.target.value)}
+                    className="discription_input"
+                    name=""
+                    id=""
+                    cols={30}
+                    rows={10}
+                    placeholder="Thêm mô tả chi tiết hơn..."
+                  ></textarea>
+                )}
               </div>
             </div>
           ) : (
@@ -410,7 +528,7 @@ function TodoPage() {
           slidebarToTodos={slidebarToTodos}
           setSlidebarToTodos={setSlidebarToTodos}
         ></SileBar>
-        
+
         {table.status === "idle" ? (
           <Todos
             btnShare={setToggle}

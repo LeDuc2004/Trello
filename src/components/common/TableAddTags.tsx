@@ -1,6 +1,6 @@
 import "../../scss/tableAddTags.scss";
 import "../../scss/tableAddMember.scss";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { putData } from "../../services";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
@@ -13,7 +13,10 @@ interface Boolean {
 }
 
 function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
+  const [textTag, setTextTag] = useState<string>();
   const refTableTag = useRef<any>(null);
+  const refTags = useRef<any>(null);
+  const [curent, setCurent] = useState<number>(-1);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const listColor = [
     { color: "#4bce97", status: false },
@@ -28,6 +31,7 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
     const handleClickOutside = (event: MouseEvent) => {
       if (!refTableTag.current?.contains(event.target as Node)) {
         setTableAddTags(false);
+        setCurent(-1);
         var div = document.getElementById("your-div");
         var div1 = document.getElementById("wrap__tb__share");
 
@@ -54,10 +58,9 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
             status: false,
           };
           return newItem;
-        } 
-        return item
+        }
+        return item;
       });
-      
 
       let newStore = {
         ...stores,
@@ -69,7 +72,7 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
           },
         },
       };
-      
+
       putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
         dispatch(todoPage.actions.updateTable(newStore));
       });
@@ -81,10 +84,9 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
             status: true,
           };
           return newItem;
-        } 
-        return item
+        }
+        return item;
       });
-      
 
       let newStore = {
         ...stores,
@@ -96,11 +98,41 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
           },
         },
       };
-      
+
       putData(`/dataTable/${newStore.id}`, newStore).then((res) => {
         dispatch(todoPage.actions.updateTable(newStore));
       });
     }
+  }
+  function handleFocusTag(index: number) {
+    setCurent(index);
+    setTimeout(() => {
+      let refTags = document.querySelectorAll(".input-tags");
+
+      if (refTags) {
+        refTags.forEach((item: any) => {
+          item.focus();
+          item.selectionStart = item.value.length;
+          item.selectionEnd = item.value.length;
+        });
+      }
+    }, 0);
+  }
+  function handleNameTag(event:any) {
+    if (event.key == "Enter") {
+      let newTagsName = [...stores.tagsname]
+      newTagsName[curent] = textTag
+      
+      let newStore = {
+        ...stores,
+        tagsname:newTagsName
+      }
+      putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+      dispatch(todoPage.actions.updateTable(newStore))
+    );
+      
+    }
+    
   }
 
   return (
@@ -129,18 +161,33 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
               (item: any, index: number) => (
                 <div key={item.color} className="Tag_color">
                   <input
+                    className="type_check"
                     checked={item.status}
                     type="checkbox"
                     onChange={(e) => handleChoseTags(item.status, index)}
                   />
-                  <div
-                    style={{ backgroundColor: `${listColor[index].color}` }}
-                    className="color_content"
-                    onClick={() => handleChoseTags(item.status, index)}
-                  >
-                    <div>{item.content}</div>
+                  <div className="color_content1">
+                    <div
+                      style={{ backgroundColor: `${listColor[index].color}` }}
+                      className="color_content"
+                      onClick={() => handleChoseTags(item.status, index)}
+                    >
+                      <div>{item.content}</div>
+                    </div>
+                    <input
+                      onKeyDown={handleNameTag}
+                      onChange={(e) => setTextTag(e.target.value)}
+                      className="input-tags"
+                      style={curent == index ? {} : { display: "none" }}
+                      type="text"
+                      placeholder="Tiêu đề"
+                    />
                   </div>
-                  <i className="fa-solid fa-pencil"></i>
+
+                  <i
+                    onClick={() => handleFocusTag(index)}
+                    className="fa-solid fa-pencil"
+                  ></i>
                 </div>
               )
             )}

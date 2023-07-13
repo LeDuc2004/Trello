@@ -1,19 +1,17 @@
 {
   "users": [
     {
-      "id": 0.3779249820624686,
-      "tk": "Lê Đức",
+      "id": 0.7584883036636818,
+      "tk": "Minh Thu",
       "email": "lolquan1",
-      "color": "#0DE3BB",
+      "color": "#0B92D6",
       "mk": "1",
-      "token": [
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4zNzc5MjQ5ODIwNjI0Njg2LCJuYW1lIjoiTMOqIMSQ4bupYyIsImlhdCI6MTY4OTE1MzMzMH0.FlnUAz0h_2XgzoiJG_hJgziAdU8jQfZcHUq18j9zrbg"
-      ],
+      "token": [],
       "idTable": [
         {
-          "id": 0.516735900293475,
-          "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
-          "name": "newTable"
+          "id": 0.11041719390962434,
+          "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
+          "name": "NewTable"
         }
       ]
     },
@@ -22,65 +20,12 @@
       "tk": "Lê Ðức",
       "email": "levanduc2052004@gmail.com",
       "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-      "token": [],
-      "idTable": [
-        {
-          "id": 0.516735900293475,
-          "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
-          "name": "newTable"
-        },
-        {
-          "id": 0.6387828655696122,
-          "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
-          "name": "simple"
-        },
-        {
-          "id": 0.26664130758158566,
-          "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
-          "name": "cc"
-        },
-        {
-          "id": 0.4882578797476096,
-          "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
-          "name": "no"
-        }
-      ]
-    },
-    {
-      "id": 0.5031364860775587,
-      "tk": "Thái Dê",
-      "email": "lolquan2",
-      "color": "#F9D47A",
-      "mk": "1",
       "token": [
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC41MDMxMzY0ODYwNzc1NTg3LCJuYW1lIjoiVGjDoWkgRMOqIiwiaWF0IjoxNjg4NDY0MDA1fQ.Lqna3GcGlrrlo84oA1aKgsOvDJXCUYW30VsEIgxsSfk"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODkyMzY0ODl9.ubfM7OQIXIydS-cGXs43_GbGFKU-gvAeGvzb0jjaZE0"
       ],
       "idTable": [
         {
-          "id": 0.516735900293475,
-          "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
-          "name": "newTable"
-        }
-      ]
-    },
-    {
-      "id": "103512326277909724078",
-      "tk": "Lê Văn Đức",
-      "email": "duclv@rikkeisoft.com",
-      "img": "https://lh3.googleusercontent.com/a/AAcHTteZOkFuTdpOoIFcvJm8EABy-6sdYldXFi2iI9iynNg7=s96-c",
-      "token": [],
-      "idTable": []
-    },
-    {
-      "id": 0.3279916922194799,
-      "tk": "Minh Thu",
-      "email": "lolquan3",
-      "color": "#F0D61D",
-      "mk": "1",
-      "token": [],
-      "idTable": [
-        {
-          "id": 0.516735900293475,
+          "id": 0.20228595991921927,
           "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
           "name": "newTable"
         }
@@ -89,41 +34,25 @@
   ],
   "dataTable": [
     {
-      "id": 0.516735900293475,
+      "id": 0.20228595991921927,
       "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
       "name": "newTable",
       "member": [
         {
           "id": "108043588203461517800",
           "tk": "Lê Ðức",
-          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
           "email": "levanduc2052004@gmail.com",
+          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
           "position": "Quản trị viên"
-        },
-        {
-          "id": 0.3779249820624686,
-          "tk": "Lê Đức",
-          "email": "lolquan1",
-          "color": "#0DE3BB",
-          "img": false,
-          "position": "Thành viên"
-        },
-        {
-          "id": 0.5031364860775587,
-          "tk": "Thái Dê",
-          "email": "lolquan2",
-          "color": "#F9D47A",
-          "img": false,
-          "position": "Thành viên"
-        },
-        {
-          "id": 0.3279916922194799,
-          "tk": "Minh Thu",
-          "email": "lolquan3",
-          "color": "#F0D61D",
-          "img": false,
-          "position": "Thành viên"
         }
+      ],
+      "tagsname": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
       ],
       "tasks": {
         "task-0": {
@@ -133,19 +62,19 @@
             {
               "id": 0,
               "color": "#4bce97",
-              "status": false,
+              "status": true,
               "content": ""
             },
             {
               "id": 1,
               "color": "#e2b203",
-              "status": false,
+              "status": true,
               "content": ""
             },
             {
               "id": 2,
               "color": "#faa53d",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
@@ -157,53 +86,20 @@
             {
               "id": 4,
               "color": "#9f8fef",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
               "id": 5,
               "color": "#579dff",
-              "status": true,
+              "status": false,
               "content": ""
             }
           ],
           "date": {
-            "time": "",
+            "time": "2023-07-14 17:24:36",
             "status": false
-          },
-          "member": [
-            {
-              "id": "108043588203461517800",
-              "tk": "Lê Ðức",
-              "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-              "email": "levanduc2052004@gmail.com",
-              "position": "Quản trị viên"
-            },
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            },
-            {
-              "id": 0.5031364860775587,
-              "tk": "Thái Dê",
-              "email": "lolquan2",
-              "color": "#F9D47A",
-              "img": false,
-              "position": "Thành viên"
-            },
-            {
-              "id": 0.3279916922194799,
-              "tk": "Minh Thu",
-              "email": "lolquan3",
-              "color": "#F0D61D",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
+          }
         },
         "task-1": {
           "id": 1,
@@ -212,19 +108,19 @@
             {
               "id": 0,
               "color": "#4bce97",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
               "id": 1,
               "color": "#e2b203",
-              "status": false,
+              "status": true,
               "content": ""
             },
             {
               "id": 2,
               "color": "#faa53d",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
@@ -236,30 +132,20 @@
             {
               "id": 4,
               "color": "#9f8fef",
-              "status": true,
+              "status": false,
               "content": ""
             },
             {
               "id": 5,
               "color": "#579dff",
-              "status": false,
+              "status": true,
               "content": ""
             }
           ],
           "date": {
-            "time": "",
-            "status": false
-          },
-          "member": [
-            {
-              "id": 0.5031364860775587,
-              "tk": "Thái Dê",
-              "email": "lolquan2",
-              "color": "#F9D47A",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
+            "time": "2023-07-12 17:24:42",
+            "status": null
+          }
         },
         "task-2": {
           "id": 2,
@@ -302,32 +188,14 @@
               "content": ""
             }
           ],
-          "member": [
-            {
-              "id": 0.5031364860775587,
-              "tk": "Thái Dê",
-              "email": "lolquan2",
-              "color": "#F9D47A",
-              "img": false,
-              "position": "Thành viên"
-            },
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ],
           "date": {
-            "time": "2023-07-11 10:43:45",
+            "time": "2023-07-14 17:24:47",
             "status": true
           }
         },
         "task-3": {
           "id": 3,
-          "content": "đi học",
+          "content": "done1",
           "tags": [
             {
               "id": 0,
@@ -367,1409 +235,9 @@
             }
           ],
           "date": {
-            "time": "2023-07-04 10:20:05",
-            "status": null
+            "time": "",
+            "status": 0
           }
-        },
-        "task-4": {
-          "id": 4,
-          "content": "đi chơi",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-5": {
-          "id": 5,
-          "content": "đi làm",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-6": {
-          "id": 6,
-          "content": "đi gọi anh Hiệp",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": true,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-20 09:45:43",
-            "status": false
-          }
-        },
-        "task-7": {
-          "id": 7,
-          "content": "thưởng thêm",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-04 10:12:40",
-            "status": true
-          },
-          "member": [
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
-        },
-        "task-8": {
-          "id": 8,
-          "content": "Trừ lương",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-11 13:38:33",
-            "status": null
-          },
-          "member": [
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
-        },
-        "task-9": {
-          "id": 9,
-          "content": "Coi như chưa tồn tại",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-10": {
-          "id": 10,
-          "content": "fff",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-11": {
-          "id": 11,
-          "content": "fasd",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": "ádfwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": 0.5031364860775587,
-              "tk": "Thái Dê",
-              "email": "lolquan2",
-              "color": "#F9D47A",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
-        },
-        "task-12": {
-          "id": 12,
-          "content": "ddd",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-13": {
-          "id": 13,
-          "content": "ád",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-14": {
-          "id": 14,
-          "content": "asd",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-15": {
-          "id": 15,
-          "content": "f",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-16": {
-          "id": 16,
-          "content": "ád",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": "108043588203461517800",
-              "tk": "Lê Ðức",
-              "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-              "email": "levanduc2052004@gmail.com",
-              "position": "Quản trị viên"
-            }
-          ],
-          "date": {
-            "time": "2023-07-11 13:38:03",
-            "status": true
-          }
-        },
-        "task-17": {
-          "id": 17,
-          "content": "kkkk",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-18": {
-          "id": 18,
-          "content": "ds",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-19": {
-          "id": 19,
-          "content": "f",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-20": {
-          "id": 20,
-          "content": "ád",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-11 10:09:56",
-            "status": null
-          }
-        },
-        "task-21": {
-          "id": 21,
-          "content": "a",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            },
-            {
-              "id": 0.5031364860775587,
-              "tk": "Thái Dê",
-              "email": "lolquan2",
-              "color": "#F9D47A",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
-        },
-        "task-22": {
-          "id": 22,
-          "content": "ddđ",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-11 13:44:16",
-            "status": null
-          }
-        },
-        "task-23": {
-          "id": 23,
-          "content": "ddd",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": "108043588203461517800",
-              "tk": "Lê Ðức",
-              "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-              "email": "levanduc2052004@gmail.com",
-              "position": "Quản trị viên"
-            }
-          ]
-        },
-        "task-24": {
-          "id": 24,
-          "content": "sad",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-13 17:25:18",
-            "status": true
-          }
-        },
-        "task-25": {
-          "id": 25,
-          "content": "ád",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ]
-        },
-        "task-26": {
-          "id": 26,
-          "content": "sdas",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-11 10:11:36",
-            "status": true
-          }
-        },
-        "task-27": {
-          "id": 27,
-          "content": "d",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-28": {
-          "id": 28,
-          "content": "            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere, deleniti praesentium dignissimos explicabo suscipit, perspiciatis quis consequuntur labore quia dolorum sapiente ratione? Praesentium nesciunt adipisci officiis illo totam, error omnis.\n",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": true,
-              "content": ""
-            }
-          ],
-          "member": [
-            {
-              "id": "108043588203461517800",
-              "tk": "Lê Ðức",
-              "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-              "email": "levanduc2052004@gmail.com",
-              "position": "Quản trị viên"
-            },
-            {
-              "id": 0.3779249820624686,
-              "tk": "Lê Đức",
-              "email": "lolquan1",
-              "color": "#0DE3BB",
-              "img": false,
-              "position": "Thành viên"
-            }
-          ],
-          "date": {
-            "time": "2023-07-19 22:55:34",
-            "status": true
-          }
-        },
-        "task-[object Object]": {
-          "id": 24,
-          "content": "sad",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ],
-          "date": {
-            "time": "2023-07-13 17:25:18",
-            "status": false
-          }
-        }
-      },
-      "columns": {
-        "column-0": {
-          "id": "column-0",
-          "title": "todo",
-          "taskIds": [
-            "task-6",
-            "task-24",
-            "task-7",
-            "task-8"
-          ]
-        },
-        "column-1": {
-          "id": "column-1",
-          "title": "doing",
-          "taskIds": [
-            "task-3",
-            "task-14",
-            "task-25",
-            "task-4",
-            "task-9",
-            "task-5"
-          ]
-        },
-        "column-2": {
-          "id": "column-2",
-          "title": "done",
-          "taskIds": [
-            "task-16",
-            "task-20",
-            "task-23",
-            "task-17",
-            "task-13",
-            "task-10"
-          ]
-        },
-        "column-3": {
-          "id": "column-3",
-          "title": "làm xong",
-          "taskIds": [
-            "task-28",
-            "task-2",
-            "task-11",
-            "task-27"
-          ]
-        },
-        "column-4": {
-          "id": "column-4",
-          "title": "chưa xong",
-          "taskIds": [
-            "task-15",
-            "task-18",
-            "task-19"
-          ]
-        },
-        "column-5": {
-          "id": "column-5",
-          "title": "Loại bỏ",
-          "taskIds": [
-            "task-1",
-            "task-12",
-            "task-26",
-            "task-22",
-            "task-0",
-            "task-21"
-          ]
-        }
-      },
-      "columnOrder": [
-        "column-2",
-        "column-5",
-        "column-3",
-        "column-1",
-        "column-0",
-        "column-4"
-      ]
-    },
-    {
-      "id": 0.6387828655696122,
-      "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
-      "name": "simple",
-      "member": [
-        {
-          "id": "108043588203461517800",
-          "tk": "Lê Ðức",
-          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-          "email": "levanduc2052004@gmail.com",
-          "position": "Quản trị viên"
-        }
-      ],
-      "tasks": {
-        "task-0": {
-          "id": 0,
-          "content": "đi chơi",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": true,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
-        },
-        "task-1": {
-          "id": 1,
-          "content": "đi học",
-          "tags": [
-            {
-              "id": 0,
-              "color": "#4bce97",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 1,
-              "color": "#e2b203",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 2,
-              "color": "#faa53d",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 3,
-              "color": "#f87462",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 4,
-              "color": "#9f8fef",
-              "status": false,
-              "content": ""
-            },
-            {
-              "id": 5,
-              "color": "#579dff",
-              "status": false,
-              "content": ""
-            }
-          ]
         }
       },
       "columns": {
@@ -1786,46 +254,21 @@
           "taskIds": [
             "task-1"
           ]
+        },
+        "column-2": {
+          "id": "column-2",
+          "title": "done",
+          "taskIds": [
+            "task-2",
+            "task-3"
+          ]
         }
       },
       "columnOrder": [
         "column-0",
-        "column-1"
+        "column-1",
+        "column-2"
       ]
-    },
-    {
-      "id": 0.26664130758158566,
-      "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
-      "name": "cc",
-      "member": [
-        {
-          "id": "108043588203461517800",
-          "tk": "Lê Ðức",
-          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-          "email": "levanduc2052004@gmail.com",
-          "position": "Quản trị viên"
-        }
-      ],
-      "tasks": {},
-      "columns": {},
-      "columnOrder": []
-    },
-    {
-      "id": 0.4882578797476096,
-      "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
-      "name": "no",
-      "member": [
-        {
-          "id": "108043588203461517800",
-          "tk": "Lê Ðức",
-          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-          "email": "levanduc2052004@gmail.com",
-          "position": "Quản trị viên"
-        }
-      ],
-      "tasks": {},
-      "columns": {},
-      "columnOrder": []
     }
   ]
 }

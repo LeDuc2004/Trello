@@ -17,7 +17,15 @@ type TaskProps = {
   namecolumn: string;
 };
 
-function Task({ task, index, namecolumn ,stores,setStores}: any) {
+function Task({
+  task,
+  index,
+  namecolumn,
+  stores,
+  setStores,
+  btnShare,
+  setDataTask,
+}: any) {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   function handleCheckBox() {
     let newStore = {
@@ -39,6 +47,10 @@ function Task({ task, index, namecolumn ,stores,setStores}: any) {
       dispatch(todoPage.actions.updateTable(newStore))
     );
   }
+  function handleTask(dataTask: any) {
+    setDataTask(dataTask);
+    btnShare("task");
+  }
   return (
     <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
       {(provided: DraggableProvided, snapshot) => (
@@ -48,6 +60,7 @@ function Task({ task, index, namecolumn ,stores,setStores}: any) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onClick={() => handleTask(task)}
         >
           <div className="task__content">{task.content}</div>
           <div className="task__20">{namecolumn}</div>
@@ -87,31 +100,37 @@ function Task({ task, index, namecolumn ,stores,setStores}: any) {
               : ""}
           </div>
           <div className="task__20">
-          {task.date?.time ? (
-                <div className="task-date">
-                  <div
-                    className={`date-iid ${task.date?.status ? "done" : task.date?.status == null ? "late":""}`}
-                  >
-                    <i className="fa-regular fa-clock"></i>
-                    <input
-                      checked={task.date?.status}
-                      className="input-check"
-                      onChange={handleCheckBox}
-                      type="checkbox"
-                    />
-                    <div onClick={()=>handleCheckBox()}  className="date-text">
-                      {task.date.time.split(" ")[0]}
-                    </div>
+            {task.date?.time ? (
+              <div className="task-date">
+                <div
+                  className={`date-iid ${
+                    task.date?.status
+                      ? "done"
+                      : task.date?.status == null
+                      ? "late"
+                      : ""
+                  }`}
+                >
+                  <i className="fa-regular fa-clock"></i>
+                  <input
+                    checked={task.date?.status}
+                    className="input-check"
+                    onChange={handleCheckBox}
+                    type="checkbox"
+                  />
+                  <div onClick={() => handleCheckBox()} className="date-text">
+                    {task.date.time.split(" ")[0]}
                   </div>
-                  {task.direction ? (
-                    <i className="fa-solid fa-align-right"></i>
-                  ) : (
-                    ""
-                  )}
                 </div>
-              ) : (
-                <div></div>
-              )}
+                {task.direction ? (
+                  <i className="fa-solid fa-align-right"></i>
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       )}

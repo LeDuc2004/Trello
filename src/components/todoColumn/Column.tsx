@@ -78,6 +78,10 @@ function Column({
                 { id: 5, color: "#579dff", status: false, content: "" },
 
               ],
+              date: {
+                time: "",
+                status: 0
+              }
             },
           },
           columns: {
@@ -218,6 +222,7 @@ function Column({
                       />
                     ))}
 
+                    {provided.placeholder}
                     <div className="options-add">
                       <div
                         className={`add__task ${
@@ -247,7 +252,6 @@ function Column({
                         </div>
                       </div>
                     </div>
-                    {provided.placeholder}
                   </div>
                 )}
               </Droppable>

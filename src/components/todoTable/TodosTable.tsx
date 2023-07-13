@@ -31,6 +31,8 @@ interface SideBarProps {
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
   stores: Item;
   setStores:any;
+  btnShare:any;
+  setDataTask:any
 }
 
 function TodosTable({
@@ -38,7 +40,8 @@ function TodosTable({
   setSlidebarToTodos,
   stores,
   setStores,
-
+  btnShare,
+  setDataTask
 }: SideBarProps) {
   const [toggle, setToggle] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -308,6 +311,8 @@ function TodosTable({
                     onclick={() => handleClickTextArea(columnId)}
                     stores={stores}
                     setStores={setStores}
+                    btnShare={btnShare}
+                    setDataTask={setDataTask}
                   />
                 );
               })}

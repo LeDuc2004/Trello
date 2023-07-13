@@ -66,8 +66,8 @@ body {
     div {
       font-size: 22px;
       white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     i {
@@ -319,15 +319,19 @@ body {
     margin-left: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 1s ease;
+    margin-right: 10px;
     i {
       margin: 0 5px;
     }
   }
-
   .todo-slideBar__filer:hover {
     background-color: #9facb1;
   }
+  .todo-slideBar__filer.curent {
+    background-color: white;
+    color: black;
+  }
+
 }
 
 .list-column {
@@ -454,13 +458,23 @@ body {
     padding: 0 20px;
     margin-top: 0;
     margin-bottom: 15px;
-    h3{
+    position: relative;
+    h3 {
       margin-top: 10px;
-      margin-bottom: 10px;margin-left: 10px;
+      margin-bottom: 10px;
+      margin-left: 10px;
     }
-    canvas{
+    canvas {
       width: 100% !important;
       height: calc(100% - 50px) !important;
+    }
+    span{
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: red;
+      bottom: 0;
     }
   }
 }
@@ -541,11 +555,11 @@ body {
         padding-left: 10px;
         margin-bottom: 5px;
 
-        div{
-          width: 100%;        
+        div {
+          width: 100%;
           white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
       .wrap_icon_plus {
@@ -555,6 +569,7 @@ body {
         margin-left: 3px;
         font-size: 14px;
         font-weight: 550;
+        margin-bottom: 5px;
       }
       .wrap_icon_plus:hover {
         background-color: #cdd3e2;
@@ -602,7 +617,7 @@ body {
       cursor: pointer;
       margin-right: 10px;
     }
-    .status_date{
+    .status_date {
       margin-left: 10px;
       background: #1f845a;
       font-size: 14px;
@@ -611,23 +626,39 @@ body {
       border-radius: 4px;
       color: white;
     }
-    .status_date.late{
+    .status_date.late {
       background: #ca3521;
     }
   }
 }
 .discription {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  .dcrt {
+    width: 100%;
+    height: max-content;
+    word-break: break-all;
+    cursor: pointer;
+    position: relative;
+    textarea {
+      width: 96%;
+      height: 90px;
 
+      background-color: white;
+      border: 2px solid gray;
+    }
+  }
   .text {
     font-size: 12px;
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 10px;
   }
-  .discription_input{
-    width: calc(100% - 15px);
+  .discription_input {
+    width: calc(100% - 28px);
+    height: 90px;
     border: 2.5px solid white;
-    height: 60px;
     outline: none;
     background-color: #091e420f;
     font-size: 13px;
@@ -637,24 +668,21 @@ body {
     padding-left: 10px;
     padding-top: 10px;
   }
-  .discription_input:focus{
+  .discription_input:focus {
     border: 2.5px solid #388bff;
     background-color: white;
-
   }
-
 }
 :where(.css-dev-only-do-not-override-14wwjjs).ant-picker {
   border-color: lightgray;
   box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
   border-inline-end-width: 1px;
   outline: 0;
-  width: 176px !important;
+  width: 182px !important;
   height: 36px !important;
 }
 :where(.css-dev-only-do-not-override-14wwjjs).ant-picker:focus {
   border-color: #4096ff;
-
 }
 @media only screen and (max-width: 1500px) {
   .todo_chart {
@@ -670,18 +698,20 @@ body {
     flex-wrap: nowrap;
     padding: 15px;
     flex-direction: column;
-    div{
-      h3{
+    div {
+      h3 {
         margin-left: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
       }
       width: 95%;
       min-height: 100%;
-      box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.2509803922), 0px 0px 1px rgba(9, 30, 66, 0.3098039216), 0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
+      box-shadow: 0px 1px 1px #091e4240,
+        0px 0px 1px #091e424f,
+        0 3px 5px #091e4233, 0 0 1px #091e424f;
       margin: 15px 10px;
       border-radius: 10px;
       overflow: hidden;
     }
-}
+  }
 }

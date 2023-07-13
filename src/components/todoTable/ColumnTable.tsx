@@ -15,7 +15,18 @@ type TaskItem = {
   content: string;
 };
 
-function ColumnTable({ column, tasks, index, columnId, active, onclick ,setStores,stores }: any) {
+function ColumnTable({
+  column,
+  tasks,
+  index,
+  columnId,
+  active,
+  onclick,
+  setStores,
+  stores,
+  btnShare,
+  setDataTask,
+}: any) {
   const [toggle, setToggle] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [rows, setRows] = useState(3);
@@ -87,10 +98,12 @@ function ColumnTable({ column, tasks, index, columnId, active, onclick ,setStore
                         namecolumn={column.title}
                         setStores={setStores}
                         stores={stores}
+                        btnShare={btnShare}
+                        setDataTask={setDataTask}
                       />
                     ))}
                     {provided.placeholder}
-                    <div style={{paddingBottom:"1px", width:"100%"}}></div>
+                    <div style={{ paddingBottom: "1px", width: "100%" }}></div>
                   </div>
                 )}
               </Droppable>

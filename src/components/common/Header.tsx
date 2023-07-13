@@ -9,7 +9,7 @@ import { fetchTable } from "../../store/createTable";
 
 function Header({ sign }: any) {
   const [tblVisible, setTblVisible] = useState<boolean>(false);
-  const [color , setColor] = useState<string>("")
+  const [color, setColor] = useState<string>("");
   const [user, setUser] = useState<boolean>(false);
   const [info, setInfor] = useState<string>("");
   const [iduser, setIduser] = useState<string>("");
@@ -72,15 +72,14 @@ function Header({ sign }: any) {
           }
         })
         .then((data) => {
-          
           dispatch(fetchTable(data.user.id));
           setUser(true);
           setInfor(data.user.tk);
           setIduser(data.user.id);
           if (data.user.img) {
             setImg(data.user.img);
-          }else{
-             setColor(data.user.color)
+          } else {
+            setColor(data.user.color);
           }
         });
     }
@@ -101,25 +100,21 @@ function Header({ sign }: any) {
     }
   }, [fontBackground]);
 
-  // Hàm lấy chữ cái đầu của tên 
-  function layChuCaiDau(ten:string) {
-    if (ten && ten.trim() !== '') {
-
+  // Hàm lấy chữ cái đầu của tên
+  function layChuCaiDau(ten: string) {
+    if (ten && ten.trim() !== "") {
       const tenDaXuLi = ten.split(" ");
       const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
-      
+
       const chuCaiDau = tenDaXuLi[0].charAt(0);
       if (tenDaXuLi.length > 1) {
-        
         return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
-      }else{
-        return chuCaiDau.toUpperCase()
-
+      } else {
+        return chuCaiDau.toUpperCase();
       }
     }
-    return '';
+    return "";
   }
-
   function handlecreatTable() {
     if (localStorage.getItem("token") != null) {
       fetch("http://localhost:5000/user", {
@@ -131,11 +126,10 @@ function Header({ sign }: any) {
       })
         .then((res) => {
           return res.json();
-
         })
         .then((data1) => {
-          let data = data1.user
-          
+          let data = data1.user;
+
           if (textNameTable) {
             let idTable = Math.random();
             let TableToUser = {
@@ -147,13 +141,16 @@ function Header({ sign }: any) {
               id: idTable,
               background: defaultImg,
               name: textNameTable,
-              member: [{
-                id: data.id,
-                tk: data.tk,
-                img: data.img,
-                email:data.email,
-                position: "Quản trị viên"
-              }],
+              member: [
+                {
+                  id: data.id,
+                  tk: data.tk,
+                  img: data.img,
+                  email: data.email,
+                  position: "Quản trị viên",
+                },
+              ],
+              tagsname: ["", "", "", "", "", ""],
               tasks: {},
               columns: {},
               columnOrder: [],
@@ -162,23 +159,25 @@ function Header({ sign }: any) {
               id: idTable,
               background: defaultImg,
               name: textNameTable,
-              member: [{
-                id: data.id,
-                tk: data.tk,
-                email:data.email,
-                color: data.color,
-                position: "Quản trị viên"
-              }],
+              member: [
+                {
+                  id: data.id,
+                  tk: data.tk,
+                  email: data.email,
+                  color: data.color,
+                  position: "Quản trị viên",
+                },
+              ],
+              tagsname: ["", "", "", "", "", ""],
               tasks: {},
               columns: {},
               columnOrder: [],
             };
-            
+
             if (data.img) {
               postData("/dataTable", TableToDataBase1);
             } else {
               postData("/dataTable", TableToDataBase2);
-
             }
             fetch("http://localhost:5000/addTable", {
               method: "POST",
@@ -192,12 +191,14 @@ function Header({ sign }: any) {
                 dispatch(createTable.actions.addTable(TableToUser));
                 setToggleCreateTable(false);
                 setTextNameTable("");
+                setTimeout(() => {
+                  window.location.href = `/todo/${idTable}`;
+                }, 0);
               }
             });
           }
         });
     }
-
   }
   function handleTable() {
     setToggleCreateTable(!toggleCreateTable);
@@ -226,7 +227,7 @@ function Header({ sign }: any) {
   }
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
-      handlecreatTable()
+      handlecreatTable();
     }
   };
   return (
@@ -382,7 +383,9 @@ function Header({ sign }: any) {
             style={{ position: "relative" }}
           >
             {imguser === "" ? (
-              <div style={{backgroundColor:`${color}`}} className="imguser">{layChuCaiDau(info)}</div>
+              <div style={{ backgroundColor: `${color}` }} className="imguser">
+                {layChuCaiDau(info)}
+              </div>
             ) : (
               <img id="imguser" src={imguser} alt="" />
             )}
@@ -391,7 +394,12 @@ function Header({ sign }: any) {
               <div className="wrap__user">
                 <div className="wrap__img">
                   {imguser === "" ? (
-                    <div style={{backgroundColor:`${color}`}} className="imguser">{layChuCaiDau(info)}</div>
+                    <div
+                      style={{ backgroundColor: `${color}` }}
+                      className="imguser"
+                    >
+                      {layChuCaiDau(info)}
+                    </div>
                   ) : (
                     <img id="imguser" src={imguser} alt="" />
                   )}

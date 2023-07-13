@@ -59,6 +59,7 @@ function Todos({
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
   const [position, setPosition] = useState<string>("");
+  const [toggleFilter, setToggleFiler] = useState<boolean>(false)
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   // <scroll-x>
   const { id } = useParams();
@@ -349,7 +350,7 @@ function Todos({
           </div>
 
           <div className="todo-slideBar__right">
-            <div className="todo-slideBar__filer">
+            <div onClick={()=>setToggleFiler(!toggleFilter)} className={`todo-slideBar__filer ${toggleFilter ? "curent":""}`}>
               <i className="fa-solid fa-arrow-down-short-wide"></i>
               <div>Lọc</div>
             </div>
@@ -487,6 +488,8 @@ function Todos({
             setSlidebarToTodos={setSlidebarToTodos}
             setStores={setStores}
             stores={stores}
+            btnShare={btnShare}
+            setDataTask={setDataTask}
           />
         ) : (
           ""

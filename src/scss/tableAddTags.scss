@@ -3,29 +3,51 @@
   align-items: center;
   margin-top: 5px;
   border-radius: 3px;
-  input {
+  .type_check {
     margin-right: 10px;
     width: 15px;
     aspect-ratio: 1/1;
     cursor: pointer;
   }
-  .color_content {
+  .color_content1 {
     box-sizing: border-box;
-    width: 198px;
-    height: 32px;
     border-radius: 5px;
-    overflow: hidden;
     display: flex;
     align-items: center;
     font-size: 16px;
     padding-left: 10px;
     padding-bottom: 5px;
     color: white;
+    position: relative;
+    .color_content {
+      box-sizing: border-box;
+      width: 198px;
+      height: 32px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      padding-left: 10px;
+      padding-bottom: 5px;
+      color: white;
+      position: relative;
+    }
 
     div {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    input {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: calc(100% - 21px);
+      height: calc(100% - 7px);
+      border-radius: 5px;
+      outline: none;
+      border: 2.5px solid #388bff;
+      padding-left: 7px;
     }
   }
   .color_content:hover {

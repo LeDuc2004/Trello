@@ -107,6 +107,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                     position: "Quản trị viên",
                   },
                 ],
+                tagsname: ["", "", "", "", "", ""],
                 tasks: {},
                 columns: {},
                 columnOrder: [],
@@ -124,6 +125,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                     position: "Quản trị viên",
                   },
                 ],
+                tagsname: ["", "", "", "", "", ""],
                 tasks: {},
                 columns: {},
                 columnOrder: [],
@@ -145,6 +147,9 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                   dispatch(createTable.actions.addTable(TableToUser));
                   setToggleCreateTable(false);
                   setTextNameTable("");
+                  setTimeout(() => {
+                    window.location.href = `/todo/${idTable}`;
+                  }, 0);
                 }
               });
             }
@@ -162,7 +167,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
   }
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
-      handlecreatTable()
+      handlecreatTable();
     }
   };
   return (

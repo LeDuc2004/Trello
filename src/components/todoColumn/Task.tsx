@@ -80,7 +80,10 @@ function Task({
     setToggleTextArea(true);
     setTimeout(() => {
       if (refTextArea.current) {
-        refTextArea.current.select();
+        const input = refTextArea.current;
+        input.focus();
+        input.selectionStart = input.value.length;
+        input.selectionEnd = input.value.length;
       }
     }, 0);
   }
@@ -119,26 +122,26 @@ function Task({
   function handleCheckBox() {
     const currentTime = new Date().getTime();
     const taskTime = new Date(task.date.time).getTime();
-    const statusDate = stores.tasks[`task-${task.id}`].date.status
-      let newStore = {
-        ...stores,
-        tasks: {
-          ...stores.tasks,
-          [`task-${task.id}`]: {
-            ...stores.tasks[`task-${task.id}`],
-            date: {
-              ...stores.tasks[`task-${task.id}`].date,
-              status:taskTime > currentTime ? !statusDate : statusDate ? null : true ,
-            },
+    const statusDate = stores.tasks[`task-${task.id}`].date.status;
+    let newStore = {
+      ...stores,
+      tasks: {
+        ...stores.tasks,
+        [`task-${task.id}`]: {
+          ...stores.tasks[`task-${task.id}`],
+          date: {
+            ...stores.tasks[`task-${task.id}`].date,
+            status:
+              taskTime > currentTime ? !statusDate : statusDate ? null : true,
           },
         },
-      };
+      },
+    };
 
-      setStores(newStore);
-      putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
-        dispatch(todoPage.actions.updateTable(newStore))
-      );
-    
+    setStores(newStore);
+    putData(`/dataTable/${newStore.id}`, newStore).then((res) =>
+      dispatch(todoPage.actions.updateTable(newStore))
+    );
   }
 
   return (
@@ -192,37 +195,42 @@ function Task({
               {task.content}
             </div>
             <div className="task-bottom">
-              {task.date?.time ? (
-                <div className="task-date">
-                  <div
-                    className={`date-iid ${
-                      task.date?.status
-                        ? "done"
-                        : task.date?.status == null
-                        ? "late"
-                        : ""
-                    }`}
-                  >
-                    <i className="fa-regular fa-clock"></i>
-                    <input
-                      checked={task.date?.status}
-                      className="input-check"
-                      onChange={handleCheckBox}
-                      type="checkbox"
-                    />
-                    <div onClick={() => handleCheckBox()} className="date-text">
-                      {task.date.time.split(" ")[0]}
+              <div className="task-date">
+                {task.date?.time ? (
+                  <div className="task-date">
+                    <div
+                      className={`date-iid ${
+                        task.date?.status
+                          ? "done"
+                          : task.date?.status == null
+                          ? "late"
+                          : ""
+                      }`}
+                    >
+                      <i className="fa-regular fa-clock"></i>
+                      <input
+                        checked={task.date?.status}
+                        className="input-check"
+                        onChange={handleCheckBox}
+                        type="checkbox"
+                      />
+                      <div
+                        onClick={() => handleCheckBox()}
+                        className="date-text"
+                      >
+                        {task.date.time.split(" ")[0]}
+                      </div>
                     </div>
                   </div>
-                  {task.direction ? (
-                    <i className="fa-solid fa-align-right"></i>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              ) : (
-                <div></div>
-              )}
+                ) : (
+                  ""
+                )}
+                {task.description ? (
+                  <i className="fa-solid fa-align-right"></i>
+                ) : (
+                  ""
+                )}
+              </div>
 
               <div className="task-member">
                 {task?.member?.length > 0
