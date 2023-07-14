@@ -31,7 +31,9 @@ function Task({
   stores,
   btnShare,
   setDataTask,
-}: TaskProps) {
+  toggleTags,
+  setToggleTags
+}: any) {
   const [stateTask, setStateTask] = useState(task);
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
@@ -76,6 +78,7 @@ function Task({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
+  
   function handleUpdateTask() {
     setToggleTextArea(true);
     setTimeout(() => {
@@ -143,6 +146,7 @@ function Task({
       dispatch(todoPage.actions.updateTable(newStore))
     );
   }
+  
 
   return (
     <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
@@ -174,14 +178,15 @@ function Task({
               <i className="fa-solid fa-pen-to-square"></i>
             </div>
             {task?.tags ? (
-              <div className="task-top">
-                {task?.tags.map((item: any) =>
+              <div className={`task-top `}>
+                {task?.tags.map((item: any,index:number) =>
                   item.status ? (
                     <div
                       key={item.id}
                       style={{ backgroundColor: `${item.color}` }}
-                      className="tag-top"
-                    ></div>
+                      className={`tag-top ${toggleTags ? "content" : ""}`}
+                      onClick={()=>setToggleTags(!toggleTags)}
+                    >{toggleTags ? stores.tagsname[index] :""}</div>
                   ) : (
                     ""
                   )

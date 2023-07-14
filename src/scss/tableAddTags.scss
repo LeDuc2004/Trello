@@ -5,7 +5,7 @@
   border-radius: 3px;
   .type_check {
     margin-right: 10px;
-    width: 15px;
+    min-width: 15px;
     aspect-ratio: 1/1;
     cursor: pointer;
   }
@@ -16,9 +16,10 @@
     align-items: center;
     font-size: 16px;
     padding-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 2.5px;
     color: white;
     position: relative;
+    padding-top: 2.5px;
     .color_content {
       box-sizing: border-box;
       width: 198px;

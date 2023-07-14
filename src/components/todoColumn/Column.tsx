@@ -26,6 +26,8 @@ function Column({
   onclick,
   btnShare,
   setDataTask,
+  toggleTags,
+  setToggleTags
 }: any) {
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleColumn, setToggleColumn] = useState<boolean>(false);
@@ -222,6 +224,8 @@ function Column({
                         index={indextask}
                         btnShare={btnShare}
                         setDataTask={setDataTask}
+                        toggleTags={toggleTags}
+                        setToggleTags={setToggleTags}
                       />
                     ))}
 

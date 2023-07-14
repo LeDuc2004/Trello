@@ -9,6 +9,7 @@ import { fetchTableLess, todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
 import TodosTable from "../todoTable/TodosTable";
 import BarChartTaskOfMember, {BarChart, BarChartDate, BarChartTags } from "../todoChart/Chart";
+import FilterTable from "../FilterTable";
 type Task = {
   id: number;
   content: string;
@@ -61,6 +62,8 @@ function Todos({
   const [position, setPosition] = useState<string>("");
   const [toggleFilter, setToggleFiler] = useState<boolean>(false)
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const [toggleTags , setToggleTags] = useState<boolean>(false)
+
   // <scroll-x>
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
@@ -354,6 +357,7 @@ function Todos({
               <i className="fa-solid fa-arrow-down-short-wide"></i>
               <div>Lọc</div>
             </div>
+            <FilterTable stores={table} setToggleFiler={setToggleFiler} toggleFilter={toggleFilter}></FilterTable>
             <span></span>
             <div className="list__member">
               {stores.member.map((item: any) => (
@@ -433,6 +437,8 @@ function Todos({
                           onclick={() => handleClickTextArea(columnId)}
                           btnShare={btnShare}
                           setDataTask={setDataTask}
+                          toggleTags={toggleTags}
+                          setToggleTags={setToggleTags}
                         />
                       );
                     })}

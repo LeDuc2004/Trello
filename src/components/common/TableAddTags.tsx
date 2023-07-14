@@ -52,7 +52,7 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!refTags.current?.contains(event.target as Node)) {
-        setCurent(-1)
+        setCurent(-1);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -123,7 +123,8 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
       let refTags = document.querySelectorAll(".input-tags");
 
       if (refTags) {
-        refTags.forEach((item: any) => {
+        refTags.forEach((item: any, index:number) => {
+          item.value = stores.tagsname[index]
           item.focus();
           item.selectionStart = item.value.length;
           item.selectionEnd = item.value.length;
@@ -133,7 +134,7 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
   }
   function handleNameTag(event: any) {
     if (event.key == "Enter") {
-      setCurent(-1)
+      setCurent(-1);
       let newTagsName = [...stores.tagsname];
       newTagsName[curent] = textTag;
 
@@ -187,7 +188,6 @@ function TableAddTags({ hide, setTableAddTags, stores, idTask }: Boolean) {
                       <div>{stores.tagsname[index]}</div>
                     </div>
                     <input
-                      value={stores.tagsname[index]}
                       ref={refTags}
                       onKeyDown={handleNameTag}
                       onChange={(e) => setTextTag(e.target.value)}

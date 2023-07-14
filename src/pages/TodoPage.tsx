@@ -13,6 +13,7 @@ import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
 import React from "react";
 import DatePick from "../components/DatePicker";
+import { productRemain } from "../selector/listTask";
 
 type Task = {
   id: number;
@@ -86,7 +87,9 @@ function TodoPage() {
     };
   });
 
-  const table = useSelector((state: RootState) => state.table);
+  const table = useSelector(productRemain);
+  
+
   const User = useSelector((state: ListUser) => state.listTable.users).filter(
     (user) => user.email === searchEmail
   );
