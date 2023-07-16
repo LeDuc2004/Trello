@@ -27,8 +27,10 @@ function Column({
   btnShare,
   setDataTask,
   toggleTags,
-  setToggleTags
+  setToggleTags,
+  listHide
 }: any) {
+  
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleColumn, setToggleColumn] = useState<boolean>(false);
   const [value, setValue] = useState("");
@@ -218,6 +220,7 @@ function Column({
                     {tasks.map((task: TaskItem, indextask: number) => (
                       <Task
                         setStores={setStores}
+                        listHide={listHide}
                         stores={stores}
                         key={indextask}
                         task={task}

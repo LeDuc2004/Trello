@@ -87,7 +87,10 @@ function TodoPage() {
     };
   });
 
-  const table = useSelector(productRemain);
+  const table1 = useSelector(productRemain);
+  const table = table1.stores
+
+  
   
 
   const User = useSelector((state: ListUser) => state.listTable.users).filter(
@@ -542,6 +545,7 @@ function TodoPage() {
             slidebarToTodos={slidebarToTodos}
             setSlidebarToTodos={setSlidebarToTodos}
             setDataTask={setDataTask}
+            listHide={table1.reset}
           ></Todos>
         ) : (
           ""

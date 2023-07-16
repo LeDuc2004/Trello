@@ -8,7 +8,11 @@ import { getData, putData } from "../../services";
 import { fetchTableLess, todoPage } from "../../store/todoPage";
 import { useParams } from "react-router-dom";
 import TodosTable from "../todoTable/TodosTable";
-import BarChartTaskOfMember, {BarChart, BarChartDate, BarChartTags } from "../todoChart/Chart";
+import BarChartTaskOfMember, {
+  BarChart,
+  BarChartDate,
+  BarChartTags,
+} from "../todoChart/Chart";
 import FilterTable from "../FilterTable";
 type Task = {
   id: number;
@@ -39,6 +43,7 @@ interface SideBarProps {
   table: Item;
   btnShare: any;
   setDataTask: any;
+  listHide: any;
 }
 
 function Todos({
@@ -47,6 +52,7 @@ function Todos({
   table,
   btnShare,
   setDataTask,
+  listHide,
 }: SideBarProps) {
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
@@ -60,14 +66,14 @@ function Todos({
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
   const [position, setPosition] = useState<string>("");
-  const [toggleFilter, setToggleFiler] = useState<boolean>(false)
+  const [toggleFilter, setToggleFiler] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const [toggleTags , setToggleTags] = useState<boolean>(false)
+  const [toggleTags, setToggleTags] = useState<boolean>(false);
+  const refTableFilter = useRef<any>(null);
 
   // <scroll-x>
   const { id } = useParams();
   const textareaRef = useRef<any>(null);
-
 
   useEffect(() => {
     setStores(table);
@@ -180,9 +186,10 @@ function Todos({
           columnOrder: newColumnOrder,
         };
         setStores(newState);
-        putData(`/dataTable/${id}`, newState)
-        .then(res=>dispatch(todoPage.actions.updateTable(newState)))
-        
+        putData(`/dataTable/${id}`, newState).then((res) =>
+          dispatch(todoPage.actions.updateTable(newState))
+        );
+
         return;
       }
 
@@ -206,8 +213,9 @@ function Todos({
           },
         };
         setStores(newState);
-        putData(`/dataTable/${id}`, newState)
-        .then(res=>dispatch(todoPage.actions.updateTable(newState)))
+        putData(`/dataTable/${id}`, newState).then((res) =>
+          dispatch(todoPage.actions.updateTable(newState))
+        );
 
         return;
       }
@@ -235,10 +243,9 @@ function Todos({
         },
       };
       setStores(newState);
-      putData(`/dataTable/${id}`, newState)
-      .then(res=>dispatch(todoPage.actions.updateTable(newState)))
-
-
+      putData(`/dataTable/${id}`, newState).then((res) =>
+        dispatch(todoPage.actions.updateTable(newState))
+      );
     }
   };
 
@@ -300,7 +307,23 @@ function Todos({
   function removeScreen(number: number) {
     setTypeTable(`table${number}`);
   }
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!refTableFilter.current?.contains(event.target as Node)) {
+        setToggleFiler(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+  function deleteListHide() {
+    setToggleFiler(false)
+    dispatch(todoPage.actions.refreshListHide(""))
+  }
   return (
     <>
       <div
@@ -353,11 +376,28 @@ function Todos({
           </div>
 
           <div className="todo-slideBar__right">
-            <div onClick={()=>setToggleFiler(!toggleFilter)} className={`todo-slideBar__filer ${toggleFilter ? "curent":""}`}>
-              <i className="fa-solid fa-arrow-down-short-wide"></i>
-              <div>Lọc</div>
+            <div
+              ref={refTableFilter}
+              
+              className={`todo-slideBar__filer ${toggleFilter || listHide.length > 0? "curent" : ""}`}
+            >
+              <FilterTable
+                stores={table}
+                setToggleFiler={setToggleFiler}
+                toggleFilter={toggleFilter}
+              ></FilterTable>
+              <div data-filter={listHide.includes("nodata") ? 0 : listHide.length} className={`iloc ${listHide.length > 0 ? "hide":""}`} onClick={() => setToggleFiler(!toggleFilter)}>
+                <i className="fa-solid fa-arrow-down-short-wide"></i>
+                <div>Lọc</div>
+              </div>
+
+              <i
+              onClick={()=>deleteListHide()}
+                className={`fa-solid fa-xmark ${
+                  listHide.length > 0 ? "" : "hide"
+                }`}
+              ></i>
             </div>
-            <FilterTable stores={table} setToggleFiler={setToggleFiler} toggleFilter={toggleFilter}></FilterTable>
             <span></span>
             <div className="list__member">
               {stores.member.map((item: any) => (
@@ -426,6 +466,7 @@ function Todos({
                       );
                       return (
                         <Column
+                          listHide={listHide}
                           setStores={setStores}
                           stores={stores}
                           column={column}
@@ -503,7 +544,7 @@ function Todos({
         {typeTable === "table3" ? (
           <div className="todo_chart">
             <BarChart columns={stores.columns}></BarChart>
-            <BarChartDate tasks={stores.tasks} ></BarChartDate>
+            <BarChartDate tasks={stores.tasks}></BarChartDate>
             <BarChartTaskOfMember tasks={Object.values(stores.tasks)} />
             <BarChartTags tasks={stores.tasks}></BarChartTags>
           </div>

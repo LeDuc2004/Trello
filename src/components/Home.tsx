@@ -111,6 +111,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 tasks: {},
                 columns: {},
                 columnOrder: [],
+              listHide:[]
+
               };
               let TableToDataBase2 = {
                 id: idTable,
@@ -129,6 +131,8 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 tasks: {},
                 columns: {},
                 columnOrder: [],
+              listHide:[]
+
               };
               if (data.img) {
                 postData("/dataTable", TableToDataBase1);

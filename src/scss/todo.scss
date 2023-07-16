@@ -320,9 +320,39 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
-    i {
+    .fa-arrow-down-short-wide{
       margin: 0 5px;
     }
+    .fa-xmark{
+      margin-left: 15px;
+      margin-bottom: -2px;
+    }
+    .fa-xmark.hide{
+      display: none;
+    }
+    .iloc{
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .iloc.hide::after{
+      content: attr(data-filter);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+      background-color: tomato;
+      top: -13px;
+      left: -17px;
+      line-height: 1;
+      font-weight: 600;
+      color: white;
+    }
+
+    
   }
   .todo-slideBar__filer:hover {
     background-color: #9facb1;

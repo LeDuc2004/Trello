@@ -8,7 +8,7 @@ export const todoPage = createSlice({
     member: [],
     tags: [],
     date: [],
-    
+    listHide:[]
   },
   reducers: {
     updateTable: (state: any, action: { payload: any }) => {
@@ -53,6 +53,13 @@ export const todoPage = createSlice({
         state.date.push(action.payload);
       }
     },
+    refreshListHide: (state: any, action: { payload: any }) => {
+       state.listHide = []
+       state.tags = []
+       state.member = []
+       state.date = []
+    },
+
   },
   extraReducers: (builder) => {
     builder

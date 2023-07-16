@@ -32,7 +32,8 @@ function Task({
   btnShare,
   setDataTask,
   toggleTags,
-  setToggleTags
+  setToggleTags,
+  listHide
 }: any) {
   const [stateTask, setStateTask] = useState(task);
   const [textArea, setTextArea] = useState<string>(task.content);
@@ -147,14 +148,13 @@ function Task({
     );
   }
   
-
   return (
     <Draggable key={task.id} draggableId={`task-${task.id}`} index={index}>
       {(provided: DraggableProvided, snapshot) => (
         <div
           draggable={false}
           style={{ wordWrap: "break-word" }}
-          className={`task-todo ${snapshot.isDragging ? "moune" : ""}`}
+          className={`task-todo ${ listHide.length > 0 ? listHide.includes(task.id) ? "" : "hide" : ""} ${snapshot.isDragging ? "moune" : ""}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

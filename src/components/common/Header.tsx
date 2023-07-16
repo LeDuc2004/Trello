@@ -154,6 +154,8 @@ function Header({ sign }: any) {
               tasks: {},
               columns: {},
               columnOrder: [],
+              listHide:[]
+
             };
             let TableToDataBase2 = {
               id: idTable,
@@ -172,6 +174,7 @@ function Header({ sign }: any) {
               tasks: {},
               columns: {},
               columnOrder: [],
+              listHide:[]
             };
 
             if (data.img) {

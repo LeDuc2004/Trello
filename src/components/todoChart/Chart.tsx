@@ -417,7 +417,6 @@ export function BarChartDate({ tasks }: any) {
   }));
 
   const colorLabels: string[] = ["#22a06b", "#d97008", "#e34935", "#dcdfe4"];
-console.log(Result);
 
   const data = {
     labels: Result.map((item) => item.name), // Danh sách các color
