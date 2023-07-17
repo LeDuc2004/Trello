@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { io, Socket } from "socket.io-client";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
+import { getData, putData } from "../../services";
 
 import Column from "./Column";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { getData, putData } from "../../services";
 import { todoPage } from "../../store/todoPage";
 import TodosTable from "../todoTable/TodosTable";
 import BarChartTaskOfMember, {
@@ -77,7 +78,7 @@ function Todos({
   const [position, setPosition] = useState<string>("");
   const [toggleFilter, setToggleFiler] = useState<boolean>(false);
   const [toggleTags, setToggleTags] = useState<boolean>(false);
-  
+
   const socket: Socket = io("http://localhost:5000");
 
   // <scroll-x>
@@ -90,7 +91,7 @@ function Todos({
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      setStores(data.newState)
+      setStores(data.newState);
     });
   }, [socket]);
 

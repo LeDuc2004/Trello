@@ -1,5 +1,4 @@
-import Header from "../common/Header";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./signin.scss";
 import jwt_decode from "jwt-decode";
 
@@ -7,6 +6,8 @@ import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { ShowSuccessToast } from "../../utils/toast";
+
+import getRandomColor from "../../utils/ramdomColor";
 
 function Signin() {
   const [spanName, setSpanName] = useState(".");
@@ -19,15 +20,8 @@ function Signin() {
   const [cfmk, setCfmk] = useState("");
   const [togle, setTogle] = useState(true);
   const [common, setCommon] = useState(true);
+
   const API_DATA_BASE = process.env.REACT_APP_API_BASE;
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
   useEffect(() => {
     setCommon(localStorage.getItem("idd"));
   }, [localStorage.getItem("idd")]);
