@@ -1,0 +1,136 @@
+.slie-bar {
+  position: relative;
+  width: 260px;
+  background-color: hsla(198, 39.4%, 33%, 0.9);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  height: calc(100vh - 50px);
+  transition: all 0.2s ease;
+}
+
+.slie-bar.fullscreen {
+  width: 11px;
+  overflow: hidden;
+  background-color: rgba(33, 27, 27, 0.162);
+  color: transparent;
+  pointer-events: none;
+}
+
+.chevron {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1607843137);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  color: #335368;
+  z-index: 2;
+}
+.chevron .fa-circle-chevron-left {
+  font-size: 30px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.chevron .fa-circle-chevron-left.fullscreen {
+  display: none;
+}
+.chevron i:hover {
+  color: white;
+}
+
+.slie-bar__table {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: white;
+  padding: 10px 0;
+  padding-left: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: calc(100% - 15px);
+}
+.slie-bar__table i {
+  margin-right: 10px;
+}
+
+.slie-bar__table:hover {
+  background-color: #6b8494;
+}
+
+.slie-bar__member {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 10px 0;
+  padding-left: 15px;
+  cursor: pointer;
+}
+.slie-bar__member .slie-bar__member-left {
+  display: flex;
+  align-items: center;
+}
+.slie-bar__member .slie-bar__member-left i {
+  font-size: 15px;
+  margin-right: 10px;
+}
+.slie-bar__member .fa-plus {
+  margin: 0 10px;
+}
+
+.slie-bar__member:hover {
+  background-color: #6b8494;
+}
+
+.slie-bar__yourtable {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-top: 10px;
+}
+.slie-bar__yourtable .yourtb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.slie-bar__yourtable .yourtb span {
+  font-weight: 550;
+  margin-left: 10px;
+  font-size: large;
+}
+.slie-bar__yourtable .yourtb .fa-plus {
+  margin: 0 10px;
+  cursor: pointer;
+}
+.slie-bar__yourtable .list-yourtable {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+}
+.slie-bar__yourtable .list-yourtable a {
+  color: white;
+}
+.slie-bar__yourtable .list-yourtable .table {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+  padding-left: 15px;
+  width: calc(100% - 15px);
+  overflow: hidden;
+}
+.slie-bar__yourtable .list-yourtable .table img {
+  width: 30px;
+  height: 25px;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+.slie-bar__yourtable .list-yourtable .table:hover {
+  background-color: #5e7483;
+}
+
+.curent {
+  background-color: #639395;
+}/*# sourceMappingURL=silebar.css.map */

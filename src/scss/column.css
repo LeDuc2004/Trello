@@ -1,0 +1,253 @@
+@charset "UTF-8";
+body {
+  background-color: white;
+  color: #44546f;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 12px;
+}
+
+p {
+  font-size: 12px;
+}
+
+.sun {
+  width: 50px;
+  height: 50px;
+  background-color: tomato;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.drop {
+  width: 100%;
+  height: 300px;
+  border: 2px solid black;
+}
+
+.column-todo {
+  box-shadow: 0px 1px 1px rgba(23, 103, 240, 0.2509803922), 0px 0px 1px rgba(9, 30, 66, 0.3098039216);
+  position: relative;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  max-height: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  margin: 0 6px;
+  vertical-align: top;
+  width: 302px;
+  border-radius: 12px;
+  background-color: #f1f2f4;
+  padding: 10px;
+  overflow: hidden;
+}
+.column-todo .fsfev {
+  position: absolute;
+  top: 9px;
+  right: 2px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.column-todo .update-clumn {
+  position: relative;
+  width: 100%;
+}
+.column-todo .update-clumn .input__column {
+  font-weight: 500;
+  position: absolute;
+  top: -5px;
+  left: -8px;
+  font-size: 17px;
+}
+.column-todo .update-clumn .input__column.hide {
+  display: none;
+}
+.column-todo .column-todo__name {
+  font-weight: 550;
+  margin-left: 10px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+.column-todo .list__columns {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: -moz-max-content;
+  height: max-content;
+  max-height: calc(100vh - 235px);
+  width: 100%;
+  padding-right: 5px;
+  position: relative;
+}
+.column-todo .list__columnsTable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  padding-right: 5px;
+  position: relative;
+}
+.column-todo ::-webkit-scrollbar {
+  width: 10px;
+}
+.column-todo ::-webkit-scrollbar-thumb {
+  background: rgb(186, 183, 183);
+  border-radius: 5px;
+}
+.column-todo ::-webkit-scrollbar-track {
+  background-color: rgba(211, 211, 211, 0.712);
+  border-radius: 5px;
+}
+.column-todo .input_in_column {
+  width: calc(100% - 40px);
+  border: 2.5px solid #388bff;
+  height: 30px;
+  outline: none;
+  background-color: white;
+  padding-left: 10px;
+  font-size: 16px;
+  border-radius: 2px;
+  margin: 0 10px;
+}
+.column-todo .input_in_column::-moz-placeholder {
+  color: rgb(112, 111, 111); /* Màu chữ mong muốn */
+}
+.column-todo .input_in_column::placeholder {
+  color: rgb(112, 111, 111); /* Màu chữ mong muốn */
+}
+.column-todo .options {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  margin-top: 10px;
+}
+.column-todo .options .btn-add {
+  color: white;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background-color: #0c66e4;
+  cursor: pointer;
+}
+.column-todo .options img {
+  width: 15px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.column-todo .options.task {
+  margin: 5px 0;
+}
+
+.btn-tranfer {
+  z-index: 0;
+  top: 0;
+  position: absolute;
+  width: 301px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2392156863);
+  margin-left: 7px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+.btn-tranfer .icon-plus {
+  font-size: 27px;
+  margin: 0 5px;
+  margin-top: -6px;
+  margin-left: 10px;
+}
+
+.btn-tranfer:hover {
+  background-color: rgba(166, 197, 226, 0.5019607843);
+}
+
+.column-todo.addtodo {
+  padding: 10px 0;
+}
+
+.column-todo.hide {
+  height: 0;
+  padding: 0;
+}
+
+.btn-tranfer.visible {
+  z-index: -1;
+}
+
+.options-add {
+  width: 99%;
+  height: -moz-max-content;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  flex-direction: column;
+  bottom: 0;
+}
+.options-add div {
+  cursor: pointer;
+}
+.options-add .icon-plus {
+  font-size: 27px;
+  margin: 0 5px;
+  margin-top: -6px;
+  cursor: pointer;
+}
+.options-add .add__task {
+  width: 100%;
+}
+.options-add .add__task textarea {
+  width: calc(100% - 8px);
+  resize: none;
+  overflow: hidden;
+  height: auto;
+  min-height: 70px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-wrap: break-word;
+  padding-top: 10px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0px 1px 1px rgba(9, 30, 66, 0.2509803922), 0px 0px 1px rgba(9, 30, 66, 0.3098039216), 0 1px 1px rgba(9, 30, 66, 0.2509803922), 0 0 1px rgba(9, 30, 66, 0.3098039216);
+}
+.options-add .add__task.hide {
+  display: none;
+}
+.options-add .btn__add_task {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  padding: 2px 0;
+}
+.options-add .btn__add_task.hide {
+  display: none;
+}
+.options-add .btn__add_task:hover {
+  background-color: #d1d4db;
+  border-radius: 8px;
+}/*# sourceMappingURL=column.css.map */

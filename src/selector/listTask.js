@@ -97,23 +97,6 @@ export const productRemain = createSelector(
 console.log(membersAccept);
       // lọc những task trùng nhau
       let reset = [...new Set(listResolve)];
-      console.log(reset);
-      // for (const key in listColumns) {
-      //   let newTaskIds = listColumns[key].taskIds.filter((taskid) => {
-      //     if (reset.includes(taskid)) {
-      //       return taskid;
-      //     }
-      //   });
-
-      //   listColumns = {
-      //     ...listColumns,
-      //     [key]: {
-      //       ...listColumns[key],
-      //       taskIds: newTaskIds,
-      //     },
-      //   };
-      // }
-
       // dữ liệu sau khi lọc xong
       
       let objStore ={

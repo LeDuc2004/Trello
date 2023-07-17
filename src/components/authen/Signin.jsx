@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { ShowSuccessToast } from "../../utils/toast";
 
 function Signin() {
   const [spanName, setSpanName] = useState(".");
@@ -40,7 +41,7 @@ function Signin() {
       handleSubmitdk(user);
     } else {
       let response = jwt_decode(responseStart.credential);
-      
+
       const user = {
         email: response.email,
         name: response.name,
@@ -54,9 +55,9 @@ function Signin() {
 
   let useAuthen = {
     id: Math.random(),
-    tk:name,
-    email:tk,
-    color:getRandomColor(),
+    tk: name,
+    email: tk,
+    color: getRandomColor(),
     mk: mk,
     token: [],
     idTable: [],
@@ -105,11 +106,11 @@ function Signin() {
               });
           }
         }
-      }else{
+      } else {
         let user = {
           id: fborgg.id,
           tk: fborgg.name,
-          color:getRandomColor(),
+          color: getRandomColor(),
           token: [],
           idTable: [],
         };
@@ -206,7 +207,10 @@ function Signin() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(useAuthen),
-            }).then(res => idd(2))
+            }).then((res) => {
+              idd(2);
+              ShowSuccessToast("Đăng ký thành công")
+            });
           }
         } else if (flag == true) {
           setSpantk("Tài khoản tồn tại");
@@ -332,7 +336,7 @@ function Signin() {
   }
 
   function idd(id) {
-    setName("")
+    setName("");
     setMk("");
     setTk("");
     setCfmk("");

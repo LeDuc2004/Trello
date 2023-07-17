@@ -14,6 +14,7 @@ import TableAddTags from "../components/common/TableAddTags";
 import React from "react";
 import DatePick from "../components/DatePicker";
 import { productRemain } from "../selector/listTask";
+import { ShowSuccessToast } from "../utils/toast";
 
 type Task = {
   id: number;
@@ -33,7 +34,7 @@ interface Item {
   tasks: any;
   columns: { [columnId: string]: Column };
   columnOrder: string[];
-  tagsname:any
+  tagsname: any;
 }
 interface User {
   id: string | number;
@@ -67,7 +68,9 @@ function TodoPage() {
   const [dataTask, setDataTask] = useState<any>({ id: 0 });
   const [textDescription, setTextDescription] = useState<string>("");
   const [toggleDesciption, setToggleDescription] = useState<boolean>(true);
-  const refTextArea = useRef<any>(null)
+  const refTextArea = useRef<any>(null);
+  const [toggleTableDeleteTask, setToggleTableDeleteTask] =
+    useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   useEffect(() => {
@@ -78,7 +81,7 @@ function TodoPage() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!refTextArea.current?.contains(event.target as Node)) {
-          setToggleDescription(true)
+        setToggleDescription(true);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -88,10 +91,7 @@ function TodoPage() {
   });
 
   const table1 = useSelector(productRemain);
-  const table = table1.stores
-
-  
-  
+  const table = table1.stores;
 
   const User = useSelector((state: ListUser) => state.listTable.users).filter(
     (user) => user.email === searchEmail
@@ -99,6 +99,8 @@ function TodoPage() {
 
   function hideWrapTb() {
     setToggle(false);
+    setToggleTableDeleteTask(false)
+
   }
   function layChuCaiDau(ten: string) {
     if (ten && ten.trim() !== "") {
@@ -119,6 +121,7 @@ function TodoPage() {
     setSearchEmail(user[0].tk);
     setIdUser(user[0].id);
   }
+
   function handleAddMember() {
     getData(`/users/${idUser}`).then((data) => {
       let idTable1 = {
@@ -150,6 +153,7 @@ function TodoPage() {
       });
     });
   }
+
   function handleTableMember() {
     var div = document.getElementById("your-div");
     var div1 = document.getElementById("wrap__tb__share");
@@ -160,6 +164,7 @@ function TodoPage() {
     }
     setTableAddMember(true);
   }
+
   function handleTableTags() {
     var div = document.getElementById("your-div");
     var div1 = document.getElementById("wrap__tb__share");
@@ -170,6 +175,7 @@ function TodoPage() {
     }
     setTableAddTags(true);
   }
+
   function handleCheckBox() {
     const currentTime = new Date().getTime();
     const taskTime = new Date(
@@ -196,9 +202,10 @@ function TodoPage() {
       dispatch(todoPage.actions.updateTable(newStore))
     );
   }
+
   function handleKeyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === "Enter") {
-      setToggleDescription(true)
+      setToggleDescription(true);
       let newStore = {
         ...table.Table,
         tasks: {
@@ -216,7 +223,7 @@ function TodoPage() {
     }
   }
   function visibleInputColumn() {
-    setToggleDescription(false)
+    setToggleDescription(false);
     setTimeout(() => {
       if (refTextArea.current) {
         refTextArea.current.focus();
@@ -224,6 +231,35 @@ function TodoPage() {
         refTextArea.current.selectionEnd = refTextArea.current.value.length;
       }
     }, 0);
+  }
+  function deleteTask(idTask: number) {
+    let listColumns = table.Table.columns;
+    for (const key in listColumns) {
+      let newTaskIds = listColumns[key].taskIds.filter((taskid: any) => {
+        if (![`task-${idTask}`].includes(taskid)) {
+          return taskid;
+        }
+      });
+
+      listColumns = {
+        ...listColumns,
+        [key]: {
+          ...listColumns[key],
+          taskIds: newTaskIds,
+        },
+      };
+    }
+    let newStore = {
+      ...table.Table,
+      columns:{
+        ...listColumns
+      }
+    }
+    dispatch(todoPage.actions.updateTable(newStore))
+    setToggleTableDeleteTask(false)
+    setToggle(false)
+    putData(`/dataTable/${newStore.id}`, newStore)
+    ShowSuccessToast("Xóa thành công !")
   }
   return (
     <>
@@ -373,7 +409,7 @@ function TodoPage() {
                     <div className="text">Nhãn</div>
                     <div className="list_tag">
                       {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map(
-                        (item: any, index:number) =>
+                        (item: any, index: number) =>
                           item.status ? (
                             <div
                               key={item.id}
@@ -446,9 +482,14 @@ function TodoPage() {
               <div className="discription">
                 <div className="text">Mô tả</div>
                 {table.Table?.tasks[`task-${dataTask?.id}`]?.description ? (
-                  <div  className="dcrt">
+                  <div className="dcrt">
                     {toggleDesciption ? (
-                     <div onClick={()=>visibleInputColumn()}>{table.Table?.tasks[`task-${dataTask?.id}`]?.description}</div> 
+                      <div onClick={() => visibleInputColumn()}>
+                        {
+                          table.Table?.tasks[`task-${dataTask?.id}`]
+                            ?.description
+                        }
+                      </div>
                     ) : (
                       <textarea
                         ref={refTextArea}
@@ -511,15 +552,40 @@ function TodoPage() {
               </div>
             </div>
 
-            <div className="btn_add clock_date">
-              <i className="fa-regular fa-clock"></i>
-              <div>Ngày</div>
+            <div
+              onClick={() => setToggleTableDeleteTask(!toggleTableDeleteTask)}
+              className="fsftc"
+            >
+              <i className="fa-solid fa-trash-can"></i>
             </div>
+            {toggleTableDeleteTask ? (
+              <div className="tb_delete">
+                <div className="text">
+                  Bạn có muốn xóa Task "{dataTask.content}" không ?
+                </div>
+                <div className="wrap_btn">
+                  <button
+                    onClick={() => setToggleTableDeleteTask(false)}
+                    className="out"
+                  >
+                    Thoát
+                  </button>
+                  <button
+                    onClick={() => deleteTask(dataTask.id)}
+                    className="comform"
+                  >
+                    Xác nhận
+                  </button>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
 
-      <Header></Header>
+      <Header/>
 
       <div
         id="your-div"

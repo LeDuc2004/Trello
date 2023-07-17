@@ -6,8 +6,8 @@ import { putData } from "../services";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { todoPage } from "../store/todoPage";
-const dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
 
+const dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
 
 const onOk = (
   value: DatePickerProps["value"] | RangePickerProps["value"]
@@ -19,11 +19,11 @@ function DatePick({date, stores, idTask}: any) {
   function onChange(value: any, dateString: [string, string] | string) {
     const currentTime = new Date().getTime();
     const taskTime = new Date(dateString.toString()).getTime();
-    let newStore = {
+    let newStore = { 
         ...stores,
         tasks: {
           ...stores.tasks,
-          [`task-${idTask}`]: {
+          [`task-${idTask}`]: {   
             ...stores.tasks[`task-${idTask}`],
             date:{
               time:dateString,

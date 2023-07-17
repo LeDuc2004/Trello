@@ -44,7 +44,7 @@ export const todoPage = createSlice({
       const existingIndex = state.date.findIndex(
         (item: any) => item === action.payload
       );
-
+  
       if (existingIndex !== -1) {
         state.date = state.date.filter(
           (item: any) => item !== action.payload
