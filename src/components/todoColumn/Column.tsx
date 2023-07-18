@@ -9,7 +9,6 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 import { todoPage } from "../../store/todoPage";
 import { scrollToBottom } from "../../utils/scrollBottom";
-import socket from "../../utils/socket";
 type TaskItem = {
   id: number;
   content: string;
@@ -29,16 +28,18 @@ function Column({
   setToggleTags,
   listHide,
 }: any) {
-  const [toggle, setToggle] = useState<boolean>(false);
-  const [toggleColumn, setToggleColumn] = useState<boolean>(false);
-  const [value, setValue] = useState("");
-  const [valueInput, setValueInput] = useState(column.title);
-
-  const [rows, setRows] = useState(3);
-  const { id } = useParams();
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const textColumn = useRef<any>(null);
+
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggleColumn, setToggleColumn] = useState<boolean>(false);
+  const [value, setValue] = useState<string>("");
+  const [valueInput, setValueInput] = useState(column.title);
+  const [rows, setRows] = useState<number>(3);
+
+  const { id } = useParams();
 
   // click outside add task
   useEffect(() => {

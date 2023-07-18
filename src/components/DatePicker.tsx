@@ -1,10 +1,10 @@
-import React from "react";
-import { DatePicker, Space } from "antd";
-import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
+import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
+import { DatePicker, Space } from "antd";
 import { putData } from "../services";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
+
 import { todoPage } from "../store/todoPage";
 
 const dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
@@ -39,7 +39,6 @@ function DatePick({date, stores, idTask}: any) {
   
 
   if (date?.time) {
-    
     return (
       <Space direction="vertical" size={12}>
         <DatePicker

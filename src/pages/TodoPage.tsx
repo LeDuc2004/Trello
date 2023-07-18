@@ -1,7 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Header from "../components/common/Header";
-import SileBar from "../components/todoColumn/SileBar";
-import Todos from "../components/todoColumn/Todos";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { fetchTableLess, todoPage } from "../store/todoPage";
@@ -9,33 +6,19 @@ import { useParams } from "react-router-dom";
 import { SelectPosition, SelectPosition1 } from "../components/Select";
 import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
+import { productRemain } from "../selector/listTask";
+import { ShowSuccessToast } from "../utils/toast";
+
+import Header from "../components/common/Header";
+import SileBar from "../components/todoColumn/SileBar";
+import Todos from "../components/todoColumn/Todos";
 import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
 import React from "react";
 import DatePick from "../components/DatePicker";
-import { productRemain } from "../selector/listTask";
-import { ShowSuccessToast } from "../utils/toast";
+import layChuCaiDau from "../utils/laychucaidau";
 
-type Task = {
-  id: number;
-  content: string;
-};
 
-type Column = {
-  id: string;
-  title: string;
-  taskIds: string[];
-};
-interface Item {
-  id: number | string;
-  background: string;
-  member: any;
-  name: string;
-  tasks: any;
-  columns: { [columnId: string]: Column };
-  columnOrder: string[];
-  tagsname: any;
-}
 interface User {
   id: string | number;
   tk: string;
@@ -43,40 +26,34 @@ interface User {
   email: string;
   img: any;
 }
-interface RootState {
-  table: {
-    status: string;
-    Table: Item;
-  };
-}
 interface ListUser {
   listTable: {
     status: string;
     users: User[];
   };
 }
-function TodoPage() {
+function TodoPage({slidebarToTodos,setSlidebarToTodos}:any) {
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const { id } = useParams();
+  
+  
+  const refTextArea = useRef<any>(null);
+
   const [toggle, setToggle] = useState<boolean | string>(false);
-  const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
   const [searchEmail, setSearchEmail] = useState<string>("");
   const [position, setPosition] = useState<string>("Thành viên");
   const [idUser, setIdUser] = useState<number | string>("");
   const [tableAddMember, setTableAddMember] = useState<boolean>(false);
   const [tableAddTags, setTableAddTags] = useState<boolean>(false);
-  const [textTime, setTextTime] = useState<string>("table0");
   const [dataTask, setDataTask] = useState<any>({ id: 0 });
   const [textDescription, setTextDescription] = useState<string>("");
   const [toggleDesciption, setToggleDescription] = useState<boolean>(true);
-  const refTextArea = useRef<any>(null);
-  const [toggleTableDeleteTask, setToggleTableDeleteTask] =
-    useState<boolean>(false);
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const [toggleTableDeleteTask, setToggleTableDeleteTask] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchTableLess(id));
     dispatch(fetchUsers());
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -102,21 +79,6 @@ function TodoPage() {
     setToggleTableDeleteTask(false)
 
   }
-  function layChuCaiDau(ten: string) {
-    if (ten && ten.trim() !== "") {
-      const tenDaXuLi = ten.split(" ");
-      const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
-
-      const chuCaiDau = tenDaXuLi[0].charAt(0);
-      if (tenDaXuLi.length > 1) {
-        return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
-      } else {
-        return chuCaiDau.toUpperCase();
-      }
-    }
-    return "";
-  }
-
   function handleIdUser(user: any) {
     setSearchEmail(user[0].tk);
     setIdUser(user[0].id);
@@ -261,6 +223,7 @@ function TodoPage() {
     putData(`/dataTable/${newStore.id}`, newStore)
     ShowSuccessToast("Xóa thành công !")
   }
+  
   return (
     <>
       <div
@@ -585,9 +548,7 @@ function TodoPage() {
         </div>
       </div>
 
-      <Header/>
-
-      <div
+      {/* <div
         id="your-div"
         style={{
           display: "flex",
@@ -598,12 +559,7 @@ function TodoPage() {
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${table.Table.background})`,
         }}
-      >
-        <SileBar
-          slidebarToTodos={slidebarToTodos}
-          setSlidebarToTodos={setSlidebarToTodos}
-        ></SileBar>
-
+      > */}
         {table.status === "idle" ? (
           <Todos
             btnShare={setToggle}
@@ -616,7 +572,7 @@ function TodoPage() {
         ) : (
           ""
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 }

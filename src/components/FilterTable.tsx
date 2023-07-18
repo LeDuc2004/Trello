@@ -1,9 +1,10 @@
-import { useRef, useEffect } from "react";
-import "../scss/filterTable.scss";
 import layChuCaiDau from "../utils/laychucaidau";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
+
 import { todoPage } from "../store/todoPage";
+
+import "../scss/filterTable.scss";
 
 function FilterTable({  toggleFilter, stores }: any) {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();

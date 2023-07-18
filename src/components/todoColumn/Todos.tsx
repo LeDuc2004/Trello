@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, RefObject } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
@@ -18,6 +18,7 @@ import BarChartTaskOfMember, {
 import FilterTable from "../FilterTable";
 
 import "../../scss/todo.scss";
+import { SocketContext } from "../../context/SocketContext";
 
 type Task = {
   id: number;
@@ -70,16 +71,17 @@ function Todos({
   const [stores, setStores] = useState<Item>(table);
   const [toggle, setToggle] = useState<boolean>(true);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [startX, setStartX] = useState<number>(0);
+  const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
   const [position, setPosition] = useState<string>("");
   const [toggleFilter, setToggleFiler] = useState<boolean>(false);
   const [toggleTags, setToggleTags] = useState<boolean>(false);
-
-  const socket: Socket = io("http://localhost:5000");
+  
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
+  const socket: Socket = useContext(SocketContext)
 
   // <scroll-x>
   const { id } = useParams();
@@ -100,7 +102,7 @@ function Todos({
   useEffect(() => {
     setStores(table);
     if (localStorage.getItem("token") != null) {
-      fetch("http://localhost:5000/user", {
+      fetch(API_DATA_NODEJS+"/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -354,6 +356,13 @@ function Todos({
     <>
       <div
         className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
+        style={{
+          maxHeight: "calc(100vh - 50px)",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(${table.background})`,
+        }}
         ref={elementRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

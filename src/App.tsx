@@ -1,31 +1,34 @@
-import { Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  Link,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import TodoPage from "./pages/TodoPage";
 import Signin from "./components/authen/Signin";
 import { useEffect } from "react";
-import Home from "./pages/Home";
+import HomeBD from "./pages/HomeBD";
+import Home from "./components/Home";
 function App() {
-  useEffect(()=>{
-   if (window.location.pathname == "/") {
-    window.location.href = "/listTable"
-   }
-  },[])
-    let arr = [
-      { path: "/home", element: <Home></Home> },
-      { path: "/listTable", element: <HomePage></HomePage> },
-      { path: "/todo/:id", element: <TodoPage></TodoPage> },
-      { path: "/signin", element:<Signin></Signin>},
+  const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
 
-    ];
-  return (
-    <>
-      <Routes>
-        {arr.map((item, index) => (
-          <Route key={item.path} path={item.path} element={item.element} />
-        ))}
-      </Routes>
-    </>
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route index element={<HomeBD  />} />
+        <Route path="home" element={<HomePage slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos}/>}>
+          <Route index element={<Home slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos}></Home>}/>
+          <Route path="table/:id" element={<TodoPage slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos} ></TodoPage>}/>
+        </Route>
+        <Route path="signin" element={<Signin></Signin>} />
+      </Route>
+    )
   );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

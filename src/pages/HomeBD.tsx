@@ -1,6 +1,6 @@
 import Header from "../components/common/Header";
 
-function Home() {
+function HomeBD() {
   return (
     <>
       <Header sign="not"></Header>
@@ -18,4 +18,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeBD;

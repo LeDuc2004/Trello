@@ -1,10 +1,13 @@
-import "../../scss/tableAddTags.scss";
-import "../../scss/tableAddMember.scss";
 import { useRef, useEffect, useState } from "react";
 import { putData } from "../../services";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
+
 import { todoPage } from "../../store/todoPage";
+
+import "../../scss/tableAddTags.scss";
+import "../../scss/tableAddMember.scss";
+
 interface Boolean {
   hide: boolean;
   setTableAddTags: any;

@@ -1,28 +1,16 @@
-import "../../scss/task.scss";
+import React, { useState, useEffect ,useRef} from "react";
+import layChuCaiDau from "../../utils/laychucaidau";
 import {
-  Droppable,
-  DroppableProvided,
   Draggable,
   DraggableProvided,
-  DraggingStyle,
-  NotDraggingStyle,
 } from "react-beautiful-dnd";
-import React, { CSSProperties, useState, useEffect } from "react";
-import { useRef } from "react";
-import { getData, putData } from "../../services";
-import { useDispatch, useSelector } from "react-redux";
+import { putData } from "../../services";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { todoPage } from "../../store/todoPage";
-import layChuCaiDau from "../../utils/laychucaidau";
 
-type TaskProps = {
-  task: any;
-  index: number;
-  setStores: any;
-  stores: any;
-  btnShare: any;
-  setDataTask: any;
-};
+import { todoPage } from "../../store/todoPage";
+
+import "../../scss/task.scss";
 
 function Task({
   task,
@@ -35,11 +23,12 @@ function Task({
   setToggleTags,
   listHide
 }: any) {
-  const [stateTask, setStateTask] = useState(task);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const refTextArea = useRef<any>(null);
+
   const [textArea, setTextArea] = useState<string>(task.content);
   const [toggleTextArea, setToggleTextArea] = useState<boolean>(false);
-  const refTextArea = useRef<any>(null);
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   useEffect(() => {
     if (task?.date?.time) {

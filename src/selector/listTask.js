@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
+
 const table = (state) => state.table;
 const members = (state) => state.table.member;
 const tags = (state) => state.table.tags;
 const date = (state) => state.table.date;
-
 
 export const productRemain = createSelector(
   [table, members, tags, date],
@@ -11,7 +11,6 @@ export const productRemain = createSelector(
     let stores = product;
     let listResolve = [];
     let listTasks = stores.Table.tasks;
-    let listColumns = stores.Table.columns;
     if (
       membersAccept.length > 0 ||
       tagsAccept.length > 0 ||
@@ -59,7 +58,6 @@ export const productRemain = createSelector(
         }
       }
       // lọc date
-      console.log(dateAccept);
       if (dateAccept.length > 0) {
         for (const key in listTasks) {
           if (dateAccept.includes("nodate")) {
@@ -68,14 +66,12 @@ export const productRemain = createSelector(
             }
           }
           if (dateAccept.includes("late")) {
-
             if (listTasks[key].date.status == null) {
               listResolve.push(listTasks[key].id);
             }
           }
           if (dateAccept.includes("doing")) {
             if (listTasks[key].date.status === false) {
-              console.log(listTasks[key].date.status);
               listResolve.push(listTasks[key].id);
             }
           }
@@ -84,31 +80,20 @@ export const productRemain = createSelector(
               listResolve.push(listTasks[key].id);
             }
           }
-          
-          
-          // listTasks[key].date.forEach((tag) => {
-          //   if (tagsAccept.includes(tag.id) && tag.status) {
-          //     console.log(tag.id);
-          //     listResolve.push(listTasks[key].id);
-          //   }
-          // });
         }
       }
-console.log(membersAccept);
-      // lọc những task trùng nhau
       let reset = [...new Set(listResolve)];
-      // dữ liệu sau khi lọc xong
-      
-      let objStore ={
+      let objStore = {
         stores,
-        reset: reset.length == 0 ? ["nodata"] : reset
-      }
-      return  objStore;
+        reset: reset.length == 0 ? ["nodata"] : reset,
+      };
+      console.log(reset);
+      return objStore;
     } else {
-      let objStore ={
+      let objStore = {
         stores,
-        reset:[]
-      }
+        reset: [],
+      };
       return objStore;
     }
   }

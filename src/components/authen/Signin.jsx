@@ -20,7 +20,7 @@ function Signin() {
   const [cfmk, setCfmk] = useState("");
   const [togle, setTogle] = useState(true);
   const [common, setCommon] = useState(true);
-
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
   const API_DATA_BASE = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     setCommon(localStorage.getItem("idd"));
@@ -214,7 +214,7 @@ function Signin() {
   }
   function handleSubmitdn(fborgg) {
     if (fborgg) {
-      fetch("http://localhost:5000/login", {
+      fetch(API_DATA_NODEJS+"/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -246,7 +246,7 @@ function Signin() {
               if (res.status == 200) {
                 localStorage.setItem("token", data1.accessToken);
 
-                window.location.href = "/";
+                window.location.href = "/home";
               }
             });
           }
@@ -274,7 +274,7 @@ function Signin() {
               } else {
                 setSpanmk(".");
                 if (mk == data[i].mk) {
-                  fetch("http://localhost:5000/login", {
+                  fetch(API_DATA_NODEJS+"/login", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
@@ -302,7 +302,7 @@ function Signin() {
                           if (res.status == 200) {
                             localStorage.setItem("token", data1.accessToken);
                             setSpantk(".");
-                            window.location.href = "/";
+                            window.location.href = "/home";
                           }
                         });
                       }
@@ -348,7 +348,7 @@ function Signin() {
         height: "100vh",
       }}
     >
-      <a href="http://localhost:3001/home" className="logo-sign">
+      <a href="/" className="logo-sign">
         <div>
           <img
             src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/trello-header-logos/167dc7b9900a5b241b15ba21f8037cf8/trello-logo-blue.svg"

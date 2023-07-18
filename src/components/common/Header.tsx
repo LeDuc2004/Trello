@@ -2,10 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { createTable } from "../../store/createTable";
-
-import "../../scss/header.scss";
 import { postData } from "../../services";
 import { fetchTable } from "../../store/createTable";
+
+import "../../scss/header.scss";
 
 function Header({ sign }: any) {
   const [tblVisible, setTblVisible] = useState<boolean>(false);
@@ -24,6 +24,9 @@ function Header({ sign }: any) {
   const refCreateTable = useRef<any>(null);
   const refInput = useRef<any>(null);
   const refTbl = useRef<any>(null);
+  
+  const API_WEBSITE = process.env.REACT_APP_API_WEBSITE
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   useEffect(() => {
@@ -57,7 +60,7 @@ function Header({ sign }: any) {
   // iduser
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
-      fetch("http://localhost:5000/user", {
+      fetch(API_DATA_NODEJS+"/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +120,7 @@ function Header({ sign }: any) {
   }
   function handlecreatTable() {
     if (localStorage.getItem("token") != null) {
-      fetch("http://localhost:5000/user", {
+      fetch(API_DATA_NODEJS+"/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +185,7 @@ function Header({ sign }: any) {
             } else {
               postData("/dataTable", TableToDataBase2);
             }
-            fetch("http://localhost:5000/addTable", {
+            fetch(API_DATA_NODEJS+"/addTable", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -195,7 +198,7 @@ function Header({ sign }: any) {
                 setToggleCreateTable(false);
                 setTextNameTable("");
                 setTimeout(() => {
-                  window.location.href = `/todo/${idTable}`;
+                  window.location.href = `http://localhost:3001/home/table/${idTable}`;
                 }, 0);
               }
             });
@@ -213,7 +216,7 @@ function Header({ sign }: any) {
   }
   function logout() {
     let token = localStorage.getItem("token");
-    fetch(`http://localhost:5000/logout`, {
+    fetch(API_DATA_NODEJS+`/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
