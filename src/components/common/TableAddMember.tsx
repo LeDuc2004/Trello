@@ -118,7 +118,7 @@ function TableAddMember({
           placeholder="Tìm kiếm các thành viên"
         />
 
-        <div className="text">Thành viên bảng</div>
+        <div  className="text">Thành viên bảng</div>
         {member?.map((item: any) => (
           <div key={item.id} onClick={() => addMember(item)} className="member">
             {item.img ? (

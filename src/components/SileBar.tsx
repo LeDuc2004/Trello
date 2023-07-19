@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import React from 'react'
-
-import "../../scss/silebar.scss";
 import { Link, useParams } from "react-router-dom";
+
+import "../scss/silebar.scss";
+import layChuCaiDau from "../utils/laychucaidau";
 interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,12 +20,12 @@ interface RootState {
   };
 }
 function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
-  const {id} = useParams()
+  const [toggle , setToggle] = useState<boolean>(false)
+  const { id } = useParams();
   const listTable = useSelector((state: RootState) => state.listTable);
-  // const listMember = useSelector((state: any) => state.table.Table)
-  // console.log(listMember);
-  
-  
+  const listMember = useSelector((state: any) => state.table.Table.member);
+  console.log(listMember);
+
   return (
     <div className={`slie-bar ${slidebarToTodos ? "fullscreen" : ""}`}>
       <div className="chevron">
@@ -41,21 +41,37 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
         <div>Bảng</div>
       </a>
 
-      <div className="slie-bar__member">
+      <div onClick={()=>setToggle(!toggle)} className="slie-bar__member ">
         <div className="slie-bar__member-left">
           <i className="fa-regular fa-user"></i>
           <div>Thành viên</div>
         </div>
-        <i className="fa-solid fa-plus"></i>
       </div>
-      <div className="list-manager">
+      <div style={{height:`${listMember?.length * 52}px`}}  className={`Table_addmember sidebar ${toggle ? "" :"close"}`}>
 
+      {listMember?.map((item: any) => (
+          <div key={item.id}  className="member">
+            {item.img ? (
+              <img src={item.img} alt="" />
+            ) : (
+              <div
+                style={{ backgroundColor: `${item.color}` }}
+                className="wrap_img"
+              >
+                {layChuCaiDau(item.tk)}
+              </div>
+            )}
+
+            <div className="info">{item.tk} ({item.email})</div>
+          </div>
+        ))}
       </div>
+
+      <div className="list-manager"></div>
 
       <div className="slie-bar__yourtable">
         <div className="yourtb">
           <span>Các bảng của bạn</span>
-          <i className="fa-solid fa-plus"></i>
         </div>
 
         <div className="list-yourtable">
@@ -71,7 +87,7 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                     <span>{item.name}</span>
                   </Link>
                 );
-              })
+              })  
             : ""}
         </div>
       </div>

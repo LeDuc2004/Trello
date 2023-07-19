@@ -1,7 +1,6 @@
 import {
   createBrowserRouter,
   Route,
-  Link,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
@@ -9,12 +8,11 @@ import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import TodoPage from "./pages/TodoPage";
 import Signin from "./components/authen/Signin";
-import { useEffect } from "react";
 import HomeBD from "./pages/HomeBD";
 import Home from "./components/Home";
 function App() {
+  
   const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
-
 
   const router = createBrowserRouter(
     createRoutesFromElements(
