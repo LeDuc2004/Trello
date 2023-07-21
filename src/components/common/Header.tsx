@@ -5,7 +5,7 @@ import { createTable } from "../../store/createTable";
 import { postData } from "../../services";
 import { fetchTable } from "../../store/createTable";
 
-import "../../scss/header.scss";
+import "../../index.scss";
 
 function Header({ sign }: any) {
   const [tblVisible, setTblVisible] = useState<boolean>(false);

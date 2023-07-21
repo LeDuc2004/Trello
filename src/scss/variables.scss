@@ -1,31 +1,21 @@
-$primary-color: white;
-$font-color: #44546f;
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
 
-$font-sizes: (
-  small: 12px,
-  medium: 16px,
-  large: 20px,
-  x-large: 24px,
-);
-@mixin font-size($size) {
-  font-size: map-get($font-sizes, $size);
-}
-h1 {
-  @include font-size(x-large);
-}
 
-h2 {
-  @include font-size(large);
-}
+$small-font-size: 12px;
+$medium-font-size: 16px;
+$large-font-size: 20px;
 
-h3 {
-  @include font-size(medium);
-}
+$border-radius: 4px;
 
-h4 {
-  @include font-size(small);
-}
+$box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
-p {
-  @include font-size(small);
-}
+$z-index-overlay: 9999;
+
+$transition-duration: 0.3s;

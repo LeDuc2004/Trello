@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import layChuCaiDau from "../utils/laychucaidau";
 
 import "../scss/silebar.scss";
-import layChuCaiDau from "../utils/laychucaidau";
+
 interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,8 +48,9 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
           <div>Thành viên</div>
         </div>
       </div>
-      <div style={{height:`${listMember?.length * 52}px`}}  className={`Table_addmember sidebar ${toggle ? "" :"close"}`}>
+      <div  className={`Table_addmember sidebar ${toggle ? "open" :""}`}>
 
+        <div className="thep">
       {listMember?.map((item: any) => (
           <div key={item.id}  className="member">
             {item.img ? (
@@ -65,6 +67,7 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
             <div className="info">{item.tk} ({item.email})</div>
           </div>
         ))}
+        </div>
       </div>
 
       <div className="list-manager"></div>
