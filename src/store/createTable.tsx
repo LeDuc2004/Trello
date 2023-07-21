@@ -28,9 +28,7 @@ export const createTable = createSlice({
   },
 });
 
-export const fetchTable = createAsyncThunk("table/fetchTable", async (iduser:string | number) => {
-
-  
+export const fetchTable = createAsyncThunk("table/fetchTable", async (iduser: string | number) => {
   const res = await fetch(`http://localhost:3000/users/${iduser}`, {
     method: "GET",
     headers: {
@@ -41,9 +39,8 @@ export const fetchTable = createAsyncThunk("table/fetchTable", async (iduser:str
   let data = await res.json();
   return data.idTable;
 });
-export const fetchUsers = createAsyncThunk("table/fetchUsers", async () => {
 
-  
+export const fetchUsers = createAsyncThunk("table/fetchUsers", async () => {
   const res = await fetch(`http://localhost:3000/users`, {
     method: "GET",
     headers: {
@@ -54,4 +51,3 @@ export const fetchUsers = createAsyncThunk("table/fetchUsers", async () => {
   let data = await res.json();
   return data;
 });
-

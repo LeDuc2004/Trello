@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { SocketContext } from "../../context/SocketContext";
 
 import { getData, putData } from "../../services";
 
@@ -18,7 +19,6 @@ import BarChartTaskOfMember, {
 import FilterTable from "../FilterTable";
 
 import "../../scss/todo.scss";
-import { SocketContext } from "../../context/SocketContext";
 
 type Task = {
   id: number;
@@ -350,7 +350,7 @@ function Todos({
   });
   function deleteListHide() {
     setToggleFiler(false);
-    dispatch(todoPage.actions.refreshListHide(""));
+    dispatch(todoPage.actions.refreshListHide());
   }
   return (
     <>

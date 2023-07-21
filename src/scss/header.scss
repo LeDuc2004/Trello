@@ -13,7 +13,7 @@
   color: white;
   background-color: hsl(198deg 39.4% 33% / 100%);
   ::placeholder {
-    color: white; /* Màu chữ mong muốn */
+    color: white;
   }
 }
 
@@ -103,10 +103,11 @@
     margin-top: -1px;
   }
 }
-.imguser{
+.imguser {
   font-size: 20px;
   width: 41px;
-  height: 41px;border-radius: 50%;
+  height: 41px;
+  border-radius: 50%;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -131,7 +132,7 @@
   will-change: top, left;
   top: 62px;
   left: 430px;
-  color: $font-color;
+  // color: $font-color;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
@@ -333,7 +334,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      div{
+      div {
         margin: 0;
         color: white;
       }
@@ -357,21 +358,19 @@
   }
 }
 .menu__user.hide {
- display: none;
+  display: none;
 }
-.btn__dkdn{
+.btn__dkdn {
   display: flex;
   cursor: pointer;
-  .btn__dn{
+  .btn__dn {
     padding: 10px 15px;
     background-color: #0065ff;
     border-radius: 5px;
     margin-right: 10px;
     color: white;
   }
-  .btn__dn:hover{
+  .btn__dn:hover {
     background-color: #1b68dc;
-
   }
-
 }

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-const SocketContext = createContext();
+const SocketContext = createContext(); 
 const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
 
 

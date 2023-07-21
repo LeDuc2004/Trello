@@ -15,6 +15,11 @@
           "id": 0.9500440280850699,
           "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
           "name": "NewTable"
+        },
+        {
+          "id": 0.5759729794341599,
+          "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
+          "name": "ttttt"
         }
       ]
     },
@@ -29,7 +34,10 @@
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk2NjYxOTV9.gPvlyv9xzaTuYV94aJPXfc4ghuMDB7sIoGJrWgqkUhI",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk2Njk1MTZ9.gL_ZjO0bFcJPaF0RLu0aKiajJSuZTwpSjvxBajdsMSc",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk2NzQ5NTZ9.hMJYN6fcG80b3OqnPZKvpuFoIER9CmQuFjMsZNLNgWM",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk3Mzk2ODB9.2VSayG8LO5t362fsyt6KrfWqinulSIdFEt0BxmAI_lU"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk3Mzk2ODB9.2VSayG8LO5t362fsyt6KrfWqinulSIdFEt0BxmAI_lU",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk4MjI4OTJ9.2xxvigHvXlQyq6o_rKClgn0RO44kRsaz6HhVlHIhjFk",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk4MjgzMDl9.l_bTQj2fdxarcR3AVfBzw9Vxb_UGTss4lpuE3GCnRlE",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2ODk4NDE5NTR9.xsuztmnQFruaqGGbo9MQncczwIQts-ek_Qm2e6SbFHo"
       ],
       "idTable": [
         {
@@ -86,6 +94,26 @@
           "id": 0.9500440280850699,
           "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
           "name": "NewTable"
+        }
+      ]
+    },
+    {
+      "id": 0.03191198886706581,
+      "tk": "thain",
+      "email": "thainq@rikkeisoft.com",
+      "color": "#7EA111",
+      "mk": "1",
+      "token": [],
+      "idTable": [
+        {
+          "id": 0.5759729794341599,
+          "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
+          "name": "ttttt"
+        },
+        {
+          "id": 0.6503778006498873,
+          "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
+          "name": "cc"
         }
       ]
     }
@@ -1520,10 +1548,10 @@
           "id": "column-0",
           "title": "todo",
           "taskIds": [
-            "task-19",
             "task-5",
             "task-13",
-            "task-23",
+            "task-8",
+            "task-18",
             "task-14",
             "task-15",
             "task-16",
@@ -1535,8 +1563,10 @@
           "id": "column-1",
           "title": "doing",
           "taskIds": [
-            "task-17",
+            "task-21",
             "task-24",
+            "task-2",
+            "task-17",
             "task-3",
             "task-11"
           ]
@@ -1546,13 +1576,11 @@
           "title": "done",
           "taskIds": [
             "task-1",
-            "task-9",
             "task-0",
-            "task-2",
+            "task-19",
+            "task-9",
             "task-12",
-            "task-21",
-            "task-18",
-            "task-8"
+            "task-23"
           ]
         },
         "column-3": {
@@ -1583,6 +1611,360 @@
           "tk": "Lê Ðức",
           "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
           "email": "levanduc2052004@gmail.com",
+          "position": "Quản trị viên"
+        }
+      ],
+      "tagsname": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "tasks": {},
+      "columns": {},
+      "columnOrder": [],
+      "listHide": []
+    },
+    {
+      "id": 0.5759729794341599,
+      "background": "/imgtable/photo-1687220297381-f8fddaa09163.jpg",
+      "name": "ttttt",
+      "member": [
+        {
+          "id": 0.03191198886706581,
+          "tk": "thain",
+          "email": "thainq@rikkeisoft.com",
+          "color": "#7EA111",
+          "position": "Quản trị viên"
+        },
+        {
+          "id": 0.16071627811274536,
+          "tk": "Minh Thu",
+          "email": "lolquan1",
+          "color": "#F5F725",
+          "img": false,
+          "position": "Thành viên"
+        }
+      ],
+      "tagsname": [
+        "task",
+        "",
+        "",
+        "bugs",
+        "",
+        ""
+      ],
+      "tasks": {
+        "task-0": {
+          "id": 0,
+          "content": "44444",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": true,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": true,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "2023-07-20 13:34:12",
+            "status": false
+          },
+          "member": [
+            {
+              "id": 0.03191198886706581,
+              "tk": "thain",
+              "email": "thainq@rikkeisoft.com",
+              "color": "#7EA111",
+              "position": "Quản trị viên"
+            },
+            {
+              "id": 0.16071627811274536,
+              "tk": "Minh Thu",
+              "email": "lolquan1",
+              "color": "#F5F725",
+              "img": false,
+              "position": "Thành viên"
+            }
+          ],
+          "description": "mô tả chi tiết."
+        },
+        "task-1": {
+          "id": 1,
+          "content": "3333",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-2": {
+          "id": 2,
+          "content": "3242",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-3": {
+          "id": 3,
+          "content": "4234324",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-4": {
+          "id": 4,
+          "content": "2342",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        }
+      },
+      "columns": {
+        "column-0": {
+          "id": "column-0",
+          "title": "111111111",
+          "taskIds": [
+            "task-1",
+            "task-2",
+            "task-3"
+          ]
+        },
+        "column-1": {
+          "id": "column-1",
+          "title": "22222222",
+          "taskIds": [
+            "task-0",
+            "task-4"
+          ]
+        },
+        "column-2": {
+          "id": "column-2",
+          "title": "33333",
+          "taskIds": []
+        },
+        "column-3": {
+          "id": "column-3",
+          "title": "4444",
+          "taskIds": []
+        },
+        "column-4": {
+          "id": "column-4",
+          "title": "55555",
+          "taskIds": []
+        },
+        "column-5": {
+          "id": "column-5",
+          "title": "66666",
+          "taskIds": []
+        }
+      },
+      "columnOrder": [
+        "column-0",
+        "column-1",
+        "column-2",
+        "column-3",
+        "column-4",
+        "column-5"
+      ],
+      "listHide": []
+    },
+    {
+      "id": 0.6503778006498873,
+      "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
+      "name": "cc",
+      "member": [
+        {
+          "id": 0.03191198886706581,
+          "tk": "thain",
+          "email": "thainq@rikkeisoft.com",
+          "color": "#7EA111",
           "position": "Quản trị viên"
         }
       ],

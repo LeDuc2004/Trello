@@ -483,6 +483,7 @@ function Signin() {
           </LoginSocialFacebook>
         </div>
       </div>
+      
       <div className="background-bottom">
         <div className="left">
           <img src="./left.png" alt="" />

@@ -1,0 +1,31 @@
+$primary-color: white;
+$font-color: #44546f;
+
+$font-sizes: (
+  small: 12px,
+  medium: 16px,
+  large: 20px,
+  x-large: 24px,
+);
+@mixin font-size($size) {
+  font-size: map-get($font-sizes, $size);
+}
+h1 {
+  @include font-size(x-large);
+}
+
+h2 {
+  @include font-size(large);
+}
+
+h3 {
+  @include font-size(medium);
+}
+
+h4 {
+  @include font-size(small);
+}
+
+p {
+  @include font-size(small);
+}

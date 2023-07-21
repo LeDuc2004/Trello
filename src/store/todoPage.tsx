@@ -53,7 +53,7 @@ export const todoPage = createSlice({
         state.date.push(action.payload);
       }
     },
-    refreshListHide: (state: any, action: { payload: any }) => {
+    refreshListHide: (state: any) => {
        state.listHide = []
        state.tags = []
        state.member = []

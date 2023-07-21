@@ -1,14 +1,16 @@
 import React from "react";
-import "../../scss/column.scss";
 import Task from "./Task";
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import { Droppable, DragDropContext, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import { getData, putData } from "../../services";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
-import { todoPage } from "../../store/todoPage";
 import { scrollToBottom } from "../../utils/scrollBottom";
+
+import { todoPage } from "../../store/todoPage";
+
+import "../../scss/column.scss";
 type TaskItem = {
   id: number;
   content: string;
