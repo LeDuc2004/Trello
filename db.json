@@ -6,9 +6,7 @@
       "email": "lolquan1",
       "color": "#F5F725",
       "mk": "1",
-      "token": [
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xNjA3MTYyNzgxMTI3NDUzNiwibmFtZSI6Ik1pbmggVGh1IiwiaWF0IjoxNjg5Mzk3OTQ3fQ.KuF_LyuPd3dB1T0uLbfuNRyOcb7Jk5HWACBQp95jP34"
-      ],
+      "token": [],
       "idTable": [
         {
           "id": 0.05919326504173239,
@@ -22,8 +20,16 @@
       "tk": "Lê Ðức",
       "email": "levanduc2052004@gmail.com",
       "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
-      "token": [],
-      "idTable": []
+      "token": [
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTAxMTI0MzZ9.sGYuN3xNDr5tij7fp1t_OkQbLzyhtLTnDmjZWeHTNuQ"
+      ],
+      "idTable": [
+        {
+          "id": 0.5646836179044836,
+          "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
+          "name": "cc"
+        }
+      ]
     }
   ],
   "dataTable": [
@@ -331,7 +337,7 @@
           ],
           "date": {
             "time": "2023-07-19 22:58:18",
-            "status": false
+            "status": null
           }
         },
         "task-6": {
@@ -531,6 +537,32 @@
       "listHide": [
         1
       ]
+    },
+    {
+      "id": 0.5646836179044836,
+      "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
+      "name": "cc",
+      "member": [
+        {
+          "id": "108043588203461517800",
+          "tk": "Lê Ðức",
+          "email": "levanduc2052004@gmail.com",
+          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
+          "position": "Quản trị viên"
+        }
+      ],
+      "tagsname": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "tasks": {},
+      "columns": {},
+      "columnOrder": [],
+      "listHide": []
     }
   ]
 }
