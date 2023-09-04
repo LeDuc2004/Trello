@@ -1,7 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Header from "../components/common/Header";
-import SileBar from "../components/todoColumn/SileBar";
-import Todos from "../components/todoColumn/Todos";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { fetchTableLess, todoPage } from "../store/todoPage";
@@ -9,32 +6,19 @@ import { useParams } from "react-router-dom";
 import { SelectPosition, SelectPosition1 } from "../components/Select";
 import { fetchUsers } from "../store/createTable";
 import { getData, putData } from "../services";
+import { productRemain } from "../selector/listTask";
+import { ShowSuccessToast } from "../utils/toast";
+
+import Header from "../components/common/Header";
+import SileBar from "../components/SileBar";
+import Todos from "../components/todoColumn/Todos";
 import TableAddMember from "../components/common/TableAddMember";
 import TableAddTags from "../components/common/TableAddTags";
 import React from "react";
 import DatePick from "../components/DatePicker";
-import { productRemain } from "../selector/listTask";
+import layChuCaiDau from "../utils/laychucaidau";
 
-type Task = {
-  id: number;
-  content: string;
-};
 
-type Column = {
-  id: string;
-  title: string;
-  taskIds: string[];
-};
-interface Item {
-  id: number | string;
-  background: string;
-  member: any;
-  name: string;
-  tasks: any;
-  columns: { [columnId: string]: Column };
-  columnOrder: string[];
-  tagsname:any
-}
 interface User {
   id: string | number;
   tk: string;
@@ -42,43 +26,39 @@ interface User {
   email: string;
   img: any;
 }
-interface RootState {
-  table: {
-    status: string;
-    Table: Item;
-  };
-}
 interface ListUser {
   listTable: {
     status: string;
     users: User[];
   };
 }
-function TodoPage() {
+function TodoPage({slidebarToTodos,setSlidebarToTodos}:any) {
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const { id } = useParams();
+  
+  
+  const refTextArea = useRef<any>(null);
+
   const [toggle, setToggle] = useState<boolean | string>(false);
-  const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
   const [searchEmail, setSearchEmail] = useState<string>("");
   const [position, setPosition] = useState<string>("Thành viên");
   const [idUser, setIdUser] = useState<number | string>("");
   const [tableAddMember, setTableAddMember] = useState<boolean>(false);
   const [tableAddTags, setTableAddTags] = useState<boolean>(false);
-  const [textTime, setTextTime] = useState<string>("table0");
   const [dataTask, setDataTask] = useState<any>({ id: 0 });
   const [textDescription, setTextDescription] = useState<string>("");
   const [toggleDesciption, setToggleDescription] = useState<boolean>(true);
-  const refTextArea = useRef<any>(null)
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const [toggleTableDeleteTask, setToggleTableDeleteTask] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchTableLess(id));
     dispatch(fetchUsers());
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!refTextArea.current?.contains(event.target as Node)) {
-          setToggleDescription(true)
+        setToggleDescription(true);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -88,10 +68,7 @@ function TodoPage() {
   });
 
   const table1 = useSelector(productRemain);
-  const table = table1.stores
-
-  
-  
+  const table = table1.stores;
 
   const User = useSelector((state: ListUser) => state.listTable.users).filter(
     (user) => user.email === searchEmail
@@ -99,26 +76,14 @@ function TodoPage() {
 
   function hideWrapTb() {
     setToggle(false);
-  }
-  function layChuCaiDau(ten: string) {
-    if (ten && ten.trim() !== "") {
-      const tenDaXuLi = ten.split(" ");
-      const chuCaiCuoi = tenDaXuLi[tenDaXuLi.length - 1].charAt(0);
+    setToggleTableDeleteTask(false)
 
-      const chuCaiDau = tenDaXuLi[0].charAt(0);
-      if (tenDaXuLi.length > 1) {
-        return chuCaiDau.toUpperCase() + chuCaiCuoi.toUpperCase();
-      } else {
-        return chuCaiDau.toUpperCase();
-      }
-    }
-    return "";
   }
-
   function handleIdUser(user: any) {
     setSearchEmail(user[0].tk);
     setIdUser(user[0].id);
   }
+
   function handleAddMember() {
     getData(`/users/${idUser}`).then((data) => {
       let idTable1 = {
@@ -150,6 +115,7 @@ function TodoPage() {
       });
     });
   }
+
   function handleTableMember() {
     var div = document.getElementById("your-div");
     var div1 = document.getElementById("wrap__tb__share");
@@ -160,6 +126,7 @@ function TodoPage() {
     }
     setTableAddMember(true);
   }
+
   function handleTableTags() {
     var div = document.getElementById("your-div");
     var div1 = document.getElementById("wrap__tb__share");
@@ -170,6 +137,7 @@ function TodoPage() {
     }
     setTableAddTags(true);
   }
+
   function handleCheckBox() {
     const currentTime = new Date().getTime();
     const taskTime = new Date(
@@ -196,9 +164,10 @@ function TodoPage() {
       dispatch(todoPage.actions.updateTable(newStore))
     );
   }
+
   function handleKeyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === "Enter") {
-      setToggleDescription(true)
+      setToggleDescription(true);
       let newStore = {
         ...table.Table,
         tasks: {
@@ -216,7 +185,7 @@ function TodoPage() {
     }
   }
   function visibleInputColumn() {
-    setToggleDescription(false)
+    setToggleDescription(false);
     setTimeout(() => {
       if (refTextArea.current) {
         refTextArea.current.focus();
@@ -225,6 +194,36 @@ function TodoPage() {
       }
     }, 0);
   }
+  function deleteTask(idTask: number) {
+    let listColumns = table.Table.columns;
+    for (const key in listColumns) {
+      let newTaskIds = listColumns[key].taskIds.filter((taskid: any) => {
+        if (![`task-${idTask}`].includes(taskid)) {
+          return taskid;
+        }
+      });
+
+      listColumns = {
+        ...listColumns,
+        [key]: {
+          ...listColumns[key],
+          taskIds: newTaskIds,
+        },
+      };
+    }
+    let newStore = {
+      ...table.Table,
+      columns:{
+        ...listColumns
+      }
+    }
+    dispatch(todoPage.actions.updateTable(newStore))
+    setToggleTableDeleteTask(false)
+    setToggle(false)
+    putData(`/dataTable/${newStore.id}`, newStore)
+    ShowSuccessToast("Xóa thành công !")
+  }
+  
   return (
     <>
       <div
@@ -373,7 +372,7 @@ function TodoPage() {
                     <div className="text">Nhãn</div>
                     <div className="list_tag">
                       {table.Table?.tasks[`task-${dataTask?.id}`]?.tags.map(
-                        (item: any, index:number) =>
+                        (item: any, index: number) =>
                           item.status ? (
                             <div
                               key={item.id}
@@ -446,9 +445,14 @@ function TodoPage() {
               <div className="discription">
                 <div className="text">Mô tả</div>
                 {table.Table?.tasks[`task-${dataTask?.id}`]?.description ? (
-                  <div  className="dcrt">
+                  <div className="dcrt">
                     {toggleDesciption ? (
-                     <div onClick={()=>visibleInputColumn()}>{table.Table?.tasks[`task-${dataTask?.id}`]?.description}</div> 
+                      <div onClick={() => visibleInputColumn()}>
+                        {
+                          table.Table?.tasks[`task-${dataTask?.id}`]
+                            ?.description
+                        }
+                      </div>
                     ) : (
                       <textarea
                         ref={refTextArea}
@@ -511,17 +515,40 @@ function TodoPage() {
               </div>
             </div>
 
-            <div className="btn_add clock_date">
-              <i className="fa-regular fa-clock"></i>
-              <div>Ngày</div>
+            <div
+              onClick={() => setToggleTableDeleteTask(!toggleTableDeleteTask)}
+              className="fsftc"
+            >
+              <i className="fa-solid fa-trash-can"></i>
             </div>
+            {toggleTableDeleteTask ? (
+              <div className="tb_delete">
+                <div className="text">
+                  Bạn có muốn xóa Task "{dataTask.content}" không ?
+                </div>
+                <div className="wrap_btn">
+                  <button
+                    onClick={() => setToggleTableDeleteTask(false)}
+                    className="out"
+                  >
+                    Thoát
+                  </button>
+                  <button
+                    onClick={() => deleteTask(dataTask.id)}
+                    className="comform"
+                  >
+                    Xác nhận
+                  </button>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
 
-      <Header></Header>
-
-      <div
+      {/* <div
         id="your-div"
         style={{
           display: "flex",
@@ -532,12 +559,7 @@ function TodoPage() {
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${table.Table.background})`,
         }}
-      >
-        <SileBar
-          slidebarToTodos={slidebarToTodos}
-          setSlidebarToTodos={setSlidebarToTodos}
-        ></SileBar>
-
+      > */}
         {table.status === "idle" ? (
           <Todos
             btnShare={setToggle}
@@ -550,7 +572,7 @@ function TodoPage() {
         ) : (
           ""
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 }

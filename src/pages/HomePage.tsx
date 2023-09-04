@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+
 import Header from "../components/common/Header";
-import SileBar from "../components/todoColumn/SileBar";
+import SileBar from "../components/SileBar";
 import Home from "../components/Home";
 
-function HomePage() {
-  const [slidebarToTodos, setSlidebarToTodos] = useState<boolean>(false);
-
+function HomePage({ slidebarToTodos, setSlidebarToTodos }: any) {
   useEffect(() => {}, []);
 
   return (
@@ -17,9 +17,6 @@ function HomePage() {
           display: "flex",
           width: "100%",
           maxHeight: "calc(100vh - 50px)",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
         }}
       >
         <SileBar
@@ -27,10 +24,7 @@ function HomePage() {
           setSlidebarToTodos={setSlidebarToTodos}
         ></SileBar>
 
-        <Home
-          slidebarToTodos={slidebarToTodos}
-          setSlidebarToTodos={setSlidebarToTodos}
-        ></Home>
+        <Outlet />
       </div>
     </>
   );

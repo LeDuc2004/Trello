@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getData, postData } from "../services";
+import { createTable } from "../store/createTable";
+
 import "../scss/home.scss";
-import { getData, postData, putData } from "../services";
-import { createTable, fetchTable } from "../store/createTable";
+import { Link } from "react-router-dom";
 
 interface SideBarProps {
   slidebarToTodos: boolean;
@@ -22,26 +24,27 @@ interface RootState {
 }
 
 function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
-  const [user, setUser] = useState<boolean>(false);
-  const [info, setInfor] = useState<string>("");
-  const [iduser, setIduser] = useState<string>("");
-  const [imguser, setImg] = useState<string>("");
-  const [toggle, setToggle] = useState<boolean>(false);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const refInput = useRef<any>(null);
+  const refCreateTable = useRef<any>(null);
+
   const [fontBackground, setFontBackground] = useState<number[]>([1, 0, 0, 0]);
   const [textSearch, setTextSearch] = useState<string>("");
-  const [defaultImg, setDefaultImg] = useState<string>(
-    "/imgtable/photo-1685625762287-5d08e37d5292.jpg"
-  );
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-  const refInput = useRef<any>(null);
+  const [defaultImg, setDefaultImg] = useState<string>("/imgtable/photo-1685625762287-5d08e37d5292.jpg");
   const [textNameTable, setTextNameTable] = useState<string>("");
   const [toggleCreateTable, setToggleCreateTable] = useState<boolean>(false);
-  const refCreateTable = useRef<any>(null);
+
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
+  const API_WEBSITE = process.env.REACT_APP_API_WEBSITE
+
+
   const listTable = useSelector((state: RootState) => {
     return state.listTable.table.filter((item) => {
       return item.name.includes(textSearch);
     });
   });
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -74,7 +77,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
 
   function handlecreatTable() {
     if (localStorage.getItem("token") != null) {
-      fetch("http://localhost:5000/user", {
+      fetch(API_DATA_NODEJS+"/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +91,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
           let data = data1.user;
           getData(`/users/${data.id}`).then((data) => {
             if (textNameTable) {
-              let idTable = Math.random();
+              const idTable = Math.random();
               let TableToUser = {
                 id: idTable,
                 background: defaultImg,
@@ -139,7 +142,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
               } else {
                 postData("/dataTable", TableToDataBase2);
               }
-              fetch("http://localhost:5000/addTable", {
+              fetch(API_DATA_NODEJS+"/addTable", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -152,7 +155,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                   setToggleCreateTable(false);
                   setTextNameTable("");
                   setTimeout(() => {
-                    window.location.href = `/todo/${idTable}`;
+                    window.location.href = `http://localhost:3001/home/table/${idTable}`;
                   }, 0);
                 }
               });
@@ -206,6 +209,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
           className="btn__creacttb tb"
         >
           <div>tạo bảng mới</div>
+
           <div
             className={`header__table home1 ${toggleCreateTable ? "" : "hide"}`}
           >
@@ -299,12 +303,13 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
               Tạo mới
             </div>
           </div>
+
         </div>
         {listTable?.length > 0
           ? listTable.map((item) => {
               return (
-                <a
-                  href={`http://localhost:3001/todo/${item.id}`}
+                <Link
+                  to={`table/${item.id}`}
                   key={item.id}
                   className="tb"
                   style={{
@@ -313,7 +318,7 @@ function Home({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
                 >
                   <div className="background__blur"></div>
                   <div className="tb__text">{item.name}</div>
-                </a>
+                </Link>
               );
             })
           : ""}

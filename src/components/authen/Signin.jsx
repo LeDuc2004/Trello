@@ -1,11 +1,13 @@
-import Header from "../common/Header";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./signin.scss";
 import jwt_decode from "jwt-decode";
 
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { ShowSuccessToast } from "../../utils/toast";
+
+import getRandomColor from "../../utils/ramdomColor";
 
 function Signin() {
   const [spanName, setSpanName] = useState(".");
@@ -18,15 +20,8 @@ function Signin() {
   const [cfmk, setCfmk] = useState("");
   const [togle, setTogle] = useState(true);
   const [common, setCommon] = useState(true);
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
   const API_DATA_BASE = process.env.REACT_APP_API_BASE;
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
   useEffect(() => {
     setCommon(localStorage.getItem("idd"));
   }, [localStorage.getItem("idd")]);
@@ -40,7 +35,7 @@ function Signin() {
       handleSubmitdk(user);
     } else {
       let response = jwt_decode(responseStart.credential);
-      
+
       const user = {
         email: response.email,
         name: response.name,
@@ -54,9 +49,9 @@ function Signin() {
 
   let useAuthen = {
     id: Math.random(),
-    tk:name,
-    email:tk,
-    color:getRandomColor(),
+    tk: name,
+    email: tk,
+    color: getRandomColor(),
     mk: mk,
     token: [],
     idTable: [],
@@ -105,11 +100,11 @@ function Signin() {
               });
           }
         }
-      }else{
+      } else {
         let user = {
           id: fborgg.id,
           tk: fborgg.name,
-          color:getRandomColor(),
+          color: getRandomColor(),
           token: [],
           idTable: [],
         };
@@ -206,7 +201,10 @@ function Signin() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(useAuthen),
-            }).then(res => idd(2))
+            }).then((res) => {
+              idd(2);
+              ShowSuccessToast("Đăng ký thành công")
+            });
           }
         } else if (flag == true) {
           setSpantk("Tài khoản tồn tại");
@@ -216,7 +214,7 @@ function Signin() {
   }
   function handleSubmitdn(fborgg) {
     if (fborgg) {
-      fetch("http://localhost:5000/login", {
+      fetch(API_DATA_NODEJS+"/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -248,7 +246,7 @@ function Signin() {
               if (res.status == 200) {
                 localStorage.setItem("token", data1.accessToken);
 
-                window.location.href = "/";
+                window.location.href = "/home";
               }
             });
           }
@@ -276,7 +274,7 @@ function Signin() {
               } else {
                 setSpanmk(".");
                 if (mk == data[i].mk) {
-                  fetch("http://localhost:5000/login", {
+                  fetch(API_DATA_NODEJS+"/login", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
@@ -304,7 +302,7 @@ function Signin() {
                           if (res.status == 200) {
                             localStorage.setItem("token", data1.accessToken);
                             setSpantk(".");
-                            window.location.href = "/";
+                            window.location.href = "/home";
                           }
                         });
                       }
@@ -332,7 +330,7 @@ function Signin() {
   }
 
   function idd(id) {
-    setName("")
+    setName("");
     setMk("");
     setTk("");
     setCfmk("");
@@ -350,7 +348,7 @@ function Signin() {
         height: "100vh",
       }}
     >
-      <a href="http://localhost:3001/home" className="logo-sign">
+      <a href="/" className="logo-sign">
         <div>
           <img
             src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/trello-header-logos/167dc7b9900a5b241b15ba21f8037cf8/trello-logo-blue.svg"
@@ -485,6 +483,7 @@ function Signin() {
           </LoginSocialFacebook>
         </div>
       </div>
+      
       <div className="background-bottom">
         <div className="left">
           <img src="./left.png" alt="" />

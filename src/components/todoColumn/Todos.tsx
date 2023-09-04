@@ -1,12 +1,14 @@
-import React, { useState, useRef, useEffect, RefObject } from "react";
-import "../../scss/todo.scss";
-import Column from "./Column";
-import { useDispatch, useSelector } from "react-redux";
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { getData, putData } from "../../services";
-import { fetchTableLess, todoPage } from "../../store/todoPage";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { SocketContext } from "../../context/SocketContext";
+
+import { getData, putData } from "../../services";
+
+import Column from "./Column";
+import { todoPage } from "../../store/todoPage";
 import TodosTable from "../todoTable/TodosTable";
 import BarChartTaskOfMember, {
   BarChart,
@@ -14,6 +16,9 @@ import BarChartTaskOfMember, {
   BarChartTags,
 } from "../todoChart/Chart";
 import FilterTable from "../FilterTable";
+
+import "../../scss/todo.scss";
+
 type Task = {
   id: number;
   content: string;
@@ -37,6 +42,7 @@ interface Item {
   columns: { [columnId: string]: Column };
   columnOrder: string[];
 }
+
 interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,31 +60,48 @@ function Todos({
   setDataTask,
   listHide,
 }: SideBarProps) {
-  const [stores, setStores] = useState<Item>(table);
-  const [toggle, setToggle] = useState<boolean>(true);
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement | null>(null);
+  const refTableFilter = useRef<any>(null);
+
+  const [stores, setStores] = useState<Item>(table);
+  const [toggle, setToggle] = useState<boolean>(true);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [startX, setStartX] = useState<number>(0);
+  const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [textClumn, setTextClumn] = useState<string>("");
   const [activeTextArea, setActiveTextArea] = useState<any>(null);
   const [typeTable, setTypeTable] = useState<string>("table1");
   const [position, setPosition] = useState<string>("");
   const [toggleFilter, setToggleFiler] = useState<boolean>(false);
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const [toggleTags, setToggleTags] = useState<boolean>(false);
-  const refTableFilter = useRef<any>(null);
+  
+  const API_DATA_NODEJS = process.env.REACT_APP_API_NODEJS;
+  const socket: any = useContext(SocketContext)
 
   // <scroll-x>
   const { id } = useParams();
+  useEffect(() => {
+    if (id) {
+      socket.emit("join_room", id);
+    }
+  }, [id, socket]);
+
+  useEffect(() => {
+    socket.on("receive_message", (data:any) => {
+      setStores(data.newState);
+    });
+  }, [socket]);
+
   const textareaRef = useRef<any>(null);
 
   useEffect(() => {
     setStores(table);
     if (localStorage.getItem("token") != null) {
-      fetch("http://localhost:5000/user", {
+      fetch(API_DATA_NODEJS+"/user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -186,6 +209,7 @@ function Todos({
           columnOrder: newColumnOrder,
         };
         setStores(newState);
+        socket.emit("send_message", { id, newState });
         putData(`/dataTable/${id}`, newState).then((res) =>
           dispatch(todoPage.actions.updateTable(newState))
         );
@@ -213,6 +237,8 @@ function Todos({
           },
         };
         setStores(newState);
+        socket.emit("send_message", { id, newState });
+
         putData(`/dataTable/${id}`, newState).then((res) =>
           dispatch(todoPage.actions.updateTable(newState))
         );
@@ -243,6 +269,7 @@ function Todos({
         },
       };
       setStores(newState);
+      socket.emit("send_message", { id, newState });
       putData(`/dataTable/${id}`, newState).then((res) =>
         dispatch(todoPage.actions.updateTable(newState))
       );
@@ -321,13 +348,20 @@ function Todos({
     };
   });
   function deleteListHide() {
-    setToggleFiler(false)
-    dispatch(todoPage.actions.refreshListHide(""))
+    setToggleFiler(false);
+    dispatch(todoPage.actions.refreshListHide(""));
   }
   return (
     <>
       <div
         className={`todos ${slidebarToTodos ? "fullscreen" : ""}`}
+        style={{
+          maxHeight: "calc(100vh - 50px)",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundImage: `url(${table.background})`,
+        }}
         ref={elementRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -378,21 +412,26 @@ function Todos({
           <div className="todo-slideBar__right">
             <div
               ref={refTableFilter}
-              
-              className={`todo-slideBar__filer ${toggleFilter || listHide.length > 0? "curent" : ""}`}
+              className={`todo-slideBar__filer ${
+                toggleFilter || listHide.length > 0 ? "curent" : ""
+              }`}
             >
               <FilterTable
                 stores={table}
                 setToggleFiler={setToggleFiler}
                 toggleFilter={toggleFilter}
               ></FilterTable>
-              <div data-filter={listHide.includes("nodata") ? 0 : listHide.length} className={`iloc ${listHide.length > 0 ? "hide":""}`} onClick={() => setToggleFiler(!toggleFilter)}>
+              <div
+                data-filter={listHide.includes("nodata") ? 0 : listHide.length}
+                className={`iloc ${listHide.length > 0 ? "hide" : ""}`}
+                onClick={() => setToggleFiler(!toggleFilter)}
+              >
                 <i className="fa-solid fa-arrow-down-short-wide"></i>
                 <div>Lọc</div>
               </div>
 
               <i
-              onClick={()=>deleteListHide()}
+                onClick={() => deleteListHide()}
                 className={`fa-solid fa-xmark ${
                   listHide.length > 0 ? "" : "hide"
                 }`}

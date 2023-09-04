@@ -1,13 +1,13 @@
-import React from "react";
-import { DatePicker, Space } from "antd";
-import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
+import type { DatePickerProps, RangePickerProps } from "antd/es/date-picker";
+import { DatePicker, Space } from "antd";
 import { putData } from "../services";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { todoPage } from "../store/todoPage";
-const dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
 
+import { todoPage } from "../store/todoPage";
+
+const dateTimeFormat = "YYYY-MM-DD HH:mm:ss";
 
 const onOk = (
   value: DatePickerProps["value"] | RangePickerProps["value"]
@@ -19,11 +19,11 @@ function DatePick({date, stores, idTask}: any) {
   function onChange(value: any, dateString: [string, string] | string) {
     const currentTime = new Date().getTime();
     const taskTime = new Date(dateString.toString()).getTime();
-    let newStore = {
+    let newStore = { 
         ...stores,
         tasks: {
           ...stores.tasks,
-          [`task-${idTask}`]: {
+          [`task-${idTask}`]: {   
             ...stores.tasks[`task-${idTask}`],
             date:{
               time:dateString,
@@ -39,7 +39,6 @@ function DatePick({date, stores, idTask}: any) {
   
 
   if (date?.time) {
-    
     return (
       <Space direction="vertical" size={12}>
         <DatePicker

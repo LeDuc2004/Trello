@@ -1,10 +1,12 @@
 import "../../scss/tableAddMember.scss";
 import { useRef, useEffect } from "react";
-import layChuCaiDau from "../../utils/laychucaidau";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { todoPage } from "../../store/todoPage";
 import { putData } from "../../services";
+import layChuCaiDau from "../../utils/laychucaidau";
+
+import { todoPage } from "../../store/todoPage";
+
 interface Boolean1 {
   tableAddMember: boolean;
   setTableAddMember: any;
@@ -116,7 +118,7 @@ function TableAddMember({
           placeholder="Tìm kiếm các thành viên"
         />
 
-        <div className="text">Thành viên bảng</div>
+        <div  className="text">Thành viên bảng</div>
         {member?.map((item: any) => (
           <div key={item.id} onClick={() => addMember(item)} className="member">
             {item.img ? (

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import React from 'react'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import layChuCaiDau from "../utils/laychucaidau";
 
-import "../../scss/silebar.scss";
-import { useParams } from "react-router-dom";
+import "../scss/silebar.scss";
+
 interface SideBarProps {
   slidebarToTodos: boolean;
   setSlidebarToTodos: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,13 +21,12 @@ interface RootState {
   };
 }
 function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
-  const {id} = useParams()
-  const [curentChose , setCurentChose] = useState<number | string>("")
+  const [toggle , setToggle] = useState<boolean>(false)
+  const { id } = useParams();
   const listTable = useSelector((state: RootState) => state.listTable);
-  useEffect(()=>{
-    setCurentChose(window.location.pathname)
-  }, [])
-  
+  const listMember = useSelector((state: any) => state.table.Table.member);
+  console.log(listMember);
+
   return (
     <div className={`slie-bar ${slidebarToTodos ? "fullscreen" : ""}`}>
       <div className="chevron">
@@ -37,37 +37,60 @@ function SileBar({ slidebarToTodos, setSlidebarToTodos }: SideBarProps) {
           }`}
         ></i>
       </div>
-      <a href="/listTable" className={`slie-bar__table ${curentChose == "/listTable" ? "curent": ""}`}>
+      <a href="/home" className={`slie-bar__table`}>
         <i className="fa-brands fa-trello"></i>
         <div>Bảng</div>
       </a>
-      <div className="slie-bar__member">
+
+      <div onClick={()=>setToggle(!toggle)} className="slie-bar__member ">
         <div className="slie-bar__member-left">
           <i className="fa-regular fa-user"></i>
           <div>Thành viên</div>
         </div>
-        <i className="fa-solid fa-plus"></i>
       </div>
+      <div  className={`Table_addmember sidebar ${toggle ? "open" :""}`}>
+
+        <div className="thep">
+      {listMember?.map((item: any) => (
+          <div key={item.id}  className="member">
+            {item.img ? (
+              <img src={item.img} alt="" />
+            ) : (
+              <div
+                style={{ backgroundColor: `${item.color}` }}
+                className="wrap_img"
+              >
+                {layChuCaiDau(item.tk)}
+              </div>
+            )}
+
+            <div className="info">{item.tk} ({item.email})</div>
+          </div>
+        ))}
+        </div>
+      </div>
+
+      <div className="list-manager"></div>
+
       <div className="slie-bar__yourtable">
         <div className="yourtb">
           <span>Các bảng của bạn</span>
-          <i className="fa-solid fa-plus"></i>
         </div>
 
         <div className="list-yourtable">
           {listTable.table?.length
             ? listTable.table.map((item) => {
                 return (
-                  <a
-                    href={`http://localhost:3001/todo/${item.id}`}
+                  <Link
+                    to={`table/${item.id}`}
                     key={item.id}
                     className={`table ${id == item.id ? "curent" : ""}`}
                   >
                     <img src={item.background} alt="" />
                     <span>{item.name}</span>
-                  </a>
+                  </Link>
                 );
-              })
+              })  
             : ""}
         </div>
       </div>

@@ -15,12 +15,14 @@ export async function postData(endpoint, data, authorization) {
     let header = {
       'Content-Type': 'application/json',
     };
+    
     if (authorization) {
       header = {
         ...header,
         authorization: authorization,
       };
     }
+
     const response = await fetch(`${Api+endpoint}`, {
       method: 'POST',
       body: JSON.stringify(data ?? {}),

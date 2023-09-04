@@ -1,20 +1,20 @@
 import React from "react";
-import "../../scss/column.scss";
 import Task from "./Task";
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import { Droppable, DragDropContext, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import { getData, putData } from "../../services";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
-import { todoPage } from "../../store/todoPage";
 import { scrollToBottom } from "../../utils/scrollBottom";
 
+import { todoPage } from "../../store/todoPage";
+
+import "../../scss/column.scss";
 type TaskItem = {
   id: number;
   content: string;
 };
-
 function Column({
   setStores,
   stores,
@@ -28,19 +28,20 @@ function Column({
   setDataTask,
   toggleTags,
   setToggleTags,
-  listHide
+  listHide,
 }: any) {
-  
-  const [toggle, setToggle] = useState<boolean>(false);
-  const [toggleColumn, setToggleColumn] = useState<boolean>(false);
-  const [value, setValue] = useState("");
-  const [valueInput, setValueInput] = useState(column.title);
-
-  const [rows, setRows] = useState(3);
-  const { id } = useParams();
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const textColumn = useRef<any>(null);
+
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggleColumn, setToggleColumn] = useState<boolean>(false);
+  const [value, setValue] = useState<string>("");
+  const [valueInput, setValueInput] = useState(column.title);
+  const [rows, setRows] = useState<number>(3);
+
+  const { id } = useParams();
 
   // click outside add task
   useEffect(() => {
@@ -60,6 +61,7 @@ function Column({
   const handleChildMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
+
   function AddTask() {
     if (value) {
       getData(`/dataTable/${id}`).then((data) => {
@@ -80,12 +82,11 @@ function Column({
                 { id: 3, color: "#f87462", status: false, content: "" },
                 { id: 4, color: "#9f8fef", status: false, content: "" },
                 { id: 5, color: "#579dff", status: false, content: "" },
-
               ],
               date: {
                 time: "",
-                status: 0
-              }
+                status: 0,
+              },
             },
           },
           columns: {
@@ -131,15 +132,12 @@ function Column({
     setRows(textarea.rows);
   }, [value]);
 
-
-  
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       AddTask();
     }
   };
   function visibleInputColumn() {
-
     onclick();
     setToggleColumn(true);
     setTimeout(() => {
@@ -171,7 +169,7 @@ function Column({
       setStores(newStore);
       putData(`/dataTable/${newStore.id}`, newStore);
     } else {
-    setToggleColumn(false);
+      setToggleColumn(false);
 
       setValueInput(column.title);
     }
@@ -186,6 +184,9 @@ function Column({
             className="column-todo"
             onMouseDown={handleChildMouseDown}
           >
+            <div className="fsfev">
+              <i className="fa-solid fa-ellipsis-vertical"></i>
+            </div>
             <div className="update-clumn">
               <input
                 onKeyDown={(e) => handleEnterColumn(e.key)}

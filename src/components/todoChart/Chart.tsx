@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -28,6 +26,30 @@ interface TaskChartProps {
       taskIds: string[];
     };
   };
+}
+
+
+interface Task {
+  id: number;
+  content: string;
+  member: Member[];
+  tags: any;
+  date: any;
+}
+
+interface Member {
+  id: string;
+  tk: string;
+  email: string;
+  color: string;
+  img: string | false;
+  position: string;
+}
+
+interface MemberTask {
+  id: string;
+  name: string;
+  total: number;
 }
 
 export function BarChart({ columns }: TaskChartProps) {
@@ -246,29 +268,6 @@ export function BarChartTags({ tasks }: any) {
       />
     </div>
   );
-}
-
-interface Task {
-  id: number;
-  content: string;
-  member: Member[];
-  tags: any;
-  date: any;
-}
-
-interface Member {
-  id: string;
-  tk: string;
-  email: string;
-  color: string;
-  img: string | false;
-  position: string;
-}
-
-interface MemberTask {
-  id: string;
-  name: string;
-  total: number;
 }
 
 const BarChartTaskOfMember: React.FC<{ tasks: Task[] }> = ({ tasks }) => {

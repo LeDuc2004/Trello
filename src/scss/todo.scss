@@ -1,5 +1,6 @@
 body {
   overflow-y: hidden;
+  user-select: none;
 }
 
 .todos {
@@ -320,22 +321,22 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
-    .fa-arrow-down-short-wide{
+    .fa-arrow-down-short-wide {
       margin: 0 5px;
     }
-    .fa-xmark{
+    .fa-xmark {
       margin-left: 15px;
       margin-bottom: -2px;
     }
-    .fa-xmark.hide{
+    .fa-xmark.hide {
       display: none;
     }
-    .iloc{
+    .iloc {
       display: flex;
       align-items: center;
       position: relative;
     }
-    .iloc.hide::after{
+    .iloc.hide::after {
       content: attr(data-filter);
       width: 20px;
       height: 20px;
@@ -351,8 +352,6 @@ body {
       font-weight: 600;
       color: white;
     }
-
-    
   }
   .todo-slideBar__filer:hover {
     background-color: #9facb1;
@@ -361,7 +360,6 @@ body {
     background-color: white;
     color: black;
   }
-
 }
 
 .list-column {
@@ -498,7 +496,7 @@ body {
       width: 100% !important;
       height: calc(100% - 50px) !important;
     }
-    span{
+    span {
       display: block;
       position: absolute;
       width: 100%;
@@ -611,6 +609,7 @@ body {
   }
 }
 .tb_task_right {
+  position: relative;
   flex: 1;
   .tb_task_right__top {
     font-size: 14px;
@@ -632,9 +631,72 @@ body {
       margin-right: 10px;
     }
   }
+
   .btn_add:hover {
     background-color: #cdd3e2;
   }
+  .fsftc {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background-color: lightgray;
+    transition: all 0.3s linear;
+  }
+  .fsftc:hover {
+    background-color: tomato;
+    color: white;
+    i {
+      scale: 1.2;
+    }
+  }
+  .tb_delete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 1px 1px rgba(23, 103, 240, 0.2509803922),
+      0px 0px 1px rgba(9, 30, 66, 0.3098039216);
+    background-color: white;
+    width: 300px;
+    height: 167px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: lightcyan;
+    .wrap_btn{
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: -20px;
+      button{
+        border: none;
+        padding: 10px 15px;
+        color: white;
+        min-width: 86px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .out{
+        background-color: tomato;
+      }
+      .comform{
+        background-color: #1f845a;
+      }
+    }
+  }
+}
+.wrap_tb_delete{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;left: 0;
+  background-color: rgba(0, 0, 0, 0.7490196078);
 }
 .date_line {
   display: flex;
@@ -680,8 +742,9 @@ body {
       background-color: white;
       border: 2px solid gray;
     }
-    div{
+    div {
       padding-bottom: 10px;
+      margin-left: 10px;
     }
   }
   .text {
@@ -741,8 +804,7 @@ body {
       }
       width: 95%;
       min-height: 100%;
-      box-shadow: 0px 1px 1px #091e4240,
-        0px 0px 1px #091e424f,
+      box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f,
         0 3px 5px #091e4233, 0 0 1px #091e424f;
       margin: 15px 10px;
       border-radius: 10px;

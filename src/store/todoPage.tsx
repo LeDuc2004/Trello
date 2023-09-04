@@ -44,7 +44,7 @@ export const todoPage = createSlice({
       const existingIndex = state.date.findIndex(
         (item: any) => item === action.payload
       );
-
+  
       if (existingIndex !== -1) {
         state.date = state.date.filter(
           (item: any) => item !== action.payload
@@ -53,7 +53,7 @@ export const todoPage = createSlice({
         state.date.push(action.payload);
       }
     },
-    refreshListHide: (state: any, action: { payload: any }) => {
+    refreshListHide: (state: any , action: {payload:any}) => {
        state.listHide = []
        state.tags = []
        state.member = []
@@ -76,6 +76,8 @@ export const todoPage = createSlice({
 export const fetchTableLess = createAsyncThunk(
   "todo/fetchTableLess",
   async (idtable: any) => {
+    console.log(1);
+    
     const res = await fetch(`http://localhost:3000/dataTable/${idtable}`, {
       method: "GET",
       headers: {
@@ -84,6 +86,8 @@ export const fetchTableLess = createAsyncThunk(
       },
     });
     let data = await res.json();
+    console.log(2);
+
     return data;
   }
 );

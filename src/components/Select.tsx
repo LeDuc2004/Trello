@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import { Select, Space, Radio } from 'antd';
-
-
-let optionsBoss 
+import { Select, Space } from 'antd';
 
 export function SelectPosition({ position , setPosition }: any) {
   return (

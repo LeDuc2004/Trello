@@ -1,0 +1,45 @@
+@mixin center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin gradient-background($start-color, $end-color) {
+  background: linear-gradient(to bottom, $start-color, $end-color);
+}
+
+@mixin rounded-box($border-radius: 4px) {
+  border-radius: $border-radius;
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+@mixin text-shadow($shadow) {
+  text-shadow: $shadow;
+}
+
+@mixin button-styles {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #007bff;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
