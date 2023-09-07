@@ -23,7 +23,6 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route index element={<HomeBD />} />
-        
         <Route path="home" element={<HomePage slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos}/>}>
           <Route index element={<Home slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos}></Home>}/>
           <Route path="table/:id" element={<TodoPage slidebarToTodos={slidebarToTodos} setSlidebarToTodos={setSlidebarToTodos} ></TodoPage>}/>

@@ -31,7 +31,8 @@
       "token": [
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTA5MDQxMTR9.SOXNfrMjv2ooWCrQQ5k5xisynyL78AifPNGhmQcqXKw",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTEzMzA4OTJ9.8vDCU6ajn9nQa5fa0E68rVwxlILAKBs8SNVCg_RP_go",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTM3OTg2MjR9.lJA4DMCe_xhx-bjQcJNWDY0YPiFpyzNsfDtFPhjDDxE"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTM3OTg2MjR9.lJA4DMCe_xhx-bjQcJNWDY0YPiFpyzNsfDtFPhjDDxE",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwODA0MzU4ODIwMzQ2MTUxNzgwMCIsIm5hbWUiOiJMw6ogw5Dhu6ljIiwiaW1nIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkdTU0plZmJwVG53VFRwVi1UT2lUZXhJN3NGSVh0OVdrTW42RnVWbkpISkE9czk2LWMiLCJpYXQiOjE2OTM5MjYwNjZ9.N5rTu02txRHCNsEagfpwuWVTTMyf8NChrckh9_ruQwY"
       ],
       "idTable": [
         {
@@ -43,6 +44,11 @@
           "id": 0.26701008024788564,
           "background": "/imgtable/photo-1685625762287-5d08e37d5292.jpg",
           "name": "TableTwo"
+        },
+        {
+          "id": 0.2503160183270634,
+          "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
+          "name": "đi làm"
         }
       ]
     },
@@ -1542,7 +1548,6 @@
           "id": "column-0",
           "title": "todo",
           "taskIds": [
-            "task-5",
             "task-9",
             "task-13",
             "task-18",
@@ -1569,6 +1574,7 @@
           "id": "column-2",
           "title": "done",
           "taskIds": [
+            "task-5",
             "task-8",
             "task-21",
             "task-19",
@@ -1973,6 +1979,292 @@
       "tasks": {},
       "columns": {},
       "columnOrder": [],
+      "listHide": []
+    },
+    {
+      "id": 0.2503160183270634,
+      "background": "/imgtable/photo-1686903431112-9b426ee61dad.jpg",
+      "name": "đi làm",
+      "member": [
+        {
+          "id": "108043588203461517800",
+          "tk": "Lê Ðức",
+          "img": "https://lh3.googleusercontent.com/a/AAcHTtfGSSJefbpTnwTTpV-TOiTexI7sFIXt9WkMn6FuVnJHJA=s96-c",
+          "email": "levanduc2052004@gmail.com",
+          "position": "Quản trị viên"
+        }
+      ],
+      "tagsname": [
+        "dễ",
+        "ẻwerewrewr",
+        "ưerewrewr",
+        "",
+        "",
+        ""
+      ],
+      "tasks": {
+        "task-0": {
+          "id": 0,
+          "content": "đi chơ",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": true,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": true,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": true,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "2023-09-14 22:04:24",
+            "status": true
+          },
+          "description": "dfrewqrwqerewqr"
+        },
+        "task-1": {
+          "id": 1,
+          "content": "dfdf",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-2": {
+          "id": 2,
+          "content": "đi chơrewerewr",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-3": {
+          "id": 3,
+          "content": "dfdfểwrwer",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        },
+        "task-4": {
+          "id": 4,
+          "content": "rưerewr",
+          "tags": [
+            {
+              "id": 0,
+              "color": "#4bce97",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 1,
+              "color": "#e2b203",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 2,
+              "color": "#faa53d",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 3,
+              "color": "#f87462",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 4,
+              "color": "#9f8fef",
+              "status": false,
+              "content": ""
+            },
+            {
+              "id": 5,
+              "color": "#579dff",
+              "status": false,
+              "content": ""
+            }
+          ],
+          "date": {
+            "time": "",
+            "status": 0
+          }
+        }
+      },
+      "columns": {
+        "column-0": {
+          "id": "column-0",
+          "title": "công việc",
+          "taskIds": [
+            "task-4",
+            "task-3",
+            "task-2"
+          ]
+        },
+        "column-1": {
+          "id": "column-1",
+          "title": "đã làm",
+          "taskIds": [
+            "task-0"
+          ]
+        },
+        "column-2": {
+          "id": "column-2",
+          "title": "chưa xong",
+          "taskIds": [
+            "task-1"
+          ]
+        }
+      },
+      "columnOrder": [
+        "column-0",
+        "column-1",
+        "column-2"
+      ],
       "listHide": []
     }
   ]

@@ -25,7 +25,7 @@ io.on("connection", (socket) => {
     socket.to(data.id).emit("receive_message", data);
   });
 });
- 
+
 // client-side
 
 app.post("/addTable", authenToken, (req, res) => {
